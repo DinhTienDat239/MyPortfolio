@@ -25,9 +25,10 @@ interface PlayableAdsProps {
   playables: Playable[];
   stats: Stat[];
   networks: Network[];
+  logoSize?: number;
 }
 
-export default function PlayableAds({ playables, stats, networks }: PlayableAdsProps) {
+export default function PlayableAds({ playables, stats, networks, logoSize = 20 }: PlayableAdsProps) {
   const [selectedPlayable, setSelectedPlayable] = useState<Playable | null>(null);
 
   return (
@@ -53,21 +54,41 @@ export default function PlayableAds({ playables, stats, networks }: PlayableAdsP
           </motion.p>
         </div>
 
-        {/* Networks */}
-        <div className="flex flex-wrap justify-center gap-8 mb-20 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          {networks.map((network, i) => (
-            <motion.div
-              key={network.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="flex items-center gap-2"
-            >
-              <LazyImage src={network.logo} alt={network.name} className="h-8 object-contain" referrerPolicy="no-referrer" />
-              <span className="font-bold text-sm uppercase tracking-widest">{network.name}</span>
-            </motion.div>
-          ))}
+        {/* Networks marquee */}
+        <div className="relative mb-20 overflow-hidden group">
+          <motion.div
+            className="flex gap-16 items-center w-max opacity-60 grayscale hover:grayscale-0 transition-all duration-500 py-4"
+            animate={{
+              x: ["-50%", "0%"],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {/* Double the content for a seamless loop */}
+            {[...networks, ...networks].map((network, i) => (
+              <div
+                key={`${network.name}-${i}`}
+                className="flex items-center gap-4 flex-shrink-0"
+              >
+                <LazyImage 
+                  src={network.logo} 
+                  alt={network.name} 
+                  containerClassName="flex-shrink-0"
+                  containerStyle={{ height: `${logoSize}px` }}
+                  className="h-full w-auto object-contain" 
+                  referrerPolicy="no-referrer" 
+                />
+                <span className="font-bold text-sm uppercase tracking-widest text-neutral-400">{network.name}</span>
+              </div>
+            ))}
+          </motion.div>
+          
+          {/* Gradient Overlays for smooth edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-neutral-950 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-neutral-950 to-transparent z-10 pointer-events-none" />
         </div>
 
         {/* Stats */}

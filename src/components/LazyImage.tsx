@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { cn } from '../lib/utils';
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   className?: string;
   containerClassName?: string;
+  containerStyle?: React.CSSProperties;
 }
 
-export default function LazyImage({ src, alt, className = '', containerClassName = '', ...props }: LazyImageProps) {
+export default function LazyImage({ src, alt, className, containerClassName, containerStyle, ...props }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className={`relative overflow-hidden ${containerClassName}`}>
+    <div 
+      className={cn("relative overflow-hidden", containerClassName)} 
+      style={containerStyle}
+    >
       {!isLoaded && (
         <div className="absolute inset-0 bg-neutral-900 animate-pulse" />
       )}
@@ -23,8 +28,8 @@ export default function LazyImage({ src, alt, className = '', containerClassName
         src={src}
         alt={alt}
         onLoad={() => setIsLoaded(true)}
-        className={`w-full h-full object-cover ${className}`}
-        {...props}
+        className={cn("w-full h-full object-cover", className)}
+        {...(props as any)}
       />
     </div>
   );

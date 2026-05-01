@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Save, Plus, Trash2, Image as ImageIcon, LogOut, ChevronRight, ChevronDown, Upload, Loader2 } from 'lucide-react';
+import { X, Save, Plus, Trash2, Image as ImageIcon, LogOut, ChevronRight, ChevronDown, ChevronUp, Upload, Loader2, Pencil } from 'lucide-react';
 import { doc, setDoc, addDoc, collection, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../lib/firebase';
 import { cn } from '../lib/utils';
@@ -229,7 +229,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
               className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
             />
           </div>
-          <div className="space-y-2 sm:col-span-2">
+          <div className="space-y-2">
             <label className="text-xs font-bold uppercase text-neutral-400">Profile Image Size ({profile.imageSize || 400}px)</label>
             <input
               type="range"
@@ -237,6 +237,52 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
               max="800"
               value={profile.imageSize || 400}
               onChange={(e) => setProfile({ ...profile, imageSize: Number(e.target.value) })}
+              className="w-full accent-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-neutral-400">Icon Size ({profile.iconSize || 20}px)</label>
+            <input
+              type="range"
+              min="12"
+              max="48"
+              value={profile.iconSize || 20}
+              onChange={(e) => setProfile({ ...profile, iconSize: Number(e.target.value) })}
+              className="w-full accent-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-neutral-400">Network Logo Size ({profile.networkLogoSize || 20}px)</label>
+            <input
+              type="range"
+              min="12"
+              max="64"
+              value={profile.networkLogoSize || 20}
+              onChange={(e) => setProfile({ ...profile, networkLogoSize: Number(e.target.value) })}
+              className="w-full accent-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-neutral-400">Game Image Width ({profile.gameImageWidth || 288}px)</label>
+            <input
+              type="range"
+              min="100"
+              max="1000"
+              step="8"
+              value={profile.gameImageWidth || 288}
+              onChange={(e) => setProfile({ ...profile, gameImageWidth: Number(e.target.value) })}
+              className="w-full accent-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase text-neutral-400">Game Image Ratio ({profile.gameImageRatio || 1.77})</label>
+            <input
+              type="range"
+              min="0.5"
+              max="2.5"
+              step="0.01"
+              value={profile.gameImageRatio || 1.77}
+              onChange={(e) => setProfile({ ...profile, gameImageRatio: Number(e.target.value) })}
               className="w-full accent-white"
             />
           </div>
@@ -274,19 +320,56 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
   const CollectionEditor = ({ collectionName, fields }: { collectionName: string; fields: string[] }) => {
     const items = data[collectionName] || [];
     const [newItem, setNewItem] = useState<any>({});
-    const [isAdding, setIsAdding] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [editingId, setEditingId] = useState<string | null>(null);
 
-    const handleAdd = async () => {
+    const handleSave = async () => {
       if (Object.keys(newItem).length === 0) return;
-      setIsAdding(true);
+      setIsProcessing(true);
       try {
-        await addDoc(collection(db, collectionName), { ...newItem, order: items.length });
+        if (editingId) {
+          await updateDoc(doc(db, collectionName, editingId), newItem);
+          setEditingId(null);
+        } else {
+          await addDoc(collection(db, collectionName), { ...newItem, order: items.length });
+        }
         setNewItem({});
       } catch (err) {
         console.error(err);
       } finally {
-        setIsAdding(false);
+        setIsProcessing(false);
       }
+    };
+
+    const handleEdit = (item: any) => {
+      setEditingId(item.id);
+      // Create a clean copy without the id field
+      const { id, ...itemData } = item;
+      setNewItem(itemData);
+      // Scroll to top of form
+      const formElement = document.getElementById('form-top');
+      if (formElement) formElement.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleMove = async (index: number, direction: 'up' | 'down') => {
+      const sortedItems = [...items].sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+      const targetIndex = direction === 'up' ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= sortedItems.length) return;
+
+      const item1 = sortedItems[index];
+      const item2 = sortedItems[targetIndex];
+
+      try {
+        await updateDoc(doc(db, collectionName, item1.id), { order: targetIndex });
+        await updateDoc(doc(db, collectionName, item2.id), { order: index });
+      } catch (err) {
+        console.error('Move failed:', err);
+      }
+    };
+
+    const cancelEdit = () => {
+      setEditingId(null);
+      setNewItem({});
     };
 
     const handleDelete = async (id: string) => {
@@ -309,8 +392,18 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
 
     return (
       <div className="space-y-8">
-        <div className="glass p-6 rounded-2xl border-white/5 space-y-4">
-          <h4 className="font-bold text-white">Add New {collectionName.slice(0, -1)}</h4>
+        <div className="glass p-6 rounded-2xl border-white/5 space-y-4" id="form-top">
+          <div className="flex items-center justify-between">
+            <h4 className="font-bold text-white">{editingId ? 'Edit' : 'Add New'} {collectionName.slice(0, -1)}</h4>
+            {editingId && (
+              <button 
+                onClick={cancelEdit}
+                className="text-xs font-bold uppercase text-neutral-400 hover:text-white transition-colors"
+              >
+                Cancel Edit
+              </button>
+            )}
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {fields.map((field) => (
               isImageField(field) ? (
@@ -357,19 +450,35 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
             ))}
           </div>
           <button
-            onClick={handleAdd}
-            disabled={isAdding}
+            onClick={handleSave}
+            disabled={isProcessing}
             className="flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-bold rounded-xl hover:bg-neutral-200 transition-all disabled:opacity-50"
           >
-            {isAdding ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-            Add Item
+            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : editingId ? <Save className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+            {editingId ? 'Update Item' : 'Add Item'}
           </button>
         </div>
 
         <div className="space-y-4">
-          {items.map((item: any, index: number) => (
+          {items.slice().sort((a: any, b: any) => (a.order || 0) - (b.order || 0)).map((item: any, index: number) => (
             <div key={item.id || `item-${index}`} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
               <div className="flex items-center gap-4">
+                <div className="flex flex-col gap-1 mr-2">
+                  <button 
+                    onClick={() => handleMove(index, 'up')}
+                    disabled={index === 0}
+                    className="p-1 hover:text-white disabled:opacity-20 transition-colors"
+                  >
+                    <ChevronUp className="w-4 h-4" />
+                  </button>
+                  <button 
+                    onClick={() => handleMove(index, 'down')}
+                    disabled={index === items.length - 1}
+                    className="p-1 hover:text-white disabled:opacity-20 transition-colors"
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                </div>
                 {item.thumbnail || item.image || item.logo ? (
                   <img src={item.thumbnail || item.image || item.logo} className="w-12 h-12 rounded-lg object-cover" alt="" />
                 ) : (
@@ -382,12 +491,20 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
                   <p className="text-xs text-neutral-400">{item.description || item.value}</p>
                 </div>
               </div>
-              <button
-                onClick={() => handleDelete(item.id)}
-                className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleEdit(item)}
+                  className="p-2 text-neutral-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <Pencil className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -398,7 +515,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
   const tabs = [
     { id: 'profile', label: 'Profile' },
     { id: 'playables', label: 'Playables', fields: ['title', 'description', 'iframeUrl', 'thumbnail'] },
-    { id: 'games', label: 'Games', fields: ['title', 'description', 'externalLink', 'mainImage', 'bgImage'] },
+    { id: 'games', label: 'Games', fields: ['title', 'tagline', 'publishedAt', 'description', 'externalLink', 'mainImage', 'bgImage'] },
     { id: 'awards', label: 'Awards', fields: ['name', 'description', 'image', 'checkoutLink', 'showCheckout'] },
     { id: 'stats', label: 'Stats', fields: ['label', 'value'] },
     { id: 'networks', label: 'Networks', fields: ['name', 'logo'] },

@@ -21,6 +21,10 @@ const DEFAULT_PROFILE = {
   aboutMe: 'Passionate Game Developer and Playable Ads Expert with a focus on creating engaging, high-performance interactive experiences. I specialize in HTML5 ad development and unique game mechanics.',
   profilePic: 'https://picsum.photos/seed/tibber/800/800',
   imageSize: 400,
+  iconSize: 20,
+  networkLogoSize: 20,
+  gameImageWidth: 288,
+  gameImageRatio: 1.77,
   primaryColor: '#0ea5e9'
 };
 
@@ -63,9 +67,10 @@ const DEFAULT_GAMES = [
   {
     id: 'g1',
     title: 'Ocean Quest',
+    tagline: 'Action Adventure • Physics Based',
     description: 'An immersive underwater adventure game with unique physics-based movement and stunning visuals.',
     externalLink: 'https://example.com/ocean-quest',
-    mainImage: 'https://picsum.photos/seed/g1/600/800',
+    mainImage: 'https://picsum.photos/seed/g1/600/400',
     bgImage: 'https://picsum.photos/seed/g1bg/1920/1080',
     order: 0
   }
@@ -182,10 +187,13 @@ export default function App() {
           playables={data.playables} 
           stats={data.stats} 
           networks={data.networks} 
+          logoSize={data.profile.networkLogoSize}
         />
         <GameDev 
           awards={data.awards} 
           games={data.games} 
+          imageSize={data.profile.gameImageWidth}
+          aspectRatio={data.profile.gameImageRatio}
         />
       </main>
 

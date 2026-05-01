@@ -14,6 +14,8 @@ interface HeroProps {
     aboutMe: string;
     profilePic: string;
     imageSize?: number;
+    iconSize?: number;
+    networkLogoSize?: number;
   };
 }
 
@@ -68,19 +70,19 @@ export default function Hero({ profile }: HeroProps) {
             className="grid sm:grid-cols-2 gap-4 text-neutral-300"
           >
             <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-white" />
+              <Calendar width={profile.iconSize || 20} height={profile.iconSize || 20} className="text-white" />
               <span>{profile.dob}</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-white" />
+              <MapPin width={profile.iconSize || 20} height={profile.iconSize || 20} className="text-white" />
               <span>{profile.location}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-white" />
+              <Phone width={profile.iconSize || 20} height={profile.iconSize || 20} className="text-white" />
               <span>{profile.phone}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-white" />
+              <Mail width={profile.iconSize || 20} height={profile.iconSize || 20} className="text-white" />
               <span>{profile.email}</span>
             </div>
           </motion.div>
