@@ -52,17 +52,17 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 text-ocean-300 hover:text-white transition-colors"
+              className="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-ocean-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <LogIn className="w-8 h-8 text-ocean-400" />
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <LogIn className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-2xl font-bold text-white">Admin Access</h2>
-              <p className="text-ocean-300 mt-2">Sign in to manage your portfolio</p>
+              <p className="text-neutral-400 mt-2">Sign in to manage your portfolio</p>
             </div>
 
             {error && (
@@ -75,7 +75,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <button
               onClick={handleLogin}
               disabled={loading}
-              className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-ocean-100 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+              className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
@@ -87,7 +87,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
               )}
             </button>
 
-            <p className="text-center text-xs text-ocean-400 mt-6">
+            <p className="text-center text-xs text-neutral-500 mt-6">
               Restricted area. Unauthorized access attempts are logged.
             </p>
           </motion.div>

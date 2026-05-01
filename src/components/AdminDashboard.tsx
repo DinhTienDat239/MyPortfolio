@@ -94,7 +94,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
 
     return (
       <div className="space-y-2">
-        <label className="text-xs font-bold uppercase text-ocean-400">{label}</label>
+        <label className="text-xs font-bold uppercase text-neutral-400">{label}</label>
         <div className="flex gap-3">
           <div className="flex-1 relative">
             <input
@@ -102,11 +102,11 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
               value={value || ''}
               onChange={(e) => onChange(e.target.value)}
               placeholder="Paste image URL or click upload"
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none pr-10"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none pr-10"
             />
             {uploading && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                <Loader2 className="w-5 h-5 text-ocean-400 animate-spin" />
+                <Loader2 className="w-5 h-5 text-neutral-400 animate-spin" />
               </div>
             )}
           </div>
@@ -114,7 +114,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
-            className="p-3 bg-white/5 border border-white/10 rounded-xl text-ocean-300 hover:bg-white/10 transition-colors disabled:opacity-50"
+            className="p-3 bg-white/5 border border-white/10 rounded-xl text-neutral-300 hover:bg-white/10 transition-colors disabled:opacity-50"
             title="Upload Image"
           >
             <Upload className="w-5 h-5" />
@@ -143,11 +143,11 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
 
     return (
       <div className="space-y-2">
-        <label className="text-xs font-bold uppercase text-ocean-400">{label}</label>
+        <label className="text-xs font-bold uppercase text-neutral-400">{label}</label>
         <div className="flex flex-col gap-3">
           {availablePaths.length > 0 && (
             <select
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none appearance-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none appearance-none"
               value={availablePaths.includes(value) ? value : ''}
               onChange={(e) => {
                 if (e.target.value) onChange(e.target.value);
@@ -164,11 +164,11 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
             value={value || ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder="Or paste external URL (https://...)"
-            className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none"
+            className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
           />
         </div>
-        <p className="text-[10px] text-ocean-300 leading-relaxed">
-          Tip: Upload your <code className="text-ocean-100 bg-white/10 px-1 py-0.5 rounded">.html</code> files to the <code className="text-ocean-100 bg-white/10 px-1 py-0.5 rounded">public/playables/</code> folder in your repository. They will automatically appear in the dropdown above.
+        <p className="text-[10px] text-neutral-500 leading-relaxed">
+          Tip: Upload your <code className="text-white bg-white/10 px-1 py-0.5 rounded">.html</code> files to the <code className="text-white bg-white/10 px-1 py-0.5 rounded">public/playables/</code> folder in your repository. They will automatically appear in the dropdown above.
         </p>
       </div>
     );
@@ -194,50 +194,50 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase text-ocean-400">Full Name</label>
+            <label className="text-xs font-bold uppercase text-neutral-400">Full Name</label>
             <input
               type="text"
               value={profile.fullName || ''}
               onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase text-ocean-400">Roles</label>
+            <label className="text-xs font-bold uppercase text-neutral-400">Roles</label>
             <input
               type="text"
               value={profile.roles || ''}
               onChange={(e) => setProfile({ ...profile, roles: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase text-ocean-400">DOB</label>
+            <label className="text-xs font-bold uppercase text-neutral-400">DOB</label>
             <input
               type="text"
               value={profile.dob || ''}
               onChange={(e) => setProfile({ ...profile, dob: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase text-ocean-400">Location</label>
+            <label className="text-xs font-bold uppercase text-neutral-400">Location</label>
             <input
               type="text"
               value={profile.location || ''}
               onChange={(e) => setProfile({ ...profile, location: e.target.value })}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none"
             />
           </div>
           <div className="space-y-2 sm:col-span-2">
-            <label className="text-xs font-bold uppercase text-ocean-400">Profile Image Size ({profile.imageSize || 400}px)</label>
+            <label className="text-xs font-bold uppercase text-neutral-400">Profile Image Size ({profile.imageSize || 400}px)</label>
             <input
               type="range"
               min="200"
               max="800"
               value={profile.imageSize || 400}
               onChange={(e) => setProfile({ ...profile, imageSize: Number(e.target.value) })}
-              className="w-full accent-ocean-500"
+              className="w-full accent-white"
             />
           </div>
         </div>
@@ -247,19 +247,19 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
           onChange={(url) => setProfile({ ...profile, profilePic: url })}
         />
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase text-ocean-400">About Me</label>
+          <label className="text-xs font-bold uppercase text-neutral-400">About Me</label>
           <textarea
             rows={4}
             value={profile.aboutMe || ''}
             onChange={(e) => setProfile({ ...profile, aboutMe: e.target.value })}
-            className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-ocean-500 outline-none resize-none"
+            className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:border-white outline-none resize-none"
           />
         </div>
         <div className="flex items-center gap-4">
           <button
             onClick={handleSave}
             disabled={status === 'saving'}
-            className="flex items-center gap-2 px-6 py-3 bg-ocean-500 text-white font-bold rounded-xl hover:bg-ocean-400 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-all disabled:opacity-50"
           >
             {status === 'saving' ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
             {status === 'saving' ? 'Saving...' : 'Save Profile'}
@@ -310,7 +310,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
     return (
       <div className="space-y-8">
         <div className="glass p-6 rounded-2xl border-white/5 space-y-4">
-          <h4 className="font-bold text-ocean-100">Add New {collectionName.slice(0, -1)}</h4>
+          <h4 className="font-bold text-white">Add New {collectionName.slice(0, -1)}</h4>
           <div className="grid sm:grid-cols-2 gap-4">
             {fields.map((field) => (
               isImageField(field) ? (
@@ -336,21 +336,21 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
                     id={`checkbox-${field}`}
                     checked={newItem[field] || false}
                     onChange={(e) => setNewItem({ ...newItem, [field]: e.target.checked })}
-                    className="w-5 h-5 accent-ocean-500 rounded cursor-pointer"
+                    className="w-5 h-5 accent-white rounded cursor-pointer"
                   />
-                  <label htmlFor={`checkbox-${field}`} className="text-sm font-bold uppercase text-ocean-400 cursor-pointer select-none">
+                  <label htmlFor={`checkbox-${field}`} className="text-sm font-bold uppercase text-neutral-400 cursor-pointer select-none">
                     {field}
                   </label>
                 </div>
               ) : (
                 <div key={field} className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase text-ocean-400 ml-1">{field}</label>
+                  <label className="text-[10px] font-bold uppercase text-neutral-400 ml-1">{field}</label>
                   <input
                     type="text"
                     placeholder={field}
                     value={newItem[field] || ''}
                     onChange={(e) => setNewItem({ ...newItem, [field]: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white outline-none focus:border-ocean-500"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-white outline-none focus:border-white"
                   />
                 </div>
               )
@@ -359,7 +359,7 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
           <button
             onClick={handleAdd}
             disabled={isAdding}
-            className="flex items-center gap-2 px-6 py-3 bg-ocean-600 text-white text-sm font-bold rounded-xl hover:bg-ocean-500 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-bold rounded-xl hover:bg-neutral-200 transition-all disabled:opacity-50"
           >
             {isAdding ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
             Add Item
@@ -373,13 +373,13 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
                 {item.thumbnail || item.image || item.logo ? (
                   <img src={item.thumbnail || item.image || item.logo} className="w-12 h-12 rounded-lg object-cover" alt="" />
                 ) : (
-                  <div className="w-12 h-12 rounded-lg bg-ocean-800 flex items-center justify-center">
-                    <ImageIcon className="w-6 h-6 text-ocean-400" />
+                  <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center">
+                    <ImageIcon className="w-6 h-6 text-neutral-400" />
                   </div>
                 )}
                 <div>
                   <h5 className="font-bold text-white">{item.title || item.name || item.label}</h5>
-                  <p className="text-xs text-ocean-400">{item.description || item.value}</p>
+                  <p className="text-xs text-neutral-400">{item.description || item.value}</p>
                 </div>
               </div>
               <button
@@ -416,25 +416,25 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
         >
           <div className="p-6 border-bottom border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-ocean-500 rounded-xl flex items-center justify-center font-bold text-white">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center font-bold text-black">
                 AD
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white">Admin Dashboard</h2>
-                <p className="text-xs text-ocean-400">Manage your portfolio content</p>
+                <p className="text-xs text-neutral-400">Manage your portfolio content</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleLogout}
-                className="p-2 text-ocean-300 hover:text-red-400 transition-colors"
+                className="p-2 text-neutral-400 hover:text-red-400 transition-colors"
                 title="Logout"
               >
                 <LogOut className="w-5 h-5" />
               </button>
               <button
                 onClick={onClose}
-                className="p-2 text-ocean-300 hover:text-white transition-colors"
+                className="p-2 text-neutral-400 hover:text-white transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -450,8 +450,8 @@ export default function AdminDashboard({ isOpen, onClose, data }: AdminDashboard
                   className={cn(
                     'px-4 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap',
                     activeTab === tab.id
-                      ? 'bg-ocean-500 text-white shadow-lg shadow-ocean-500/20'
-                      : 'bg-white/5 text-ocean-300 hover:bg-white/10'
+                      ? 'bg-white text-black shadow-lg shadow-white/20'
+                      : 'bg-white/5 text-neutral-400 hover:bg-white/10'
                   )}
                 >
                   {tab.label}

@@ -55,7 +55,7 @@ export default function Header({ brandName }: HeaderProps) {
           href="#"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold font-display text-ocean-400 text-glow"
+          className="text-2xl font-bold font-display text-white text-glow"
         >
           {brandName}
         </motion.a>
@@ -70,17 +70,17 @@ export default function Header({ brandName }: HeaderProps) {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-sm font-medium text-ocean-100 hover:text-ocean-400 transition-colors relative group"
+              className="text-sm font-medium text-neutral-300 hover:text-white transition-colors relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ocean-400 transition-all group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
             </motion.a>
           ))}
         </nav>
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-ocean-100"
+          className="md:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
@@ -102,7 +102,7 @@ export default function Header({ brandName }: HeaderProps) {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className="text-lg font-medium text-ocean-100 hover:text-ocean-400 py-2"
+                  className="text-lg font-medium text-neutral-300 hover:text-white py-2"
                 >
                   {link.name}
                 </a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Trophy, ExternalLink } from 'lucide-react';
+import LazyImage from './LazyImage';
 
 interface Award {
   id: string;
@@ -27,7 +28,7 @@ interface GameDevProps {
 
 export default function GameDev({ awards, games }: GameDevProps) {
   return (
-    <section id="games" className="py-20 px-6">
+    <section id="games" className="py-20 px-6 bg-black relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.h2
@@ -43,7 +44,7 @@ export default function GameDev({ awards, games }: GameDevProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-ocean-200 max-w-2xl mx-auto"
+            className="text-neutral-400 max-w-2xl mx-auto"
           >
             Passionate about creating unique mechanics, smooth logic, and immersive experiences that push the boundaries of web-based gaming.
           </motion.p>
@@ -64,21 +65,21 @@ export default function GameDev({ awards, games }: GameDevProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="glass p-6 rounded-3xl flex flex-col gap-6 border-white/5 group hover:bg-white/10 transition-colors"
+                  className="glass p-6 rounded-3xl flex flex-col gap-6 border-white/5 group hover:bg-white/5 transition-colors"
                 >
-                  <div className="w-full aspect-video rounded-2xl bg-ocean-900/50 overflow-hidden border border-white/5">
-                    <img src={award.image} alt={award.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <div className="w-full aspect-video rounded-2xl bg-neutral-900/50 overflow-hidden border border-white/5">
+                    <LazyImage src={award.image} alt={award.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
                   </div>
                   <div className="flex flex-col flex-1">
                     <h4 className="text-2xl font-bold text-white mb-3">{award.name}</h4>
-                    <p className="text-ocean-200 leading-relaxed flex-1">{award.description}</p>
+                    <p className="text-neutral-400 leading-relaxed flex-1">{award.description}</p>
                     {award.showCheckout && award.checkoutLink && (
                       <div className="mt-6 pt-6 border-t border-white/10">
                         <a
                           href={award.checkoutLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-ocean-500 text-ocean-300 hover:text-white font-bold rounded-xl transition-all group/btn"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white text-neutral-300 hover:text-black font-bold rounded-xl transition-all group/btn"
                         >
                           Checkout
                           <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
@@ -105,13 +106,13 @@ export default function GameDev({ awards, games }: GameDevProps) {
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
-                <img
+                <LazyImage
                   src={game.bgImage || 'https://picsum.photos/seed/gamebg/1920/1080'}
                   alt=""
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ocean-950 via-ocean-950/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
               </div>
 
               <div className="relative z-10 grid md:grid-cols-[1fr_300px] gap-12 items-end w-full">
@@ -119,14 +120,14 @@ export default function GameDev({ awards, games }: GameDevProps) {
                   <h3 className="text-4xl md:text-5xl font-black mb-4 text-white uppercase tracking-tighter">
                     {game.title}
                   </h3>
-                  <p className="text-lg text-ocean-100 max-w-xl mb-8 leading-relaxed">
+                  <p className="text-lg text-neutral-300 max-w-xl mb-8 leading-relaxed">
                     {game.description}
                   </p>
                   <a
                     href={game.externalLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-ocean-500 hover:bg-ocean-400 text-white font-bold rounded-full transition-all hover:gap-5 box-glow"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-neutral-200 text-black font-bold rounded-full transition-all hover:gap-5 box-glow"
                   >
                     PLAY NOW
                     <ExternalLink className="w-5 h-5" />
@@ -138,7 +139,7 @@ export default function GameDev({ awards, games }: GameDevProps) {
                     whileHover={{ y: -10, rotate: 2 }}
                     className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
                   >
-                    <img
+                    <LazyImage
                       src={game.mainImage || 'https://picsum.photos/seed/game/600/800'}
                       alt={game.title}
                       className="w-full h-full object-cover"

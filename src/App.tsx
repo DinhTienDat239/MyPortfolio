@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 import { auth, db } from './lib/firebase';
+import Preloader from './components/Preloader';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import PlayableAds from './components/PlayableAds';
@@ -86,6 +87,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
   const [data, setData] = useState<any>({
     profile: DEFAULT_PROFILE,
     playables: DEFAULT_PLAYABLES,
@@ -156,6 +158,11 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setShowPreloader(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleHiddenTrigger = () => {
     if (user) {
       setIsAdminDashboardOpen(true);
@@ -165,7 +172,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen selection:bg-ocean-500 selection:text-white">
+    <div className="min-h-screen selection:bg-white selection:text-black">
+      {showPreloader && <Preloader />}
       <Header brandName="Tibber Dinh" />
       
       <main>
@@ -202,7 +210,7 @@ export default function App() {
       {user && (
         <button
           onClick={() => setIsAdminDashboardOpen(true)}
-          className="fixed bottom-8 right-8 z-40 w-14 h-14 bg-ocean-500 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform box-glow"
+          className="fixed bottom-8 right-8 z-40 w-14 h-14 bg-white text-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform box-glow"
         >
           <div className="font-bold">AD</div>
         </button>
