@@ -1,0 +1,337 @@
+{
+  "profile": {
+    "fullName": "Dinh Tien Dat",
+    "alias": "Tibber",
+    "roles": "Playable Ads · Game Developer · Idea Creator",
+    "tagline": "I build games that bite back.",
+    "location": "Hanoi, Vietnam",
+    "email": "scd239@gmail.com",
+    "phone": "+84 368623903",
+    "dob": "23/09/2003",
+    "aboutMe": "Passionate Game Developer and Playable Ads Expert with a focus on creating engaging, high-performance interactive experiences. I specialize in HTML5 ad development and unique game mechanics.",
+    "profilePic": "",
+    "available": true
+  },
+  "story": [
+    {
+      "kicker": "I",
+      "title": "The Origin",
+      "body": "I started in game development — systems, mechanics, and the feel of a single jump. Games taught me that every millisecond of feedback matters."
+    },
+    {
+      "kicker": "II",
+      "title": "The Craft",
+      "body": "Then I learned to compress a whole game into thirty seconds and a few megabytes: playable ads that must hook a stranger before they scroll away."
+    },
+    {
+      "kicker": "III",
+      "title": "The Hunt",
+      "body": "Now I hunt ideas — mechanics that read instantly, convert hard, and still feel like real games. Small builds, sharp teeth."
+    }
+  ],
+  "stats": [
+    {
+      "label": "HTML Playables Built",
+      "value": "1000+"
+    },
+    {
+      "label": "Ads Impressions",
+      "value": "10M+"
+    },
+    {
+      "label": "Happy Clients",
+      "value": "50+"
+    },
+    {
+      "label": "Years Experience",
+      "value": "3+"
+    }
+  ],
+  "networks": [
+    {
+      "name": "AppLovin",
+      "logo": "https://www.vectorlogo.zone/logos/applovin/applovin-icon.svg"
+    },
+    {
+      "name": "Meta",
+      "logo": "https://www.vectorlogo.zone/logos/facebook/facebook-icon.svg"
+    },
+    {
+      "name": "Google Ads",
+      "logo": "https://www.vectorlogo.zone/logos/google_adwords/google_adwords-icon.svg"
+    },
+    {
+      "name": "Unity Ads",
+      "logo": "https://www.vectorlogo.zone/logos/unity3d/unity3d-icon.svg"
+    },
+    {
+      "name": "IronSource",
+      "logo": "https://www.vectorlogo.zone/logos/ironsource/ironsource-icon.svg"
+    },
+    {
+      "name": "Mintegral",
+      "logo": "https://www.vectorlogo.zone/logos/mintegral/mintegral-icon.svg"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Engines & Games",
+      "sigil": "I",
+      "skills": [
+        {
+          "name": "Unity",
+          "level": 5
+        },
+        {
+          "name": "C#",
+          "level": 5
+        },
+        {
+          "name": "Game Mechanics",
+          "level": 4,
+          "note": "Game feel, juice, core loops"
+        }
+      ]
+    },
+    {
+      "name": "Playable Ads",
+      "sigil": "II",
+      "skills": [
+        {
+          "name": "HTML5 / Canvas",
+          "level": 5
+        },
+        {
+          "name": "JavaScript",
+          "level": 5
+        },
+        {
+          "name": "TypeScript",
+          "level": 4
+        },
+        {
+          "name": "Ad Network SDKs",
+          "level": 5,
+          "note": "MRAID & network-specific builds"
+        },
+        {
+          "name": "Size Optimization",
+          "level": 4,
+          "note": "Single-file builds under network limits"
+        }
+      ]
+    },
+    {
+      "name": "Web",
+      "sigil": "III",
+      "skills": [
+        {
+          "name": "React",
+          "level": 4
+        },
+        {
+          "name": "Vite",
+          "level": 4
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": 4
+        },
+        {
+          "name": "Three.js / R3F",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "name": "Craft",
+      "sigil": "IV",
+      "skills": [
+        {
+          "name": "Idea Creation",
+          "level": 5,
+          "note": "Hooks & concepts for ad creatives"
+        },
+        {
+          "name": "Git",
+          "level": 4
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "pa-gun",
+      "slug": "gun",
+      "title": "Gun",
+      "category": "playable",
+      "summary": "Gun — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Gun.html",
+      "orientation": "portrait",
+      "featured": true,
+      "order": 0
+    },
+    {
+      "id": "pa-busaway",
+      "slug": "bus-away",
+      "title": "Bus Away",
+      "category": "playable",
+      "summary": "Bus Away — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/BusAway_Ikame.html",
+      "orientation": "portrait",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "pa-jigsaw",
+      "slug": "jigsaw",
+      "title": "Jigsaw",
+      "category": "playable",
+      "summary": "Jigsaw — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Jigsaw.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 2
+    },
+    {
+      "id": "pa-merge",
+      "slug": "merge",
+      "title": "Merge",
+      "category": "playable",
+      "summary": "Merge — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Merge.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 3
+    },
+    {
+      "id": "pa-musicbox",
+      "slug": "music-box",
+      "title": "Music Box",
+      "category": "playable",
+      "summary": "Music Box — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/MusicBox.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 4
+    },
+    {
+      "id": "pa-tricky",
+      "slug": "tricky",
+      "title": "Tricky",
+      "category": "playable",
+      "summary": "Tricky — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Tricky.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 5
+    },
+    {
+      "id": "pa-watersort",
+      "slug": "water-sort",
+      "title": "Water Sort",
+      "category": "playable",
+      "summary": "Water Sort — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/WaterSort.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 6
+    },
+    {
+      "id": "pa-wood",
+      "slug": "wood",
+      "title": "Wood",
+      "category": "playable",
+      "summary": "Wood — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Wood.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 7
+    },
+    {
+      "id": "pa-wool",
+      "slug": "wool",
+      "title": "Wool",
+      "category": "playable",
+      "summary": "Wool — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Wool.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 8
+    },
+    {
+      "id": "pa-worm",
+      "slug": "worm",
+      "title": "Worm",
+      "category": "playable",
+      "summary": "Worm — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "tags": [
+        "HTML5",
+        "Playable Ad"
+      ],
+      "playableUrl": "playables/Worm.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 9
+    }
+  ],
+  "awards": [],
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/DinhTienDat239",
+      "handle": "@DinhTienDat239"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:scd239@gmail.com",
+      "handle": "scd239@gmail.com"
+    },
+    {
+      "label": "itch.io",
+      "url": "",
+      "handle": ""
+    },
+    {
+      "label": "LinkedIn",
+      "url": "",
+      "handle": ""
+    }
+  ]
+}

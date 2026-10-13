@@ -1,20 +1,100 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Tibber · Dinh Tien Dat — Portfolio
 
-# Run and deploy your AI Studio app
+Portfolio tĩnh phong cách **Vampire / Dark Fantasy / Cyber-Goth**: React 19 + Vite + Tailwind v4 + Motion + React Three Fiber.
+Không database, không backend: toàn bộ nội dung nằm trong `src/data/content.json`, **push lên `main` là GitHub Actions tự build và deploy lên GitHub Pages**.
 
-This contains everything you need to run your app locally.
+## Chạy local
 
-View your app in AI Studio: https://ai.studio/apps/7fffb00b-b2f4-4647-8d5e-9201985af899
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # xuất ra dist/
+npm run preview    # xem bản build
+```
 
-## Run Locally
+## Deploy (GitHub Pages)
 
-**Prerequisites:**  Node.js
+1. Lần đầu: repo trên GitHub → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. `git push` lên `main` → workflow `.github/workflows/deploy.yml` build & deploy (≈1–2 phút, xem tab **Actions**).
+3. Site: `https://dinhtiendat239.github.io/MyPortfolio/`
 
+Site dùng hash routing (`#/work/<slug>`) và `base: './'` nên chạy được ở mọi đường dẫn / domain riêng mà không cần cấu hình thêm.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Cập nhật nội dung
+
+Mọi thứ ở **`src/data/content.json`** (kiểu dữ liệu: `src/types/content.ts`):
+
+| Muốn… | Sửa |
+|---|---|
+| Đổi tên, tagline, about, ảnh đại diện | `profile` |
+| 3 thẻ câu chuyện ở phần Origin | `story` |
+| Số liệu đếm (1000+, 10M+…) | `stats` |
+| Thêm dự án | thêm 1 object vào `projects` |
+| Kỹ năng (level 1–5) | `skills` |
+| GitHub / itch.io / LinkedIn | `socials` (để `url` rỗng → tự ẩn) |
+| Giải thưởng | `awards` (mảng rỗng → section tự ẩn) |
+
+### Thêm 1 project
+
+```jsonc
+{
+  "id": "my-game",
+  "slug": "my-game",                 // URL: #/work/my-game
+  "title": "My Game",
+  "category": "game",                // "game" | "playable" | "webapp"
+  "summary": "One or two sentences.",
+  "thumbnail": "images/my-game.webp", // file đặt trong public/images/ — bỏ trống → artwork tự sinh
+  "previewVideo": "videos/my-game.webm", // tuỳ chọn: clip 3–6s, play khi hover card
+  "playableUrl": "playables/MyGame.html", // tuỳ chọn: chơi trực tiếp trong khung điện thoại
+  "externalLink": "https://…",       // tuỳ chọn: store / itch.io
+  "tags": ["Unity", "C#"],
+  "year": "2026",
+  "role": "Solo developer",
+  "featured": true,
+  "order": 0,
+  "caseStudy": [                     // tuỳ chọn: nội dung trang case study
+    { "type": "text", "heading": "The hook", "body": "…" },
+    { "type": "image", "src": "images/my-game-2.webp", "caption": "…" },
+    { "type": "stats", "items": [{ "label": "CTR", "value": "12%" }] },
+    { "type": "quote", "text": "…" }
+  ]
+}
+```
+
+Tab **Web Apps** tự xuất hiện khi có project `"category": "webapp"`.
+
+## Lấy dữ liệu cũ từ Firestore (chạy 1 lần)
+
+```bash
+npm run export:firestore
+```
+
+Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành file trong `public/images/` và **merge** vào `content.json` (giữ nguyên những gì bạn tự viết thêm). Xong thì commit, có thể xoá `scripts/export-firestore.mjs`.
+
+## Easter eggs
+
+- Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Blood Mode
+- Click 3 lần vào dấu **✝** ở footer → Blood Mode
+- Nút loa trên header → âm thanh click / gõ phím (tổng hợp bằng Web Audio, không có file âm thanh)
+- Mở DevTools console 🦇
+
+## Cấu trúc
+
+```
+src/
+├─ data/content.json        ← toàn bộ nội dung
+├─ types/content.ts
+├─ styles/vamp.css          ← theme Tailwind v4 (@theme): màu blood-*, font, glitch, grain
+├─ pages/                   HomePage · CaseStudyPage
+├─ components/
+│  ├─ sections/             HeroVamp · Origin · Crypt · Arsenal · Trophies · Summon
+│  ├─ projects/             ProjectCard (3D tilt + video hover) · ProjectArt · PlayableFrame
+│  ├─ three/                BloodMoonScene (R3F, lazy-load)
+│  ├─ fx/                   Preloader · Curtain · BloodCursor · SmoothScroll · …
+│  └─ layout/               Header · Footer
+├─ lib/                     router (hash) · sound · bloodMode · store · utils
+└─ hooks/useKonami.ts
+public/
+├─ playables/               build HTML của từng playable
+└─ images/                  ảnh (do export script tạo / bạn tự thêm)
+```
