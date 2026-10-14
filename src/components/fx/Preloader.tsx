@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { setScrollLocked } from './SmoothScroll';
 import { Sprite } from '../pixel/Sprite';
+import { LAYERS } from '../../lib/game';
 
 const KEY = 'cave-world-generated';
 const STEPS = ['Carving caverns', 'Scattering ores', 'Lighting torches', 'Growing glowshrooms', 'Waking the slimes'];
-const TIPS = ['Tip: press 1–6 to jump between layers.', 'Tip: click the cave walls to mine ore.', 'Tip: some secrets only open with the right key sequence.'];
+const TIPS = [`Tip: press 1–${LAYERS.length} to jump between layers.`, 'Tip: click the cave walls to mine ore.', 'Tip: some secrets only open with the right key sequence.'];
 const SEGMENTS = 20;
 
 const seen = () => {

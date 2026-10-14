@@ -78,7 +78,7 @@ Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành f
 - **Đào quặng**: click vào tường hang ở Hero để đào khối — đủ 10 khối hoàn thành quest → Treasure Rain
 - Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Treasure Rain
 - Click 3 lần vào viên ngọc ở footer → Treasure Rain
-- Phím **1–6**: nhảy giữa các tầng (hotbar)
+- Phím số **1–5** (thêm awards thì thành 1–6): nhảy giữa các tầng (hotbar)
 - Nút loa trên HUD → âm thanh chiptune (Web Audio, không có file âm thanh)
 - Mở DevTools console ⛏
 
