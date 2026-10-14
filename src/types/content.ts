@@ -47,6 +47,7 @@ export interface Network {
 export interface SkillGroup {
   name: string;           // "Engines", "Web", …
   sigil: string;          // ký hiệu trang trí: "I", "II", …
+  icon?: string;          // tên sprite: pickaxe | sword | gem | book | potion | …
   skills: { name: string; level: number; note?: string }[]; // level 1–5
 }
 
@@ -83,6 +84,8 @@ export interface Project {
   externalLink?: string;  // store / itch.io / web demo
   caseStudy?: CaseStudyBlock[];
   featured?: boolean;
+  /** Ghi đè độ hiếm tự động (mặc định: featured → legendary, game → epic, playable → rare, webapp → uncommon) */
+  rarity?: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
   order: number;
 }
 

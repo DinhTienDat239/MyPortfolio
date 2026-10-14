@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-/** Store nhỏ cho state toàn cục (sound on/off, blood mode) — không cần thêm thư viện. */
+/** Store nhỏ cho state toàn cục (âm thanh, quặng, kho báu…) — không cần thêm thư viện. */
 export function createStore<T>(initial: T) {
   let value = initial;
   const listeners = new Set<() => void>();

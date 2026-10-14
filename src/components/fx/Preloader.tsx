@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { setScrollLocked } from './SmoothScroll';
+import { Sprite } from '../pixel/Sprite';
 
-const KEY = 'vamp-awakened';
+const KEY = 'cave-world-generated';
+const STEPS = ['Carving caverns', 'Scattering ores', 'Lighting torches', 'Growing glowshrooms', 'Waking the slimes'];
+const TIPS = ['Tip: press 1–6 to jump between layers.', 'Tip: click the cave walls to mine ore.', 'Tip: some secrets only open with the right key sequence.'];
+const SEGMENTS = 20;
 
 const seen = () => {
   try {
@@ -12,21 +16,21 @@ const seen = () => {
   }
 };
 
-/** "Awakening": chỉ chạy lần đầu trong phiên, ~1.6s, đếm 0→100. */
-export default function Preloader({ name }: { name: string }) {
+/** Màn "Generating world…" — chỉ chạy lần đầu trong phiên, ~1.8s. */
+export default function Preloader() {
   const [visible, setVisible] = useState(() => !seen());
-  const [count, setCount] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [tip] = useState(() => TIPS[Math.floor(Math.random() * TIPS.length)]);
 
   useEffect(() => {
     if (!visible) return;
     setScrollLocked(true);
     const start = performance.now();
-    const DURATION = 1500;
+    const DURATION = 1700;
     let raf = 0;
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / DURATION);
-      // ease-out để số chạy nhanh rồi chậm dần
-      setCount(Math.round((1 - Math.pow(1 - p, 3)) * 100));
+      setProgress(p);
       if (p < 1) raf = requestAnimationFrame(tick);
       else
         setTimeout(() => {
@@ -36,35 +40,44 @@ export default function Preloader({ name }: { name: string }) {
           } catch {
             /* ignore */
           }
-        }, 250);
+        }, 300);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [visible]);
+
+  const filled = Math.round(progress * SEGMENTS);
+  const step = STEPS[Math.min(STEPS.length - 1, Math.floor(progress * STEPS.length))];
 
   return (
     <AnimatePresence onExitComplete={() => setScrollLocked(false)}>
       {visible && (
         <motion.div
           key="preloader"
-          exit={{ clipPath: 'inset(0 0 100% 0)' }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-void"
-          style={{ clipPath: 'inset(0 0 0% 0)' }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: 'linear' }}
+          className="bg-tile-stone fixed inset-0 z-[9999] flex flex-col items-center justify-center px-6"
         >
-          <motion.div
-            initial={{ opacity: 0, letterSpacing: '0.6em', filter: 'blur(10px)' }}
-            animate={{ opacity: 1, letterSpacing: '0.25em', filter: 'blur(0px)' }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-4xl font-black uppercase text-bone md:text-6xl"
-          >
-            {name}
-          </motion.div>
-          <div className="mt-8 h-px w-56 overflow-hidden bg-ash">
-            <div className="h-full bg-blood-500 shadow-blood" style={{ width: `${count}%` }} />
-          </div>
-          <div className="mt-4 font-mono text-xs tracking-[0.4em] text-fog">
-            AWAKENING <span className="text-blood-400 tabular-nums">{String(count).padStart(3, '0')}</span>
+          <div className="cave-dark pointer-events-none absolute inset-0" />
+          <div className="relative flex flex-col items-center">
+            <Sprite name="pickaxe" size={64} className="animate-bob" />
+            <p className="mt-6 font-label text-xs uppercase tracking-widest text-mist">World seed · 239</p>
+            <h1 className="pixel-shadow mt-2 text-3xl font-bold text-parchment md:text-4xl">Generating world…</h1>
+
+            <div className="px-slot mt-8 flex gap-1 p-2">
+              {Array.from({ length: SEGMENTS }).map((_, i) => (
+                <span
+                  key={i}
+                  className="h-4 w-2.5 sm:w-3.5"
+                  style={{ background: i < filled ? (i % 5 === 4 ? 'var(--color-crystal)' : 'var(--color-torch)') : 'transparent' }}
+                />
+              ))}
+            </div>
+            <p className="mt-4 font-label text-xs text-torch">
+              {step}
+              <span className="animate-blink">_</span>
+            </p>
+            <p className="mt-10 max-w-xs text-center text-sm text-mist">{tip}</p>
           </div>
         </motion.div>
       )}

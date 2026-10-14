@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-import HeroVamp from '../components/sections/HeroVamp';
-import Origin from '../components/sections/Origin';
-import Crypt from '../components/sections/Crypt';
-import Arsenal from '../components/sections/Arsenal';
-import Trophies from '../components/sections/Trophies';
-import Summon from '../components/sections/Summon';
+import CaveHero from '../components/sections/CaveHero';
+import Character from '../components/sections/Character';
+import Vault from '../components/sections/Vault';
+import SkillTree from '../components/sections/SkillTree';
+import Feats from '../components/sections/Feats';
+import Craft from '../components/sections/Craft';
 import { consumeHomeTarget } from '../lib/router';
 import { jumpTo, scrollToTarget } from '../components/fx/SmoothScroll';
 
 export default function HomePage() {
-  // Quay về từ case study: tới section được yêu cầu, hoặc đúng chỗ đang xem trước đó
+  // Quay về từ trang chi tiết: tới đúng tầng được yêu cầu, hoặc chỗ đang xem trước đó
   useEffect(() => {
     const { section, y } = consumeHomeTarget();
     if (section) {
-      const t = setTimeout(() => scrollToTarget(`#${section}`), 350);
+      const t = setTimeout(() => scrollToTarget(`#${section}`), 400);
       return () => clearTimeout(t);
     }
     if (y !== undefined) requestAnimationFrame(() => jumpTo(y));
@@ -21,12 +21,12 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroVamp />
-      <Origin />
-      <Crypt />
-      <Arsenal />
-      <Trophies />
-      <Summon />
+      <CaveHero />
+      <Character />
+      <Vault />
+      <SkillTree />
+      <Feats />
+      <Craft />
     </>
   );
 }

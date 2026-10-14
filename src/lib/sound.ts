@@ -1,10 +1,10 @@
 import { createStore, storage } from './store';
 
 /**
- * Âm thanh tổng hợp bằng Web Audio — không cần file mp3 nào.
- * Mặc định TẮT; người dùng bật bằng nút loa trên Header (nhớ qua localStorage).
+ * Âm thanh chiptune tổng hợp bằng Web Audio — không có file âm thanh nào.
+ * Mặc định TẮT; bật bằng nút loa trên HUD (nhớ qua localStorage).
  */
-export const soundOn = createStore<boolean>(storage.get('vamp-sound') === '1');
+export const soundOn = createStore<boolean>(storage.get('cave-sound') === '1');
 
 let ctx: AudioContext | null = null;
 const audio = () => {
@@ -18,57 +18,51 @@ const audio = () => {
 
 export function setSound(on: boolean) {
   soundOn.set(on);
-  storage.set('vamp-sound', on ? '1' : '0');
-  if (on) play('chime');
+  storage.set('cave-sound', on ? '1' : '0');
+  if (on) play('pickup');
 }
 
-type Kind = 'tick' | 'key' | 'thud' | 'chime';
+type Kind = 'tick' | 'key' | 'mine' | 'pickup' | 'chime' | 'thud';
+
+/** 1 nốt square/triangle với envelope ngắn */
+function blip(ac: AudioContext, t: number, freq: number, dur: number, vol: number, type: OscillatorType = 'square', slideTo?: number) {
+  const osc = ac.createOscillator();
+  const gain = ac.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t);
+  if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+  gain.gain.setValueAtTime(vol, t);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  osc.connect(gain).connect(ac.destination);
+  osc.start(t);
+  osc.stop(t + dur + 0.02);
+}
 
 export function play(kind: Kind) {
   if (!soundOn.get()) return;
   try {
     const ac = audio();
     const t = ac.currentTime;
-    const gain = ac.createGain();
-    gain.connect(ac.destination);
-    const osc = ac.createOscillator();
-    osc.connect(gain);
-
     switch (kind) {
-      case 'tick': // click: tiếng "tách" ngắn
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(1400, t);
-        osc.frequency.exponentialRampToValueAtTime(500, t + 0.05);
-        gain.gain.setValueAtTime(0.06, t);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
-        osc.start(t);
-        osc.stop(t + 0.08);
+      case 'tick':
+        blip(ac, t, 880, 0.05, 0.03, 'square', 660);
         break;
-      case 'key': // gõ phím: cao độ ngẫu nhiên nhẹ
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(900 + Math.random() * 500, t);
-        gain.gain.setValueAtTime(0.018, t);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
-        osc.start(t);
-        osc.stop(t + 0.04);
+      case 'key':
+        blip(ac, t, 520 + Math.random() * 260, 0.03, 0.02, 'square');
         break;
-      case 'thud': // nhịp tim trầm
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(110, t);
-        osc.frequency.exponentialRampToValueAtTime(40, t + 0.25);
-        gain.gain.setValueAtTime(0.25, t);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
-        osc.start(t);
-        osc.stop(t + 0.32);
+      case 'mine': // "cộc" đá vỡ
+        blip(ac, t, 220, 0.09, 0.09, 'square', 70);
+        blip(ac, t + 0.03, 140, 0.08, 0.06, 'triangle', 60);
         break;
-      case 'chime': // bật âm / easter egg
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(660, t);
-        osc.frequency.setValueAtTime(990, t + 0.09);
-        gain.gain.setValueAtTime(0.05, t);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
-        osc.start(t);
-        osc.stop(t + 0.36);
+      case 'pickup': // nhặt quặng: 2 nốt đi lên
+        blip(ac, t, 660, 0.07, 0.05, 'square');
+        blip(ac, t + 0.07, 990, 0.1, 0.05, 'square');
+        break;
+      case 'chime': // mở khoá / easter egg: arpeggio
+        [523, 659, 784, 1047].forEach((f, i) => blip(ac, t + i * 0.08, f, 0.16, 0.045, 'square'));
+        break;
+      case 'thud':
+        blip(ac, t, 110, 0.25, 0.18, 'triangle', 45);
         break;
     }
   } catch {

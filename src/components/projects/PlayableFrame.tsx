@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ExternalLink, Play, RotateCcw, Smartphone } from 'lucide-react';
+import { ExternalLink, RotateCcw, Smartphone } from 'lucide-react';
 import { asset } from '../../data';
 import { cn } from '../../lib/utils';
 import { play } from '../../lib/sound';
+import { Sprite } from '../pixel/Sprite';
 
 interface Props {
   src: string;
@@ -12,11 +13,11 @@ interface Props {
 }
 
 /**
- * Khung điện thoại chạy playable thật. Iframe chỉ được tải khi người xem bấm
- * "Awaken" — playable nặng 2–5MB nên không tải sẵn.
+ * Máy chơi game cầm tay pixel chạy playable thật. Iframe chỉ tải khi bấm "Power on"
+ * vì mỗi playable nặng 2–5MB.
  */
 export default function PlayableFrame({ src, title, orientation = 'portrait' }: Props) {
-  const [awake, setAwake] = useState(false);
+  const [on, setOn] = useState(false);
   const [mode, setMode] = useState(orientation);
   const [reloadKey, setReloadKey] = useState(0);
   const url = asset(src)!;
@@ -26,66 +27,60 @@ export default function PlayableFrame({ src, title, orientation = 'portrait' }: 
     <div className="flex flex-col items-center">
       <motion.div
         layout
-        transition={{ type: 'spring', stiffness: 160, damping: 22 }}
-        className={cn(
-          'relative rounded-[2.2rem] border border-ash bg-void p-3 shadow-blood-lg',
-          portrait ? 'aspect-[9/17] w-[min(360px,82vw)]' : 'aspect-[16/9] w-[min(820px,92vw)]',
-        )}
+        transition={{ type: 'spring', stiffness: 170, damping: 22 }}
+        className={cn('px-panel relative bg-rock-2 p-4 pb-5', portrait ? 'w-[min(380px,86vw)]' : 'w-[min(880px,92vw)]')}
       >
-        {/* tai thỏ */}
-        <div className={cn('absolute z-10 rounded-full bg-ash', portrait ? 'left-1/2 top-5 h-1.5 w-16 -translate-x-1/2' : 'left-5 top-1/2 h-16 w-1.5 -translate-y-1/2')} />
-        <div className="relative h-full w-full overflow-hidden rounded-[1.6rem] bg-crypt">
-          {awake ? (
-            <iframe
-              key={reloadKey}
-              src={url}
-              title={title}
-              allow="autoplay; fullscreen"
-              className="h-full w-full border-0"
-            />
+        {/* đèn nguồn */}
+        <div className="mb-3 flex items-center justify-between px-1">
+          <span className="font-label text-[10px] uppercase text-mist">Pocket-Cave</span>
+          <span className="flex items-center gap-2 font-label text-[9px] uppercase text-mist">
+            <span className={cn('h-2 w-2', on ? 'bg-uncommon animate-blink' : 'bg-ruby/60')} /> {on ? 'On' : 'Off'}
+          </span>
+        </div>
+        <div className={cn('px-slot relative overflow-hidden bg-void', portrait ? 'aspect-[9/16]' : 'aspect-[16/9]')}>
+          {on ? (
+            <iframe key={reloadKey} src={url} title={title} allow="autoplay; fullscreen" className="h-full w-full border-0" />
           ) : (
             <button
               onClick={() => {
-                play('thud');
-                setAwake(true);
+                play('chime');
+                setOn(true);
               }}
-              data-cursor="play"
-              className="group absolute inset-0 flex flex-col items-center justify-center gap-5 bg-[radial-gradient(circle,rgb(255_0_51/0.18),transparent_65%)]"
+              data-cursor
+              className="bg-tile-stone group absolute inset-0 flex flex-col items-center justify-center gap-5"
             >
-              <span className="flex h-20 w-20 items-center justify-center rounded-full border border-blood-500 text-blood-400 transition-all group-hover:scale-110 group-hover:bg-blood-500 group-hover:text-void animate-pulse-blood">
-                <Play className="ml-1 h-8 w-8 fill-current" />
-              </span>
-              <span className="font-mono text-xs uppercase tracking-[0.35em] text-bone">Awaken the playable</span>
+              <Sprite name="gem" size={64} className="animate-bob" />
+              <span className="px-btn">▶ Power on</span>
+              <span className="font-label text-[9px] uppercase text-mist">Loads the real build (~3MB)</span>
             </button>
           )}
         </div>
+        {/* D-pad + nút trang trí */}
+        <div aria-hidden className="mt-4 flex items-center justify-between px-3">
+          <div className="relative h-12 w-12">
+            <span className="absolute left-4 top-0 h-12 w-4 bg-ink" />
+            <span className="absolute left-0 top-4 h-4 w-12 bg-ink" />
+          </div>
+          <div className="flex gap-3">
+            <span className="h-7 w-7 rounded-full bg-ruby shadow-[inset_0_-3px_0_0_rgb(0_0_0/0.35)]" />
+            <span className="mt-3 h-7 w-7 rounded-full bg-gold shadow-[inset_0_-3px_0_0_rgb(0_0_0/0.35)]" />
+          </div>
+        </div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-6 flex flex-wrap justify-center gap-3">
-          <button
-            onClick={() => setMode(portrait ? 'landscape' : 'portrait')}
-            className="flex items-center gap-2 border border-ash px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-fog transition-colors hover:border-blood-600 hover:text-bone"
-          >
-            <Smartphone className={cn('h-3.5 w-3.5 transition-transform', !portrait && 'rotate-90')} />
-            {portrait ? 'Landscape' : 'Portrait'}
+      <div className="mt-8 flex flex-wrap justify-center gap-4">
+        <button onClick={() => setMode(portrait ? 'landscape' : 'portrait')} className="px-btn-stone !py-2">
+          <Smartphone className={cn('h-4 w-4 transition-transform', !portrait && 'rotate-90')} /> {portrait ? 'Landscape' : 'Portrait'}
+        </button>
+        {on && (
+          <button onClick={() => setReloadKey((k) => k + 1)} className="px-btn-stone !py-2">
+            <RotateCcw className="h-4 w-4" /> Restart
           </button>
-          {awake && (
-            <button
-              onClick={() => setReloadKey((k) => k + 1)}
-              className="flex items-center gap-2 border border-ash px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-fog transition-colors hover:border-blood-600 hover:text-bone"
-            >
-              <RotateCcw className="h-3.5 w-3.5" /> Restart
-            </button>
-          )}
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 border border-ash px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-fog transition-colors hover:border-blood-600 hover:text-bone"
-          >
-            <ExternalLink className="h-3.5 w-3.5" /> Fullscreen
-          </a>
-      </motion.div>
+        )}
+        <a href={url} target="_blank" rel="noopener noreferrer" className="px-btn-stone !py-2">
+          <ExternalLink className="h-4 w-4" /> Fullscreen
+        </a>
+      </div>
     </div>
   );
 }

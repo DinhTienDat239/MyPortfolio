@@ -1,32 +1,29 @@
 import { motion } from 'motion/react';
 
-const EASE = [0.76, 0, 0.24, 1] as const;
+const COLS = 10;
+const ROWS = 6;
+// độ trễ ngẫu nhiên nhưng cố định cho từng ô → hiệu ứng "tan rã pixel"
+const DELAYS = Array.from({ length: COLS * ROWS }, (_, i) => ((Math.sin(i * 12.9898) * 43758.5453) % 1 + 1) % 1);
 
 /**
- * Chuyển trang kiểu cinematic: 2 tấm màn (đỏ rồi đen) quét qua màn hình.
- * Đặt bên trong <motion.* initial="initial" animate="enter" exit="exit"> — variants lan xuống.
+ * Chuyển trang: màn hình lấp đầy/vỡ ra thành các khối đá.
+ * Đặt bên trong <motion.* initial="initial" animate="enter" exit="exit">.
  */
 export default function Curtain() {
   return (
-    <>
-      <motion.div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-[90] bg-blood-600"
-        variants={{
-          initial: { scaleY: 1, originY: 0 },
-          enter: { scaleY: 0, originY: 0, transition: { duration: 0.7, ease: EASE, delay: 0.15 } },
-          exit: { scaleY: 1, originY: 1, transition: { duration: 0.5, ease: EASE } },
-        }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-[91] bg-void"
-        variants={{
-          initial: { scaleY: 1, originY: 0 },
-          enter: { scaleY: 0, originY: 0, transition: { duration: 0.7, ease: EASE } },
-          exit: { scaleY: 1, originY: 1, transition: { duration: 0.5, ease: EASE, delay: 0.12 } },
-        }}
-      />
-    </>
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-[90] grid" style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)`, gridTemplateRows: `repeat(${ROWS}, 1fr)` }}>
+      {DELAYS.map((d, i) => (
+        <motion.div
+          key={i}
+          className="bg-tile-stone -m-px"
+          style={{ boxShadow: 'inset 0 0 0 2px rgb(0 0 0 / 0.35)' }}
+          variants={{
+            initial: { scale: 1 },
+            enter: { scale: 0, transition: { duration: 0.18, delay: 0.1 + d * 0.45, ease: 'linear' } },
+            exit: { scale: 1, transition: { duration: 0.18, delay: d * 0.35, ease: 'linear' } },
+          }}
+        />
+      ))}
+    </div>
   );
 }

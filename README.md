@@ -1,6 +1,8 @@
 # Tibber · Dinh Tien Dat — Portfolio
 
-Portfolio tĩnh phong cách **Vampire / Dark Fantasy / Cyber-Goth**: React 19 + Vite + Tailwind v4 + Motion + React Three Fiber.
+Portfolio tĩnh phong cách **pixel-art khám phá hang động**: cuộn trang = đào sâu xuống lòng đất. React 19 + Vite + Tailwind v4 + Motion + React Three Fiber.
+
+Toàn bộ pixel art (sprite, tile, con trỏ, hang voxel 3D) là **nguyên bản**, vẽ bằng code — không dùng asset của game nào.
 Không database, không backend: toàn bộ nội dung nằm trong `src/data/content.json`, **push lên `main` là GitHub Actions tự build và deploy lên GitHub Pages**.
 
 ## Chạy local
@@ -73,10 +75,17 @@ Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành f
 
 ## Easter eggs
 
-- Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Blood Mode
-- Click 3 lần vào dấu **✝** ở footer → Blood Mode
-- Nút loa trên header → âm thanh click / gõ phím (tổng hợp bằng Web Audio, không có file âm thanh)
-- Mở DevTools console 🦇
+- **Đào quặng**: click vào tường hang ở Hero để đào khối — đủ 10 khối hoàn thành quest → Treasure Rain
+- Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Treasure Rain
+- Click 3 lần vào viên ngọc ở footer → Treasure Rain
+- Phím **1–6**: nhảy giữa các tầng (hotbar)
+- Nút loa trên HUD → âm thanh chiptune (Web Audio, không có file âm thanh)
+- Mở DevTools console ⛏
+
+## Thêm sprite pixel
+
+Sprite nằm ở `src/components/pixel/sprites.ts`: mỗi sprite là lưới 16×16 ký tự, màu tra theo `PALETTE`.
+Dùng: `<Sprite name="gem" size={32} />`. Có thể đổi màu: `recolor={{ c: '#b77cff' }}`.
 
 ## Cấu trúc
 
@@ -84,15 +93,16 @@ Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành f
 src/
 ├─ data/content.json        ← toàn bộ nội dung
 ├─ types/content.ts
-├─ styles/vamp.css          ← theme Tailwind v4 (@theme): màu blood-*, font, glitch, grain
-├─ pages/                   HomePage · CaseStudyPage
+├─ styles/cave.css          ← theme Tailwind v4: màu hang/quặng/độ hiếm, panel pixel, tile nền, con trỏ cuốc
+├─ pages/                   HomePage · CaseStudyPage (Item Codex)
 ├─ components/
-│  ├─ sections/             HeroVamp · Origin · Crypt · Arsenal · Trophies · Summon
-│  ├─ projects/             ProjectCard (3D tilt + video hover) · ProjectArt · PlayableFrame
-│  ├─ three/                BloodMoonScene (R3F, lazy-load)
-│  ├─ fx/                   Preloader · Curtain · BloodCursor · SmoothScroll · …
-│  └─ layout/               Header · Footer
-├─ lib/                     router (hash) · sound · bloodMode · store · utils
+│  ├─ sections/             CaveHero · Character · Vault · SkillTree · Feats · Craft
+│  ├─ projects/             ItemCard (độ hiếm + 3D tilt + video hover) · PlayableFrame (máy cầm tay)
+│  ├─ pixel/                sprites.ts · Sprite · PixelScene (cảnh hang tự sinh)
+│  ├─ three/                CaveScene (hang voxel R3F, đào được, lazy-load)
+│  ├─ fx/                   Preloader · Curtain · Layer · Ambience · SmoothScroll · Counter
+│  └─ layout/               Header (HUD độ sâu) · Hotbar · Footer (địa tầng)
+├─ lib/                     router (hash) · game (tầng, quặng, kho báu) · sound · store · utils
 └─ hooks/useKonami.ts
 public/
 ├─ playables/               build HTML của từng playable

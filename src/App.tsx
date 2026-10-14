@@ -2,26 +2,28 @@ import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import SmoothScroll, { jumpTo } from './components/fx/SmoothScroll';
 import Preloader from './components/fx/Preloader';
-import BloodCursor from './components/fx/BloodCursor';
-import BloodModeOverlay from './components/fx/BloodModeOverlay';
 import Curtain from './components/fx/Curtain';
+import { ClickDebris, LanternLight, TreasureRain } from './components/fx/Ambience';
 import Header from './components/layout/Header';
+import Hotbar from './components/layout/Hotbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import CaseStudyPage from './pages/CaseStudyPage';
 import { matchWork, useRoute } from './lib/router';
 import { useKonami } from './hooks/useKonami';
-import { toggleBloodMode } from './lib/bloodMode';
+import { startTreasureRain } from './lib/game';
 import { play } from './lib/sound';
 import { content, findProject } from './data';
+
+const konami = () => startTreasureRain('konami');
 
 export default function App() {
   const route = useRoute();
   const slug = matchWork(route);
 
-  useKonami(toggleBloodMode);
+  useKonami(konami);
 
-  // Tiếng "tách" khi click link/nút (chỉ khi người dùng đã bật âm)
+  // Tiếng "tách" khi click link/nút (chỉ khi đã bật âm)
   useEffect(() => {
     const onDown = (e: PointerEvent) => {
       if ((e.target as HTMLElement).closest('a, button')) play('tick');
@@ -30,27 +32,27 @@ export default function App() {
     return () => window.removeEventListener('pointerdown', onDown);
   }, []);
 
-  // Tiêu đề tab theo trang
   useEffect(() => {
     const p = slug ? findProject(slug) : undefined;
     document.title = p ? `${p.title} — ${content.profile.alias}` : `${content.profile.alias} · ${content.profile.fullName} — Game & Playable Ads Developer`;
   }, [slug]);
 
-  // Lời chào cho ai mở DevTools
   useEffect(() => {
     console.log(
-      `%c🦇 ${content.profile.alias.toUpperCase()} %c\nLooking under the hood? I like that. → ${content.profile.email}\nPsst: ↑↑↓↓←→←→BA`,
-      'font: 900 28px serif; color: #ff0033;',
-      'color: #8d8589;',
+      `%c⛏ ${content.profile.alias.toUpperCase()} %c\nYou dug into the console. Nice. → ${content.profile.email}\nPsst: ↑↑↓↓←→←→BA`,
+      'font: 700 26px monospace; color: #ffb347; text-shadow: 3px 3px 0 #14121f;',
+      'color: #9a98b8;',
     );
   }, []);
 
   return (
     <SmoothScroll>
-      <Preloader name={content.profile.alias} />
-      <BloodCursor />
-      <BloodModeOverlay />
+      <Preloader />
+      <LanternLight />
+      <ClickDebris />
+      <TreasureRain />
       <Header />
+      <Hotbar />
 
       <AnimatePresence mode="wait" onExitComplete={() => jumpTo(0)}>
         <motion.main key={slug ?? 'home'} initial="initial" animate="enter" exit="exit">
