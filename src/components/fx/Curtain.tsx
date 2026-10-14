@@ -15,7 +15,7 @@ export default function Curtain() {
       {DELAYS.map((d, i) => (
         <motion.div
           key={i}
-          className="bg-tile-stone -m-px"
+          className="bg-floor-burrow -m-px"
           style={{ boxShadow: 'inset 0 0 0 2px rgb(0 0 0 / 0.35)' }}
           variants={{
             initial: { scale: 1 },

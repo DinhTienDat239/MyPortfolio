@@ -121,7 +121,7 @@ export default function Craft() {
             <div className="flex flex-col items-center gap-3">
               <div
                 className={cn('px-slot relative flex h-24 w-24 items-center justify-center transition-shadow', ready && 'shadow-torch')}
-                style={ready ? { boxShadow: 'inset 4px 4px 0 0 rgb(0 0 0 / 0.45), 0 0 0 4px var(--color-torch), 0 0 24px rgb(255 179 71 / 0.4)' } : undefined}
+                style={ready ? { borderColor: 'var(--color-gold)', boxShadow: 'inset 0 2px 0 rgb(0 0 0 / 0.45), 0 0 24px rgb(242 193 78 / 0.4)' } : undefined}
               >
                 <Sprite name="scroll" size={56} className={cn('transition', ready ? 'animate-bob' : 'opacity-25 grayscale')} />
                 {ready && (

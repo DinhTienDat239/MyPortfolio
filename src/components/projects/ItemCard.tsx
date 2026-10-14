@@ -68,7 +68,7 @@ export default function ItemCard({ project, index, className }: { project: Proje
         className={cn('px-panel relative block h-full p-3', rarity === 'legendary' && 'rarity-glow')}
       >
         {/* dải màu độ hiếm */}
-        <span aria-hidden className="absolute inset-x-0 top-0 h-1" style={{ background: color }} />
+        <span aria-hidden className="absolute inset-x-3 top-0 h-[2px] rounded-full" style={{ background: color, boxShadow: `0 0 12px ${color}` }} />
 
         <div className="px-slot relative aspect-[16/10] overflow-hidden">
           {thumb ? (

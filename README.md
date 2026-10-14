@@ -1,8 +1,8 @@
 # Tibber · Dinh Tien Dat — Portfolio
 
-Portfolio tĩnh phong cách **pixel-art khám phá hang động**: cuộn trang = đào sâu xuống lòng đất. React 19 + Vite + Tailwind v4 + Motion + React Three Fiber.
+Portfolio tĩnh phong cách **pixel-art khám phá hang động**: cuộn trang = đào sâu xuống lòng đất. React 19 + Vite + Tailwind v4 + Motion + engine canvas 2D tự viết (hang nhìn 3/4, ánh sáng động).
 
-Toàn bộ pixel art (sprite, tile, con trỏ, hang voxel 3D) là **nguyên bản**, vẽ bằng code — không dùng asset của game nào.
+Toàn bộ pixel art (sprite, tile, con trỏ, hang động có ánh sáng) là **nguyên bản**, vẽ bằng code — không dùng asset của game nào.
 Không database, không backend: toàn bộ nội dung nằm trong `src/data/content.json`, **push lên `main` là GitHub Actions tự build và deploy lên GitHub Pages**.
 
 ## Chạy local
@@ -75,7 +75,7 @@ Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành f
 
 ## Easter eggs
 
-- **Đào quặng**: click vào tường hang ở Hero để đào khối — đủ 10 khối hoàn thành quest → Treasure Rain
+- **Đào quặng**: click vào tường hang ở Hero 3 lần để đào vỡ khối — đủ 10 khối hoàn thành quest → Treasure Rain
 - Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Treasure Rain
 - Click 3 lần vào viên ngọc ở footer → Treasure Rain
 - Phím số **1–5** (thêm awards thì thành 1–6): nhảy giữa các tầng (hotbar)
@@ -99,9 +99,9 @@ src/
 │  ├─ sections/             CaveHero · Character · Vault · SkillTree · Feats · Craft
 │  ├─ projects/             ItemCard (độ hiếm + 3D tilt + video hover) · PlayableFrame (máy cầm tay)
 │  ├─ pixel/                sprites.ts · Sprite · PixelScene (cảnh hang tự sinh)
-│  ├─ three/                CaveScene (hang voxel R3F, đào được, lazy-load)
 │  ├─ fx/                   Preloader · Curtain · Layer · Ambience · SmoothScroll · Counter
 │  └─ layout/               Header (HUD độ sâu) · Hotbar · Footer (địa tầng)
+├─ engine/                  CaveWorld (render + ánh sáng + đào) · paint (cọ vẽ tile) · biomes (bảng màu) · textures
 ├─ lib/                     router (hash) · game (tầng, quặng, kho báu) · sound · store · utils
 └─ hooks/useKonami.ts
 public/

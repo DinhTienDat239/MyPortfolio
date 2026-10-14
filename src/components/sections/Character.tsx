@@ -160,7 +160,7 @@ function Journal() {
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, delay: 0.1 }}
     >
-      <div className="relative bg-parchment p-6 text-ink shadow-[0_-4px_0_0_#14121f,0_4px_0_0_#14121f,-4px_0_0_0_#14121f,4px_0_0_0_#14121f,inset_0_-6px_0_0_#c9b48e] md:p-8">
+      <div className="relative rounded-lg border-2 border-[#6e4a2a] bg-gradient-to-b from-[#f6ead0] to-[#e8d5ae] p-6 text-ink shadow-[inset_0_-4px_0_rgb(120_80_40/0.25),0_10px_30px_rgb(0_0_0/0.45)] md:p-8">
         <p className="font-label text-[10px] uppercase text-[#8a5a34]">Explorer's journal</p>
         <p className="mt-3 text-xl leading-relaxed md:text-2xl">“{profile.aboutMe}”</p>
       </div>

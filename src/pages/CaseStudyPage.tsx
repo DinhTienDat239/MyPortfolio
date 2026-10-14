@@ -60,7 +60,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
 function NotFound() {
   return (
-    <section className="bg-tile-stone flex min-h-[100svh] flex-col items-center justify-center px-6 text-center">
+    <section className="bg-floor-burrow flex min-h-[100svh] flex-col items-center justify-center px-6 text-center">
       <Sprite name="slime" size={96} className="animate-bob" />
       <p className="mt-6 font-label text-xs uppercase text-torch">404 · Unexplored tile</p>
       <h1 className="pixel-shadow mt-3 text-5xl font-bold text-parchment">Nothing here but slime.</h1>
@@ -86,7 +86,7 @@ function Codex({ project }: { project: Project }) {
   ].filter((s) => s.v);
 
   return (
-    <article className="bg-tile-gold min-h-screen pb-10">
+    <article className="bg-floor-ruins min-h-screen pb-10">
       <motion.div style={{ scaleX: progress }} className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-torch" />
 
       <button onClick={() => goToSection('work')} className="px-btn-stone fixed left-3 top-24 z-40 !px-3 !py-2 md:left-6">
@@ -98,7 +98,7 @@ function Codex({ project }: { project: Project }) {
         <div className="cave-dark pointer-events-none absolute inset-0" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, type: 'spring', stiffness: 200, damping: 20 }} className="px-panel relative p-3" style={{ ['--rarity' as string]: color }}>
-            <span className="absolute inset-x-0 top-0 h-1" style={{ background: color }} />
+            <span className="absolute inset-x-3 top-0 h-[2px] rounded-full" style={{ background: color, boxShadow: `0 0 12px ${color}` }} />
             <div className="px-slot aspect-[16/10] overflow-hidden">
               {cover ? <img src={cover} alt="" className="h-full w-full object-cover" /> : <PixelScene seed={project.slug} icon={CATEGORY_ICON[project.category]} />}
             </div>

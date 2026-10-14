@@ -47,7 +47,7 @@ export default function PlayableFrame({ src, title, orientation = 'portrait' }: 
                 setOn(true);
               }}
               data-cursor
-              className="bg-tile-stone group absolute inset-0 flex flex-col items-center justify-center gap-5"
+              className="bg-floor-burrow group absolute inset-0 flex flex-col items-center justify-center gap-5"
             >
               <Sprite name="gem" size={64} className="animate-bob" />
               <span className="px-btn">▶ Power on</span>

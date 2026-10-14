@@ -1,189 +1,185 @@
 /* ============================================================
-   CAVE THEME — pixel-art underground (Tailwind v4, CSS-first)
-   Cuộn trang = đào sâu xuống lòng đất. Mỗi section là 1 "tầng".
-   Fonts nạp bằng <link> trong index.html.
+   LANTERNLIGHT — design system (Tailwind v4, CSS-first)
+   Hướng thiết kế: hang động 2D nhìn 3/4, ánh đuốc là nhân vật chính,
+   UI panel xanh đêm bán trong suốt, góc bo nhẹ, viền mảnh, chữ màu giấy da.
+   Fonts (index.html): Jersey 10 (tiêu đề) · Pixelify Sans (nội dung) · Silkscreen (nhãn HUD)
    ============================================================ */
 @import "tailwindcss";
 
 @theme {
-  --font-pixel: "Pixelify Sans", ui-monospace, monospace;   /* tiêu đề + nội dung */
-  --font-label: "Silkscreen", ui-monospace, monospace;      /* nhãn nhỏ kiểu HUD */
+  --font-display: "Jersey 10", "Pixelify Sans", ui-monospace, monospace;
+  --font-pixel: "Pixelify Sans", ui-monospace, monospace;
+  --font-label: "Silkscreen", ui-monospace, monospace;
   --font-sans: "Pixelify Sans", ui-sans-serif, system-ui, sans-serif;
 
-  /* ---- Hang động ---- */
-  --color-void: #07070d;
-  --color-cave: #0d0e1c;     /* nền chính */
-  --color-rock: #1a1b30;     /* panel */
-  --color-rock-2: #25273f;   /* panel nổi */
-  --color-edge: #3b3d5e;     /* viền */
-  --color-ink: #14121f;      /* viền đậm sprite */
+  /* ---- Nền & panel ---- */
+  --color-night: #0b0d18;
+  --color-void: #06070e;
+  --color-cave: #0b0d18;
+  --color-rock: #161b2e;      /* panel */
+  --color-rock-2: #1e2440;    /* panel nổi / nút phụ */
+  --color-edge: #343d63;      /* viền */
+  --color-edge-hi: #4e5a8a;
+  --color-slot: #0c0f1e;
+  --color-ink: #120d0a;
 
   /* ---- Chữ ---- */
-  --color-parchment: #f1e3c6;
-  --color-mist: #9a98b8;
+  --color-parchment: #f3e6c8;
+  --color-mist: #a3a8c6;
 
-  /* ---- Đuốc & quặng ---- */
-  --color-torch: #ffb347;
-  --color-torch-deep: #e8772e;
-  --color-copper: #e07a3f;
-  --color-gold: #f5c542;
+  /* ---- Ánh sáng & vật liệu ---- */
+  --color-torch: #ffb057;
+  --color-torch-deep: #d9822b;
+  --color-gold: #f2c14e;
+  --color-gold-deep: #a8741f;
+  --color-copper: #e8873f;
   --color-crystal: #5ef2e6;
   --color-crystal-deep: #1f9c9a;
-  --color-amethyst: #b77cff;
+  --color-amethyst: #b48cff;
   --color-moss: #7fc35a;
   --color-moss-deep: #3f7a32;
-  --color-shroom: #4fd6ff;
+  --color-shroom: #57c7ff;
   --color-ruby: #e8434f;
+  --color-clay: #a46146;
 
   /* ---- Độ hiếm ---- */
-  --color-common: #d8d8e0;
-  --color-uncommon: #7fd35a;
-  --color-rare: #5aa8ff;
-  --color-epic: #b77cff;
-  --color-legendary: #ffab3d;
+  --color-common: #e4e1d6;
+  --color-uncommon: #8ad65e;
+  --color-rare: #5fb0ff;
+  --color-epic: #c08cff;
+  --color-legendary: #ffae42;
 
-  --shadow-torch: 0 0 24px rgb(255 179 71 / 0.35);
-  --shadow-crystal: 0 0 24px rgb(94 242 230 / 0.35);
+  --shadow-torch: 0 0 28px rgb(255 176 87 / 0.35);
+  --shadow-crystal: 0 0 22px rgb(94 242 230 / 0.35);
 
   --animate-bob: bob 2.4s ease-in-out infinite;
-  --animate-flicker: flicker 2.2s steps(1) infinite;
-  --animate-twinkle: twinkle 1.6s steps(2) infinite;
-  --animate-blink: blink 1s steps(1) infinite;
+  --animate-flicker: flicker 2.2s ease-in-out infinite;
+  --animate-twinkle: twinkle 1.6s ease-in-out infinite;
+  --animate-blink: blink 1.1s steps(1) infinite;
 
   @keyframes bob {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-5px); }
   }
   @keyframes flicker {
     0%, 100% { opacity: 1; }
-    30% { opacity: 0.82; }
-    55% { opacity: 0.95; }
-    70% { opacity: 0.75; }
+    25% { opacity: 0.86; }
+    50% { opacity: 0.96; }
+    75% { opacity: 0.8; }
   }
   @keyframes twinkle {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.3; transform: scale(0.6); }
+    50% { opacity: 0.25; transform: scale(0.6); }
   }
   @keyframes blink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    50% { opacity: 0.2; }
   }
 }
 
 :root {
-  --tile-stone: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20width%3D%2716%27%20height%3D%2716%27%20fill%3D%27%2314152a%27/%3E%3Crect%20x%3D%275%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%276%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2715%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%279%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%275%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%276%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%271%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%274%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%2711%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%275%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%2712%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%271%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%274%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2714%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2715%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%273%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%2714%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%277%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%278%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%272%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%279%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2712%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%273%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%274%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%275%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%276%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231b1d36%27/%3E%3Crect%20x%3D%277%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%279%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%276%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230e0f1f%27/%3E%3C/svg%3E");
-  --tile-dirt: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20width%3D%2716%27%20height%3D%2716%27%20fill%3D%27%231d1520%27/%3E%3Crect%20x%3D%276%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%2711%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%270%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%277%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%279%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%2710%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%2712%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%2713%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%270%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%279%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2711%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%2714%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%272%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%273%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%272%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%274%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2715%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%273%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2712%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%271%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%276%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%278%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%275%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%2712%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%270%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%274%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2715%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%273%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%2714%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%271%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%273%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2713%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%275%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%233a2a22%27/%3E%3Crect%20x%3D%276%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%279%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23271c25%27/%3E%3Crect%20x%3D%2712%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2713%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%278%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%279%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23150f17%27/%3E%3C/svg%3E");
-  --tile-crystal: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20width%3D%2716%27%20height%3D%2716%27%20fill%3D%27%230f1726%27/%3E%3Crect%20x%3D%272%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%274%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2714%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%270%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%278%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%273%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2714%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%270%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%277%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2710%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%270%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%2715%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%2710%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2711%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2712%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%273%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%274%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%275%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2711%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%2715%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%277%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2711%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2712%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2715%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%279%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2713%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%270%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2710%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%231d6b72%27/%3E%3Crect%20x%3D%270%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%274%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2714%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%271%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%276%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%279%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%2712%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2316213a%27/%3E%3Crect%20x%3D%272%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%273%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%274%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%275%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%277%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%278%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3Crect%20x%3D%279%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230a101c%27/%3E%3C/svg%3E");
-  --tile-moss: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20width%3D%2716%27%20height%3D%2716%27%20fill%3D%27%23101a1a%27/%3E%3Crect%20x%3D%2710%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2712%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2715%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%274%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%277%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2710%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2711%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%272%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%278%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2712%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%270%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%272%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%273%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2710%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%2712%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%278%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%2715%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%270%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2711%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%277%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%278%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%272%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2710%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%2713%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%271%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%278%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%279%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2710%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%2714%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%274%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%278%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%272%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%274%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%2713%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%270%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%272%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%273%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%275%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23162423%27/%3E%3Crect%20x%3D%2713%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%232c5a33%27/%3E%3Crect%20x%3D%274%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%276%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%277%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%273%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3Crect%20x%3D%274%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%230b1313%27/%3E%3C/svg%3E");
-  --tile-gold: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20width%3D%2716%27%20height%3D%2716%27%20fill%3D%27%2317151f%27/%3E%3Crect%20x%3D%276%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%279%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%270%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%272%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%273%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2710%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%274%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2710%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%270%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%271%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%275%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2714%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2712%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2714%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%272%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%275%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%276%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%278%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2712%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%270%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%278%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%276%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%278%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2711%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%273%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%275%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2710%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2711%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%270%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%272%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%277%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%278%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2711%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2712%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%273%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%274%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%275%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%277%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%272%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%279%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235a4520%27/%3E%3Crect%20x%3D%2710%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%271%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%2713%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2715%27%20y%3D%2715%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23201d2b%27/%3E%3Crect%20x%3D%274%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%276%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%277%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2713%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3Crect%20x%3D%2714%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23100e17%27/%3E%3C/svg%3E");
   --cursor-pick: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2732%27%20height%3D%2732%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20x%3D%274%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%276%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%273%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%274%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%275%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%276%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%277%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%278%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%279%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2710%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2711%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2712%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%272%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%273%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%274%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%275%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%276%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%277%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%278%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%279%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%2710%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%2711%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%2712%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%2713%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2714%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%272%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%273%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%274%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%275%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%276%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2712%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%2713%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%239aa3b8%27/%3E%3Crect%20x%3D%2714%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2715%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%272%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%273%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%2714%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23d6dcea%27/%3E%3Crect%20x%3D%2715%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%272%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2714%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%235c637a%27/%3E%3Crect%20x%3D%2715%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2715%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b07a45%27/%3E%3Crect%20x%3D%279%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b07a45%27/%3E%3Crect%20x%3D%279%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3C/svg%3E");
   --cursor-pick-hot: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2732%27%20height%3D%2732%27%20viewBox%3D%270%200%2016%2016%27%20shape-rendering%3D%27crispEdges%27%3E%3Crect%20x%3D%274%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%275%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%276%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%271%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%272%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%273%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%274%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%275%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%276%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%277%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%278%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%279%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2710%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2711%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2712%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%272%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%272%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%273%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%274%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%275%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%276%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%277%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%278%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%279%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%2710%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%2711%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%2712%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%2713%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2714%27%20y%3D%273%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%272%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%273%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%274%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%275%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%276%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2710%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2711%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2712%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%2713%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23f5c542%27/%3E%3Crect%20x%3D%2714%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2715%27%20y%3D%274%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%272%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%273%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2713%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%2714%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23fff0a8%27/%3E%3Crect%20x%3D%2715%27%20y%3D%275%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%272%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2714%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b8862a%27/%3E%3Crect%20x%3D%2715%27%20y%3D%276%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%270%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%271%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%2715%27%20y%3D%277%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b07a45%27/%3E%3Crect%20x%3D%279%27%20y%3D%278%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%279%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2710%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%23b07a45%27/%3E%3Crect%20x%3D%279%27%20y%3D%2711%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2712%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%238a5a34%27/%3E%3Crect%20x%3D%279%27%20y%3D%2713%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%277%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%278%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3Crect%20x%3D%279%27%20y%3D%2714%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27%2314121f%27/%3E%3C/svg%3E");
 }
 
-/* ---------------- Base ---------------- */
 @layer base {
   html {
     color-scheme: dark;
     cursor: var(--cursor-pick) 2 2, auto;
   }
-  a, button, [role="button"], [data-cursor] {
-    cursor: var(--cursor-pick-hot) 2 2, pointer;
-  }
+  a, button, [role="button"], [data-cursor] { cursor: var(--cursor-pick-hot) 2 2, pointer; }
   input, textarea { cursor: text; }
 
   body {
-    @apply bg-cave font-sans text-parchment antialiased;
-    background-image: var(--tile-stone);
-    background-size: 64px 64px;
-    image-rendering: pixelated;
+    @apply bg-night font-sans text-parchment antialiased;
+    font-size: 17px;
   }
-  ::selection { background: var(--color-torch); color: var(--color-ink); }
-  h1, h2, h3, h4 { font-family: var(--font-pixel); }
-  img { image-rendering: auto; }
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400 !important; font-synthesis: none; letter-spacing: 0.02em; line-height: 0.95; }
 }
 
-/* ---------------- Pixel UI ----------------
-   Viền "khía góc" kiểu pixel bằng box-shadow — không cần ảnh. */
+/* ---------------- Panels ----------------
+   Panel kiểu UI game hang động: nền xanh đêm bán trong suốt, viền mảnh 2px,
+   góc bo nhẹ, highlight 1px phía trên, bóng mềm. */
 @utility px-panel {
-  background: var(--color-rock);
+  background: linear-gradient(180deg, rgb(30 36 64 / 0.94), rgb(20 24 44 / 0.94));
+  border: 2px solid var(--color-edge);
+  border-radius: 8px;
   box-shadow:
-    0 -4px 0 0 var(--color-ink), 0 4px 0 0 var(--color-ink),
-    -4px 0 0 0 var(--color-ink), 4px 0 0 0 var(--color-ink),
-    inset 0 4px 0 0 rgb(255 255 255 / 0.07),
-    inset 0 -4px 0 0 rgb(0 0 0 / 0.35);
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    inset 0 0 0 1px rgb(0 0 0 / 0.35),
+    0 10px 30px rgb(0 0 0 / 0.45);
+  backdrop-filter: blur(3px);
 }
 @utility px-slot {
-  background: rgb(7 7 13 / 0.55);
-  box-shadow:
-    inset 4px 4px 0 0 rgb(0 0 0 / 0.45),
-    inset -4px -4px 0 0 rgb(255 255 255 / 0.05),
-    0 0 0 4px var(--color-edge);
+  background: var(--color-slot);
+  border: 2px solid #232a4a;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 0 rgb(0 0 0 / 0.45), inset 0 -1px 0 rgb(255 255 255 / 0.04);
 }
 @utility px-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.85rem 1.4rem;
+  padding: 0.8rem 1.35rem;
   font-family: var(--font-label);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  color: var(--color-ink);
-  background: var(--color-torch);
+  color: #2a1606;
+  background: linear-gradient(180deg, #ffd77a 0%, #f2b84b 55%, #e09a33 100%);
+  border: 2px solid #6e4310;
+  border-radius: 8px;
   box-shadow:
-    0 -4px 0 0 var(--color-ink), 0 4px 0 0 var(--color-ink),
-    -4px 0 0 0 var(--color-ink), 4px 0 0 0 var(--color-ink),
-    inset 0 -6px 0 0 var(--color-torch-deep),
-    inset 0 4px 0 0 rgb(255 255 255 / 0.35);
-  transition: transform 80ms steps(2), filter 120ms;
-  &:hover { filter: brightness(1.12); }
-  &:active { transform: translateY(4px); box-shadow: 0 -4px 0 0 var(--color-ink), 0 0 0 0 var(--color-ink), -4px 0 0 0 var(--color-ink), 4px 0 0 0 var(--color-ink), inset 0 4px 0 0 var(--color-torch-deep); }
+    inset 0 2px 0 rgb(255 255 255 / 0.5),
+    inset 0 -3px 0 rgb(120 60 0 / 0.35),
+    0 0 22px rgb(255 176 87 / 0.28),
+    0 4px 0 #3d2408;
+  transition: transform 90ms ease, filter 120ms ease, box-shadow 120ms ease;
+  &:hover { filter: brightness(1.08); box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.5), inset 0 -3px 0 rgb(120 60 0 / 0.35), 0 0 32px rgb(255 176 87 / 0.45), 0 4px 0 #3d2408; }
+  &:active { transform: translateY(3px); box-shadow: inset 0 2px 0 rgb(255 255 255 / 0.4), 0 1px 0 #3d2408; }
 }
 @utility px-btn-stone {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.85rem 1.4rem;
+  padding: 0.8rem 1.35rem;
   font-family: var(--font-label);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  background: var(--color-rock-2);
   color: var(--color-parchment);
-  box-shadow:
-    0 -4px 0 0 var(--color-ink), 0 4px 0 0 var(--color-ink),
-    -4px 0 0 0 var(--color-ink), 4px 0 0 0 var(--color-ink),
-    inset 0 -6px 0 0 rgb(0 0 0 / 0.35),
-    inset 0 4px 0 0 rgb(255 255 255 / 0.08);
-  transition: transform 80ms steps(2), filter 120ms;
-  &:hover { filter: brightness(1.2); }
-  &:active { transform: translateY(4px); }
+  background: linear-gradient(180deg, #27305a, #1b2142);
+  border: 2px solid var(--color-edge-hi);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1), 0 4px 0 #0a0c18;
+  transition: transform 90ms ease, filter 120ms ease;
+  &:hover { filter: brightness(1.18); }
+  &:active { transform: translateY(3px); box-shadow: 0 1px 0 #0a0c18; }
 }
-@utility pixel-shadow {
-  text-shadow: 3px 3px 0 var(--color-ink), 6px 6px 0 rgb(0 0 0 / 0.35);
+
+/* ---------------- Chữ ---------------- */
+@utility soft-shadow { text-shadow: 0 2px 0 rgb(0 0 0 / 0.55), 0 0 18px rgb(0 0 0 / 0.5); }
+@utility pixel-shadow { text-shadow: 0 2px 0 rgb(0 0 0 / 0.6), 0 0 14px rgb(0 0 0 / 0.45); }
+/* Tiêu đề lớn: giấy da ấm, viền tối 2 lớp, quầng đuốc */
+@utility title-glow {
+  color: var(--color-parchment);
+  text-shadow:
+    0 3px 0 #6b3e1c,
+    0 6px 0 #2a170a,
+    0 0 40px rgb(255 170 80 / 0.35),
+    0 0 90px rgb(255 140 60 / 0.18);
 }
 @utility pixel-extrude {
-  /* chữ khối nổi 3D kiểu voxel */
-  text-shadow:
-    0 4px 0 #8a5a34, 0 8px 0 #6e4d36, 0 12px 0 #4a3426,
-    0 16px 0 var(--color-ink), 0 24px 24px rgb(0 0 0 / 0.6);
+  color: var(--color-parchment);
+  text-shadow: 0 3px 0 #6b3e1c, 0 6px 0 #2a170a, 0 0 40px rgb(255 170 80 / 0.3);
 }
 @utility pixelated { image-rendering: pixelated; }
+@utility cave-dark { background: radial-gradient(ellipse at center, transparent 30%, rgb(6 7 14 / 0.88) 100%); }
 
-@utility bg-tile-stone { background-image: var(--tile-stone); background-size: 64px 64px; }
-@utility bg-tile-dirt { background-image: var(--tile-dirt); background-size: 64px 64px; }
-@utility bg-tile-crystal { background-image: var(--tile-crystal); background-size: 64px 64px; }
-@utility bg-tile-moss { background-image: var(--tile-moss); background-size: 64px 64px; }
-@utility bg-tile-gold { background-image: var(--tile-gold); background-size: 64px 64px; }
-
-/* Bóng tối mép section — như ánh đuốc chỉ soi được giữa phòng */
-@utility cave-dark {
-  background: radial-gradient(ellipse at center, transparent 35%, rgb(7 7 13 / 0.85) 100%);
-}
-
-/* Đèn lồng đi theo chuột (biến --lx --ly do LanternLight set) */
+/* Đèn lồng theo chuột (biến --lx --ly) */
 .lantern-light {
-  background: radial-gradient(260px circle at var(--lx, -999px) var(--ly, -999px), rgb(255 179 71 / 0.10), transparent 70%);
+  background: radial-gradient(240px circle at var(--lx, -999px) var(--ly, -999px), rgb(255 190 110 / 0.09), transparent 70%);
 }
 
 /* Sprite 2 khung hình (đuốc) */
@@ -196,21 +192,20 @@
 .skill-cube { transform-style: preserve-3d; animation: cube-spin 18s linear infinite; }
 .skill-cube:hover { animation-play-state: paused; }
 @keyframes cube-spin {
-  from { transform: rotateX(-22deg) rotateY(0deg); }
-  to   { transform: rotateX(-22deg) rotateY(360deg); }
+  from { transform: rotateX(-20deg) rotateY(0deg); }
+  to   { transform: rotateX(-20deg) rotateY(360deg); }
 }
 
-/* Viền độ hiếm nhấp nháy cho đồ huyền thoại */
-.rarity-glow { animation: rarity-glow 2s ease-in-out infinite; }
+/* Viền độ hiếm cho đồ huyền thoại */
+.rarity-glow { animation: rarity-glow 2.4s ease-in-out infinite; }
 @keyframes rarity-glow {
-  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
-  50% { filter: drop-shadow(0 0 10px var(--rarity, var(--color-legendary))); }
+  0%, 100% { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.07), 0 10px 30px rgb(0 0 0 / 0.45), 0 0 0 transparent; }
+  50% { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.07), 0 10px 30px rgb(0 0 0 / 0.45), 0 0 26px var(--rarity, var(--color-legendary)); }
 }
 
-/* ---------------- Scrollbar ---------------- */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-void); }
-::-webkit-scrollbar-thumb { background: var(--color-edge); border: 2px solid var(--color-void); }
+::-webkit-scrollbar-thumb { background: var(--color-edge); border: 2px solid var(--color-void); border-radius: 6px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-torch-deep); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -220,3 +215,19 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------- Nền biome ----------------
+   Texture sàn sinh bởi engine (--tex-*), phóng to x3 nguyên lần cho pixel sắc nét,
+   phủ tối để ánh sáng (LayerSection) "soi" ra từng vùng. */
+@utility bg-floor-burrow { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-burrow) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-clay { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-clay) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-ruins { background: linear-gradient(rgb(6 7 14 / 0.45), rgb(6 7 14 / 0.45)), var(--tex-ruins) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-crystal { background: linear-gradient(rgb(6 7 14 / 0.4), rgb(6 7 14 / 0.4)), var(--tex-crystal) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-garden { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-garden) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+
+.wall-band { height: 114px; background-repeat: repeat-x; background-size: 384px 114px; image-rendering: pixelated; }
+.wall-burrow { background-image: var(--wall-burrow); }
+.wall-clay { background-image: var(--wall-clay); }
+.wall-ruins { background-image: var(--wall-ruins); }
+.wall-crystal { background-image: var(--wall-crystal); }
+.wall-garden { background-image: var(--wall-garden); }

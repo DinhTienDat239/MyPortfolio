@@ -22,7 +22,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (!this.state.error) return this.props.children;
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cave p-6 text-center">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-night p-6 text-center">
         <p className="font-label text-xs uppercase text-torch">Cave-in!</p>
         <h1 className="mt-6 pixel-shadow text-4xl font-bold text-parchment md:text-6xl">Something collapsed.</h1>
         <button

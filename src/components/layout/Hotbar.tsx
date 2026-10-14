@@ -42,7 +42,7 @@ export default function Hotbar() {
             aria-label={l.label}
             aria-current={on ? 'true' : undefined}
             className={cn('px-slot group relative flex h-11 w-11 items-center justify-center md:h-14 md:w-14', on && 'bg-torch/15')}
-            style={on ? { boxShadow: 'inset 4px 4px 0 0 rgb(0 0 0 / 0.45), 0 0 0 4px var(--color-torch)' } : undefined}
+            style={on ? { borderColor: 'var(--color-gold)', boxShadow: 'inset 0 2px 0 rgb(0 0 0 / 0.45), 0 0 16px rgb(242 193 78 / 0.45)' } : undefined}
           >
             <Sprite name={l.icon} size={28} className={cn('transition-transform md:hidden', on && 'animate-bob')} />
             <Sprite name={l.icon} size={36} className={cn('hidden transition-transform group-hover:-translate-y-0.5 md:block', on && 'animate-bob')} />

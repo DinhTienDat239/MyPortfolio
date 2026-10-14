@@ -57,7 +57,7 @@ export default function Preloader() {
           key="preloader"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: 'linear' }}
-          className="bg-tile-stone fixed inset-0 z-[9999] flex flex-col items-center justify-center px-6"
+          className="bg-floor-burrow fixed inset-0 z-[9999] flex flex-col items-center justify-center px-6"
         >
           <div className="cave-dark pointer-events-none absolute inset-0" />
           <div className="relative flex flex-col items-center">

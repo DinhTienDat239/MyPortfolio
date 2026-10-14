@@ -15,7 +15,6 @@ export default defineConfig({
   },
   build: {
     target: 'es2020',
-    chunkSizeWarningLimit: 1200, // chunk three.js lớn nhưng đã lazy-load
     rollupOptions: {
       output: {
         manualChunks: {

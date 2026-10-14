@@ -58,7 +58,7 @@ function SkillCube() {
         {faces.map((g, i) => (
           <div
             key={i}
-            className="bg-tile-crystal absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center"
+            className="bg-floor-crystal absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center"
             style={{
               transform: transforms[i],
               backfaceVisibility: 'hidden',
