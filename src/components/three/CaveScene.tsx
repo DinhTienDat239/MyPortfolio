@@ -297,14 +297,15 @@ function Terrain({ onMine }: { onMine?: (kind: MinedKind) => void }) {
 }
 
 // ---------- Cụm pha lê trung tâm ----------
-function CrystalCluster() {
+function CrystalCluster({ calm }: { calm: boolean }) {
   const group = useRef<THREE.Group>(null!);
   const orbit = useRef<THREE.Group>(null!);
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
-    group.current.rotation.y += delta * 0.4;
-    group.current.position.y = 1.9 + Math.sin(t * 1.4) * 0.18;
-    orbit.current.rotation.y -= delta * 0.9;
+    const k = calm ? 0.25 : 1;
+    group.current.rotation.y += delta * 0.4 * k;
+    group.current.position.y = 1.9 + Math.sin(t * 1.4 * k) * 0.18;
+    orbit.current.rotation.y -= delta * 0.9 * k;
   });
   return (
     <group position={[0, 0, 0]}>
@@ -373,7 +374,7 @@ function TorchPost({ position, phase }: { position: [number, number, number]; ph
 }
 
 // ---------- Bào tử bay lơ lửng ----------
-function Spores() {
+function Spores({ calm }: { calm: boolean }) {
   const ref = useRef<THREE.Points>(null!);
   const COUNT = 140;
   const positions = useMemo(() => {
@@ -389,7 +390,7 @@ function Spores() {
     const pos = ref.current.geometry.attributes.position as THREE.BufferAttribute;
     const t = state.clock.elapsedTime;
     for (let i = 0; i < COUNT; i++) {
-      let y = pos.getY(i) + delta * (0.25 + (i % 5) * 0.05);
+      let y = pos.getY(i) + delta * (0.25 + (i % 5) * 0.05) * (calm ? 0.3 : 1);
       if (y > 5) y = 0.5;
       pos.setY(i, y);
       pos.setX(i, pos.getX(i) + Math.sin(t + i) * delta * 0.15);
@@ -410,7 +411,7 @@ function Spores() {
 const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -0.6);
 const hit = new THREE.Vector3();
 
-function LanternAndCamera() {
+function LanternAndCamera({ calm }: { calm: boolean }) {
   const light = useRef<THREE.PointLight>(null!);
   const { camera, size } = useThree();
   const narrow = size.width < size.height;
@@ -422,9 +423,9 @@ function LanternAndCamera() {
       light.current.position.x = THREE.MathUtils.damp(light.current.position.x, hit.x, 10, delta);
       light.current.position.z = THREE.MathUtils.damp(light.current.position.z, hit.z, 10, delta);
     }
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, base.x + state.pointer.x * 1.2, 2, delta);
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, base.x + (calm ? 0 : state.pointer.x * 1.2), 2, delta);
     camera.position.y = THREE.MathUtils.damp(camera.position.y, base.y, 2, delta);
-    camera.position.z = THREE.MathUtils.damp(camera.position.z, base.z - state.pointer.y * 0.8, 2, delta);
+    camera.position.z = THREE.MathUtils.damp(camera.position.z, base.z - (calm ? 0 : state.pointer.y * 0.8), 2, delta);
     camera.lookAt(0, 0.5, 0);
   });
 
@@ -434,11 +435,13 @@ function LanternAndCamera() {
 interface Props {
   active: boolean;
   intense?: boolean;
+  /** người dùng bật giảm chuyển động → vẫn hiện hang nhưng chuyển động chậm, camera đứng yên */
+  calm?: boolean;
   eventSource: RefObject<HTMLElement | null>;
   onMine?: (kind: MinedKind) => void;
 }
 
-export default function CaveScene({ active, intense = false, eventSource, onMine }: Props) {
+export default function CaveScene({ active, intense = false, calm = false, eventSource, onMine }: Props) {
   return (
     <Canvas
       frameloop={active ? 'always' : 'never'}
@@ -458,13 +461,13 @@ export default function CaveScene({ active, intense = false, eventSource, onMine
       <directionalLight position={[4, 10, 6]} intensity={0.35} color="#a6a9ff" />
 
       <Terrain onMine={onMine} />
-      <CrystalCluster />
+      <CrystalCluster calm={calm} />
       <TorchPost position={[-6.2, 0, -2.6]} phase={0} />
       <TorchPost position={[6.4, 0, -2.2]} phase={2} />
       <TorchPost position={[-5.6, 0, 3.2]} phase={4} />
       <TorchPost position={[5.8, 0, 3.4]} phase={1} />
-      <Spores />
-      <LanternAndCamera />
+      <Spores calm={calm} />
+      <LanternAndCamera calm={calm} />
     </Canvas>
   );
 }

@@ -71,11 +71,11 @@ export default function CaveHero() {
     <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-void" style={{ zIndex: 0 }}>
       {/* ---- Hang động 3D ---- */}
       <div className="absolute inset-0">
-        {reduced || !webgl ? (
+        {!webgl ? (
           <div className="bg-tile-stone absolute inset-0" />
         ) : (
           <Suspense fallback={<div className="bg-tile-stone absolute inset-0" />}>
-            <CaveScene active={inView} intense={rich} eventSource={ref} onMine={addOre} />
+            <CaveScene active={inView} intense={rich} calm={!!reduced} eventSource={ref} onMine={addOre} />
           </Suspense>
         )}
       </div>
