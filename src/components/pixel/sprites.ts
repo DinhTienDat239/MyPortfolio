@@ -344,6 +344,24 @@ export const SPRITES = {
     '....kNNk.kNNk...',
     '....kkkk.kkkk...',
   ],
+  hand: [
+    '.....kk.........',
+    '....kxxk........',
+    '....kxxk........',
+    '....kxxk........',
+    '....kxxkkk.kk...',
+    '....kxxkxxkxxk..',
+    '.kk.kxxkxxkxxkk.',
+    'kxxkkxxxxxxxxxxk',
+    'kxxxkxxxxxxxxxxk',
+    '.kxxxxxxxxxxxxXk',
+    '..kxxxxxxxxxxxXk',
+    '...kxxxxxxxxxXk.',
+    '....kxxxxxxxXk..',
+    '....kXXXXXXXXk..',
+    '....kkkkkkkkkk..',
+    '................',
+  ],
 } satisfies Record<string, string[]>;
 
 export type SpriteName = keyof typeof SPRITES;
