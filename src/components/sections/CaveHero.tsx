@@ -80,7 +80,7 @@ function CaveCanvas({ sectionRef, onEvent, onHover }: { sectionRef: RefObject<HT
       biome: 'burrow',
       interactive: true,
       calm: !!reduced,
-      focus: wide ? { x: 0.66, y: 0.48 } : { x: 0.5, y: 0.3 },
+      focus: wide ? { x: 0.66, y: 0.48 } : { x: 0.5, y: 0.22 },
       chestLabels: CHEST_PROJECTS.map((p) => p.title),
       onMine: addOre,
       onHit: () => play('mine'),
