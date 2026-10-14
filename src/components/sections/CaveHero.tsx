@@ -101,6 +101,7 @@ function CaveCanvas({ sectionRef, onEvent, onHover }: { sectionRef: RefObject<HT
       },
     });
     world.current = w;
+    (window as unknown as { __cave?: CaveWorld }).__cave = w;
 
     const fit = () => {
       const r = canvas.getBoundingClientRect();

@@ -146,6 +146,8 @@ export class CaveWorld {
   private t = 0;
   private running = false;
   private intense = false;
+  /** thời gian render trung bình 1 khung (ms) — để đo hiệu năng */
+  frameMs = 0;
   private lightR = new Float32Array(0);
   private lightG = new Float32Array(0);
   private lightB = new Float32Array(0);
@@ -593,7 +595,9 @@ export class CaveWorld {
       if (!this.running) return;
       const dt = Math.min(0.05, (now - this.last) / 1000);
       this.last = now;
+      const t0 = performance.now();
       this.frame(dt);
+      this.frameMs = this.frameMs * 0.9 + (performance.now() - t0) * 0.1;
       this.raf = requestAnimationFrame(loop);
     };
     this.raf = requestAnimationFrame(loop);
@@ -1370,11 +1374,10 @@ export class CaveWorld {
       const a = 0.35 + 0.35 * Math.sin(t * 2 + f.p * 3);
       blob(f.x, f.y, 6, `rgba(200,255,120,${a * 0.6})`);
     }
+    // phóng to canvas nửa độ phân giải có làm mượt = đủ mềm như bloom, không cần filter blur (rất chậm)
     ctx.globalCompositeOperation = 'screen';
     ctx.imageSmoothingEnabled = true;
-    ctx.filter = 'blur(2px)';
     ctx.drawImage(this.glowCanvas, 0, 0, this.W, this.H);
-    ctx.filter = 'none';
     ctx.imageSmoothingEnabled = false;
 
     // ---- hạt phát sáng vẽ sau ánh sáng ----
