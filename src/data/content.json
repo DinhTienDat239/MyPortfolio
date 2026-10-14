@@ -177,7 +177,8 @@
       "playableUrl": "playables/Gun.html",
       "orientation": "portrait",
       "featured": true,
-      "order": 0
+      "order": 0,
+      "sizeKB": 2059
     },
     {
       "id": "pa-busaway",
@@ -192,7 +193,8 @@
       "playableUrl": "playables/BusAway_Ikame.html",
       "orientation": "portrait",
       "featured": true,
-      "order": 1
+      "order": 1,
+      "sizeKB": 2903
     },
     {
       "id": "pa-jigsaw",
@@ -207,7 +209,8 @@
       "playableUrl": "playables/Jigsaw.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 2
+      "order": 2,
+      "sizeKB": 3038
     },
     {
       "id": "pa-merge",
@@ -222,7 +225,8 @@
       "playableUrl": "playables/Merge.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 3
+      "order": 3,
+      "sizeKB": 2722
     },
     {
       "id": "pa-musicbox",
@@ -237,7 +241,8 @@
       "playableUrl": "playables/MusicBox.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 4
+      "order": 4,
+      "sizeKB": 4548
     },
     {
       "id": "pa-tricky",
@@ -252,7 +257,8 @@
       "playableUrl": "playables/Tricky.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 5
+      "order": 5,
+      "sizeKB": 4037
     },
     {
       "id": "pa-watersort",
@@ -267,7 +273,8 @@
       "playableUrl": "playables/WaterSort.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 6
+      "order": 6,
+      "sizeKB": 4326
     },
     {
       "id": "pa-wood",
@@ -282,7 +289,8 @@
       "playableUrl": "playables/Wood.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 7
+      "order": 7,
+      "sizeKB": 3728
     },
     {
       "id": "pa-wool",
@@ -297,7 +305,8 @@
       "playableUrl": "playables/Wool.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 8
+      "order": 8,
+      "sizeKB": 4028
     },
     {
       "id": "pa-worm",
@@ -312,7 +321,8 @@
       "playableUrl": "playables/Worm.html",
       "orientation": "portrait",
       "featured": false,
-      "order": 9
+      "order": 9,
+      "sizeKB": 2694
     }
   ],
   "awards": [],

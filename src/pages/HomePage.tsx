@@ -5,7 +5,6 @@ import Vault from '../components/sections/Vault';
 import SkillTree from '../components/sections/SkillTree';
 import Feats from '../components/sections/Feats';
 import Craft from '../components/sections/Craft';
-import Inspiration from '../components/sections/Inspiration';
 import { consumeHomeTarget } from '../lib/router';
 import { jumpTo, scrollToTarget } from '../components/fx/SmoothScroll';
 
@@ -28,7 +27,6 @@ export default function HomePage() {
       <SkillTree />
       <Feats />
       <Craft />
-      <Inspiration />
     </>
   );
 }

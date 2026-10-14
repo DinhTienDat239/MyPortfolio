@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '../../lib/utils';
-import { currentLayer, LAYERS } from '../../lib/game';
+import { currentLayer } from '../../lib/game';
 import { BIOMES, rgb, type BiomeId } from '../../engine/biomes';
 import { Sprite, Torch } from '../pixel/Sprite';
 import type { SpriteName } from '../pixel/sprites';
@@ -78,21 +78,9 @@ interface HeadingProps {
 
 /** Tiêu đề phòng: chip tên biome + độ sâu, tiêu đề lớn có quầng đuốc. */
 export function LayerHeading({ id, title, intro, icon, align = 'left' }: HeadingProps) {
-  const idx = LAYERS.findIndex((l) => l.id === id);
-  const layer = LAYERS[idx];
+  void id;
   return (
     <div className={cn('mb-14 md:mb-16', align === 'center' && 'flex flex-col items-center text-center')}>
-      <motion.p
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.4 }}
-        className="mb-4 inline-flex items-center gap-2 rounded-md border border-edge/70 bg-night/70 px-3 py-1.5 font-label text-[10px] uppercase text-mist backdrop-blur-sm"
-      >
-        <span className="text-gold">B{idx}</span>
-        <span className="h-3 w-px bg-edge" />
-        {layer?.biome} · -{layer?.depth}m
-      </motion.p>
       <motion.h2
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}

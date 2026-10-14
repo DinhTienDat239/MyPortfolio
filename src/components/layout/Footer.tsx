@@ -45,10 +45,6 @@ export default function Footer() {
             </button>
           </div>
           <p aria-hidden className="mt-8 text-center font-label text-[10px] tracking-[0.4em] text-edge">↑ ↑ ↓ ↓ ← → ← → B A</p>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-mist/60">
-            Core Keeper © Pugstorm &amp; Fireshine Games. The trailer and store widget above are official YouTube and Steam embeds. All pixel art on
-            this site is original — this is a fan-made personal portfolio, not affiliated with or endorsed by the developers.
-          </p>
         </div>
       </div>
     </footer>

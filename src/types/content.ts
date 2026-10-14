@@ -80,6 +80,7 @@ export interface Project {
   year?: string;
   role?: string;
   playableUrl?: string;   // "playables/Merge.html" — chơi trực tiếp trong khung điện thoại
+  sizeKB?: number;        // dung lượng build (tự điền bằng script, hiện ở bảng inventory)
   orientation?: 'portrait' | 'landscape';
   externalLink?: string;  // store / itch.io / web demo
   caseStudy?: CaseStudyBlock[];
