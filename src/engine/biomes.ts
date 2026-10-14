@@ -99,8 +99,8 @@ export const BIOMES: Record<BiomeId, Biome> = {
     speck: ['#234526', '#4f8a47'],
     pebble: '#1f3c22',
     wallTop: ['#0a110c', '#121c14'],
-    wallFace: ['#24402a', '#1f3825', '#2a4a30', '#1b3220'],
-    wallLip: '#4f8a47',
+    wallFace: ['#1c3023', '#182a1e', '#213727', '#15251a'],
+    wallLip: '#35603a',
     water: ['#10324a', '#2a6a8a'],
     decor: [
       { kind: 'grass', color: '#5d9a43', accent: '#8cc65a', chance: 0.12 },

@@ -30,7 +30,7 @@ export function WallBand({ biome, torches = true, className }: { biome: BiomeId;
             {/* vũng sáng đổ xuống sàn */}
             <div
               className="animate-flicker absolute left-0 top-10 h-[420px] w-[520px] -translate-x-1/2"
-              style={{ background: `radial-gradient(closest-side, ${rgb(light, 0.2)}, ${rgb(light, 0.07)} 55%, transparent)`, mixBlendMode: 'screen', animationDelay: `${i * 0.4}s` }}
+              style={{ background: `radial-gradient(closest-side, ${rgb(light, 0.24)}, ${rgb(light, 0.09)} 55%, transparent)`, mixBlendMode: 'screen', animationDelay: `${i * 0.4}s` }}
             />
           </div>
         ))}
@@ -62,7 +62,7 @@ export function LayerSection({ id, tile, children, className }: LayerProps) {
     <section ref={ref} id={id} className={cn('relative overflow-hidden', `bg-floor-${biome}`, className)}>
       <WallBand biome={biome} />
       {/* bóng tối hai mép như tầm sáng có hạn */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,transparent_40%,rgb(6_7_14/0.75)_100%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_50%_45%,transparent_45%,rgb(6_7_14/0.7)_100%)]" />
       <div className="relative mx-auto max-w-7xl px-5 pb-28 pt-14 md:px-8 md:pb-36 md:pt-20">{children}</div>
     </section>
   );

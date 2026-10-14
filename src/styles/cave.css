@@ -92,6 +92,7 @@
 
   body {
     @apply bg-night font-sans text-parchment antialiased;
+    overflow-x: clip;
     font-size: 17px;
   }
   ::selection { background: var(--color-gold); color: var(--color-ink); }
@@ -219,11 +220,11 @@
 /* ---------------- Nền biome ----------------
    Texture sàn sinh bởi engine (--tex-*), phóng to x3 nguyên lần cho pixel sắc nét,
    phủ tối để ánh sáng (LayerSection) "soi" ra từng vùng. */
-@utility bg-floor-burrow { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-burrow) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
-@utility bg-floor-clay { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-clay) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
-@utility bg-floor-ruins { background: linear-gradient(rgb(6 7 14 / 0.45), rgb(6 7 14 / 0.45)), var(--tex-ruins) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
-@utility bg-floor-crystal { background: linear-gradient(rgb(6 7 14 / 0.4), rgb(6 7 14 / 0.4)), var(--tex-crystal) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
-@utility bg-floor-garden { background: linear-gradient(rgb(6 7 14 / 0.5), rgb(6 7 14 / 0.5)), var(--tex-garden) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-burrow { background: linear-gradient(rgb(6 7 14 / 0.32), rgb(6 7 14 / 0.32)), var(--tex-burrow) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-clay { background: linear-gradient(rgb(6 7 14 / 0.32), rgb(6 7 14 / 0.32)), var(--tex-clay) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-ruins { background: linear-gradient(rgb(6 7 14 / 0.3), rgb(6 7 14 / 0.3)), var(--tex-ruins) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-crystal { background: linear-gradient(rgb(6 7 14 / 0.28), rgb(6 7 14 / 0.28)), var(--tex-crystal) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
+@utility bg-floor-garden { background: linear-gradient(rgb(6 7 14 / 0.32), rgb(6 7 14 / 0.32)), var(--tex-garden) 0 0 / 384px 384px, var(--color-night); image-rendering: pixelated; }
 
 .wall-band { height: 114px; background-repeat: repeat-x; background-size: 384px 114px; image-rendering: pixelated; }
 .wall-burrow { background-image: var(--wall-burrow); }

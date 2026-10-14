@@ -18,7 +18,7 @@ function TradingPartners() {
       <motion.div className="flex w-max items-center gap-10" animate={{ x: ['0%', '-50%'] }} transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}>
         {list.map((n, i) => (
           <div key={`${n.name}-${i}`} className="flex shrink-0 items-center gap-3">
-            {n.logo && <img src={asset(n.logo)} alt="" className="h-5 w-auto opacity-80" loading="lazy" />}
+            {n.logo && <img src={asset(n.logo)} alt="" className="h-5 w-auto opacity-80" loading="lazy" onError={(e) => (e.currentTarget.style.display = "none")} />}
             <span className="font-label text-[11px] uppercase text-parchment/80">{n.name}</span>
             <Sprite name="coin" size={16} className="ml-7" />
           </div>

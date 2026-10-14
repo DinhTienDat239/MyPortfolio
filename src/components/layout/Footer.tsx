@@ -19,7 +19,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-20 bg-void pb-28">
+    <footer className="relative z-20 overflow-hidden bg-void pb-28">
       {/* Bức tường cuối cùng của hang */}
       <WallBand biome="garden" />
       <div className="bg-void px-5 pt-16 md:px-8">
