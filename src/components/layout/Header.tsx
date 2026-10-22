@@ -17,10 +17,10 @@ function DepthMeter() {
   const layer = LAYERS.find((l) => l.id === layerId) ?? LAYERS[0];
   return (
     <div className="px-slot hidden items-center gap-3 px-3 py-1.5 md:flex">
-      <span className="font-label text-[10px] uppercase text-mist">Depth</span>
+      <span className="font-label text-[12px] uppercase text-mist">Depth</span>
       <motion.span className="w-14 font-label text-xs text-torch tabular-nums">{depth}</motion.span>
       <span className="h-3 w-px bg-edge" />
-      <span className="font-label text-[10px] uppercase text-parchment">{layer.biome}</span>
+      <span className="font-label text-[12px] uppercase text-parchment">{layer.biome}</span>
     </div>
   );
 }
@@ -59,7 +59,7 @@ export default function Header() {
           <DepthMeter />
           <OreCounter />
           {content.profile.available && (
-            <span className="px-slot hidden items-center gap-2 px-2.5 py-1.5 font-label text-[10px] uppercase text-uncommon lg:flex">
+            <span className="px-slot hidden items-center gap-2 px-2.5 py-1.5 font-label text-[12px] uppercase text-uncommon lg:flex">
               <span className="h-2 w-2 bg-uncommon animate-blink" /> Open for work
             </span>
           )}

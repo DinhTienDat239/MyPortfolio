@@ -32,7 +32,7 @@ export default function Footer() {
             <Torch size={48} className="hidden sm:inline-block" />
           </div>
 
-          <div className="mt-16 flex flex-col items-center justify-between gap-6 font-label text-[11px] uppercase text-mist md:flex-row">
+          <div className="mt-16 flex flex-col items-center justify-between gap-6 font-label text-[13px] uppercase text-mist md:flex-row">
             <p className="flex items-center gap-2">
               © {new Date().getFullYear()} {content.profile.fullName}
               <button onClick={onGem} aria-label="A glinting gem" className="opacity-40 transition-opacity hover:opacity-100">
@@ -44,7 +44,7 @@ export default function Footer() {
               <Sprite name="lantern" size={20} /> Back to surface
             </button>
           </div>
-          <p aria-hidden className="mt-8 text-center font-label text-[10px] tracking-[0.4em] text-edge">↑ ↑ ↓ ↓ ← → ← → B A</p>
+          <p aria-hidden className="mt-8 text-center font-label text-[12px] tracking-[0.4em] text-edge">↑ ↑ ↓ ↓ ← → ← → B A</p>
         </div>
       </div>
     </footer>

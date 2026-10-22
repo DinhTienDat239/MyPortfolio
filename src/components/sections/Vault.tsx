@@ -9,6 +9,7 @@ import { LayerHeading, LayerSection } from '../fx/Layer';
 import { Sprite } from '../pixel/Sprite';
 import PixelScene from '../pixel/PixelScene';
 import { asset } from '../../data';
+import Shot from '../projects/Shot';
 
 type Filter = 'all' | ProjectCategory;
 const ORDER: ProjectCategory[] = ['game', 'playable', 'webapp'];
@@ -21,6 +22,7 @@ function Row({ p, i }: { p: Project; i: number }) {
   const rarity = rarityOf(p);
   const color = RARITY_COLOR[rarity];
   const thumb = asset(p.thumbnail);
+  const phoneShot = !!p.playableUrl && p.orientation !== 'landscape';
   const pct = p.sizeKB ? Math.min(100, (p.sizeKB / SIZE_CAP_KB) * 100) : 0;
   return (
     <motion.li
@@ -34,9 +36,17 @@ function Row({ p, i }: { p: Project; i: number }) {
         onClick={rememberHomeScroll}
         className="group grid grid-cols-[96px_1fr] items-center gap-x-4 gap-y-2 border-b border-edge/60 px-2 py-4 transition-colors hover:bg-gold/[0.06] md:grid-cols-[28px_132px_1fr_150px_170px_70px] md:gap-x-6 md:px-3"
       >
-        <span className="hidden font-label text-[10px] text-mist/70 md:block">{String(i + 1).padStart(2, '0')}</span>
-        <span className="relative block aspect-[16/10] overflow-hidden rounded-md border border-edge/80">
-          {thumb ? <img src={thumb} alt="" loading="lazy" className="h-full w-full object-cover" /> : <PixelScene seed={p.slug} icon={CATEGORY_ICON[p.category]} className="transition-transform duration-500 group-hover:scale-110" />}
+        <span className="hidden font-label text-[12px] text-mist/70 md:block">{String(i + 1).padStart(2, '0')}</span>
+        <span
+          className={cn(
+            'relative block overflow-hidden rounded-md border border-edge/80',
+            // screenshot playable dọc → khung điện thoại để thấy rõ màn chơi thật
+            thumb && phoneShot ? 'mx-auto aspect-[9/16] w-[64px] md:w-[72px]' : 'aspect-[16/10]',
+          )}
+        >
+          {thumb ? (
+            phoneShot ? <img src={thumb} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" /> : <Shot src={thumb} />
+          ) : <PixelScene seed={p.slug} icon={CATEGORY_ICON[p.category]} className="transition-transform duration-500 group-hover:scale-110" />}
         </span>
         <span className="min-w-0">
           <span className="flex items-baseline gap-3">
@@ -45,19 +55,19 @@ function Row({ p, i }: { p: Project; i: number }) {
             </span>
             {p.featured && <Sprite name="star" size={14} className="shrink-0" />}
           </span>
-          <span className="mt-1 block font-label text-[9px] uppercase text-mist">
+          <span className="mt-1 block font-label text-[11px] uppercase text-mist">
             {RARITY_LABEL[rarity]} · {CATEGORY_LABEL[p.category]}
           </span>
           <span className="mt-1.5 hidden text-sm text-mist/90 md:line-clamp-1">{p.summary}</span>
         </span>
-        <span className="col-start-2 font-label text-[10px] uppercase text-parchment/80 md:col-start-auto">
+        <span className="col-start-2 font-label text-[12px] uppercase text-parchment/80 md:col-start-auto">
           {p.playableUrl ? 'HTML5 · single file' : p.tags.slice(0, 2).join(' · ')}
           <span className="block text-mist/70">{p.orientation === 'landscape' ? 'Landscape' : 'Portrait'} · {p.year ?? 'tap to play'}</span>
         </span>
         <span className="col-start-2 md:col-start-auto">
           {p.sizeKB ? (
             <>
-              <span className="flex items-baseline justify-between font-label text-[10px] text-parchment/90">
+              <span className="flex items-baseline justify-between font-label text-[12px] text-parchment/90">
                 <span>{mb(p.sizeKB)} MB</span>
                 <span className="text-mist/60">/ 5 MB</span>
               </span>
@@ -66,10 +76,10 @@ function Row({ p, i }: { p: Project; i: number }) {
               </span>
             </>
           ) : (
-            <span className="font-label text-[10px] text-mist/60">—</span>
+            <span className="font-label text-[12px] text-mist/60">—</span>
           )}
         </span>
-        <span className="col-start-2 font-label text-[10px] uppercase text-gold transition-transform group-hover:translate-x-1 md:col-start-auto md:text-right">
+        <span className="col-start-2 font-label text-[12px] uppercase text-gold transition-transform group-hover:translate-x-1 md:col-start-auto md:text-right">
           {p.playableUrl ? 'Play ▶' : 'Open ▶'}
         </span>
       </a>
@@ -117,7 +127,7 @@ export default function Vault() {
       )}
 
       <div className="px-panel overflow-hidden">
-        <div className="hidden grid-cols-[28px_132px_1fr_150px_170px_70px] gap-x-6 border-b border-edge px-3 py-3 font-label text-[9px] uppercase text-mist md:grid">
+        <div className="hidden grid-cols-[28px_132px_1fr_150px_170px_70px] gap-x-6 border-b border-edge px-3 py-3 font-label text-[11px] uppercase text-mist md:grid">
           <span>#</span>
           <span>Preview</span>
           <span>Item</span>
@@ -130,7 +140,7 @@ export default function Vault() {
             <Row key={p.id} p={p} i={i} />
           ))}
         </ul>
-        <div className="flex flex-wrap items-center justify-between gap-3 px-3 py-3 font-label text-[9px] uppercase text-mist">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-3 py-3 font-label text-[11px] uppercase text-mist">
           <span>
             {visible.length} builds · {mb(totalKB)} MB total
           </span>

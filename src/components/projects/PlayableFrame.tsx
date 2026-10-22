@@ -32,8 +32,8 @@ export default function PlayableFrame({ src, title, orientation = 'portrait' }: 
       >
         {/* đèn nguồn */}
         <div className="mb-3 flex items-center justify-between px-1">
-          <span className="font-label text-[10px] uppercase text-mist">Pocket-Cave</span>
-          <span className="flex items-center gap-2 font-label text-[9px] uppercase text-mist">
+          <span className="font-label text-[12px] uppercase text-mist">Pocket-Cave</span>
+          <span className="flex items-center gap-2 font-label text-[11px] uppercase text-mist">
             <span className={cn('h-2 w-2', on ? 'bg-uncommon animate-blink' : 'bg-ruby/60')} /> {on ? 'On' : 'Off'}
           </span>
         </div>
@@ -51,7 +51,7 @@ export default function PlayableFrame({ src, title, orientation = 'portrait' }: 
             >
               <Sprite name="gem" size={64} className="animate-bob" />
               <span className="px-btn">▶ Power on</span>
-              <span className="font-label text-[9px] uppercase text-mist">Loads the real build (~3MB)</span>
+              <span className="font-label text-[11px] uppercase text-mist">Loads the real build (~3MB)</span>
             </button>
           )}
         </div>

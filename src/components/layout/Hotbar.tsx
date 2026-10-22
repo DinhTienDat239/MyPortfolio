@@ -46,9 +46,9 @@ export default function Hotbar() {
           >
             <Sprite name={l.icon} size={28} className={cn('transition-transform md:hidden', on && 'animate-bob')} />
             <Sprite name={l.icon} size={36} className={cn('hidden transition-transform group-hover:-translate-y-0.5 md:block', on && 'animate-bob')} />
-            <span className="absolute left-1 top-0.5 font-label text-[9px] text-parchment/70">{i + 1}</span>
+            <span className="absolute left-1 top-0.5 font-label text-[11px] text-parchment/70">{i + 1}</span>
             {/* tooltip */}
-            <span className="px-panel pointer-events-none absolute -top-11 left-1/2 hidden -translate-x-1/2 whitespace-nowrap px-2.5 py-1 font-label text-[10px] uppercase text-parchment group-hover:block">
+            <span className="px-panel pointer-events-none absolute -top-11 left-1/2 hidden -translate-x-1/2 whitespace-nowrap px-2.5 py-1 font-label text-[12px] uppercase text-parchment group-hover:block">
               {l.label}
             </span>
           </button>

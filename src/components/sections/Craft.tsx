@@ -109,7 +109,7 @@ export default function Craft() {
       <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">
         {/* Bàn chế tạo */}
         <form onSubmit={submit} className="px-panel p-5 md:p-7">
-          <p className="mb-5 font-label text-[10px] uppercase text-moss">Recipe · Message</p>
+          <p className="mb-5 font-label text-[12px] uppercase text-moss">Recipe · Message</p>
           <div className="grid items-center gap-6 md:grid-cols-[1fr_auto_auto]">
             <div className="space-y-4">
               <Ingredient label="Your name" icon="heart" name="name" value={form.name} onChange={set('name')} />
@@ -131,7 +131,7 @@ export default function Craft() {
                   </>
                 )}
               </div>
-              <span className="font-label text-[10px] uppercase text-mist">{ready ? 'Ready to craft' : 'Missing ingredients'}</span>
+              <span className="font-label text-[12px] uppercase text-mist">{ready ? 'Ready to craft' : 'Missing ingredients'}</span>
             </div>
           </div>
 
@@ -155,7 +155,7 @@ export default function Craft() {
             <span className="flex items-center gap-4">
               <Sprite name="scroll" size={36} />
               <span>
-                <span className="block font-label text-[10px] uppercase text-mist">Direct line</span>
+                <span className="block font-label text-[12px] uppercase text-mist">Direct line</span>
                 <span className="block break-all text-lg text-parchment">{profile.email}</span>
               </span>
             </span>
@@ -178,7 +178,7 @@ export default function Craft() {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block text-xl font-bold text-parchment group-hover:text-torch">{s.label}</span>
-                      {s.handle && <span className="block truncate font-label text-[10px] text-mist">{s.handle}</span>}
+                      {s.handle && <span className="block truncate font-label text-[12px] text-mist">{s.handle}</span>}
                     </span>
                     <span className="font-label text-torch transition-transform group-hover:translate-x-1">▶</span>
                   </a>
@@ -187,7 +187,7 @@ export default function Craft() {
           </ul>
 
           {profile.phone && (
-            <p className="font-label text-[11px] uppercase text-mist">
+            <p className="font-label text-[13px] uppercase text-mist">
               Or call ·{' '}
               <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="text-parchment hover:text-torch">
                 {profile.phone}

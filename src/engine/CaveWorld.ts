@@ -166,6 +166,8 @@ export class CaveWorld {
   // Kích thước & sinh bản đồ
   // ======================================================================
   resize(cssW: number, cssH: number) {
+    // Khung 0px (tab ẩn, layout chưa xong) → canvas 0px làm drawImage văng lỗi. Đợi lần resize sau.
+    if (cssW < 1 || cssH < 1) return;
     const scale = this.o.scale ?? Math.max(2, Math.min(4, Math.round(cssW / 470)));
     this.W = Math.ceil(cssW / scale);
     this.H = Math.ceil(cssH / scale);

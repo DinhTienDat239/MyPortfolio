@@ -21,7 +21,7 @@ function levelFromDob(dob?: string) {
   return { level, xp: (now.getTime() - last.getTime()) / (next.getTime() - last.getTime()) };
 }
 
-/** Ảnh đại diện được "pixel hoá" thật: vẽ xuống canvas 48px rồi phóng to. */
+/** Ảnh đại diện được "pixel hoá" thật: vẽ xuống canvas 96px rồi phóng to. */
 function PixelPortrait({ src, alt }: { src?: string; alt: string }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [ok, setOk] = useState(false);
@@ -49,7 +49,7 @@ function PixelPortrait({ src, alt }: { src?: string; alt: string }) {
 
   return (
     <div className="px-slot relative aspect-square w-full overflow-hidden">
-      {src && <canvas ref={ref} width={48} height={48} role="img" aria-label={alt} className={cn('pixelated h-full w-full', !ok && 'hidden')} />}
+      {src && <canvas ref={ref} width={96} height={96} role="img" aria-label={alt} className={cn('pixelated h-full w-full', !ok && 'hidden')} />}
       {(!src || !ok) && (
         <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle,rgb(255_179_71/0.18),transparent_70%)]">
           <Sprite name="explorer" size={160} className="animate-bob" title={alt} />
@@ -87,7 +87,7 @@ function CharacterCard() {
         <h3 className="pixel-shadow text-2xl font-bold text-parchment">{profile.fullName}</h3>
         {lv && <span className="font-label text-xs text-torch">Lv.{lv.level}</span>}
       </div>
-      <p className="mt-1 font-label text-[10px] uppercase text-mist">Class · {profile.roles.split(/[·\-–]/)[0].trim()}</p>
+      <p className="mt-1 font-label text-[12px] uppercase text-mist">Class · {profile.roles.split(/[·\-–]/)[0].trim()}</p>
 
       {lv && (
         <div className="mt-3">
@@ -100,7 +100,7 @@ function CharacterCard() {
               transition={{ duration: 1.2, ease: 'easeOut' }}
             />
           </div>
-          <p className="mt-1 font-label text-[9px] uppercase text-mist">XP to next level · {Math.round(lv.xp * 100)}%</p>
+          <p className="mt-1 font-label text-[11px] uppercase text-mist">XP to next level · {Math.round(lv.xp * 100)}%</p>
         </div>
       )}
 
@@ -116,7 +116,7 @@ function CharacterCard() {
       </dl>
 
       {/* Ô trang bị */}
-      <p className="mt-6 font-label text-[10px] uppercase text-mist">Equipment</p>
+      <p className="mt-6 font-label text-[12px] uppercase text-mist">Equipment</p>
       <div className="relative mt-2 grid grid-cols-4 gap-3">
         {EQUIPMENT.map((e) => (
           <button
@@ -161,7 +161,7 @@ function Journal() {
       transition={{ duration: 0.5, delay: 0.1 }}
     >
       <div className="relative rounded-lg border-2 border-[#6e4a2a] bg-gradient-to-b from-[#f6ead0] to-[#e8d5ae] p-6 text-ink shadow-[inset_0_-4px_0_rgb(120_80_40/0.25),0_10px_30px_rgb(0_0_0/0.45)] md:p-8">
-        <p className="font-label text-[10px] uppercase text-[#8a5a34]">Explorer's journal</p>
+        <p className="font-label text-[12px] uppercase text-[#8a5a34]">Explorer's journal</p>
         <p className="mt-3 text-xl leading-relaxed md:text-2xl">“{profile.aboutMe}”</p>
       </div>
 
@@ -179,7 +179,7 @@ function Journal() {
       <div className="px-panel mt-5 min-h-44 p-6">
         <AnimatePresence mode="wait">
           <motion.div key={page} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }}>
-            <p className="font-label text-[10px] uppercase text-torch">Log {story[page].kicker}</p>
+            <p className="font-label text-[12px] uppercase text-torch">Log {story[page].kicker}</p>
             <h3 className="mt-2 text-3xl font-bold text-parchment">{story[page].title}</h3>
             <p className="mt-3 text-lg leading-relaxed text-mist">{story[page].body}</p>
           </motion.div>
@@ -214,7 +214,7 @@ export default function Character() {
                 <div className="pixel-shadow mt-3 text-3xl font-bold text-gold">
                   <Counter value={s.value} />
                 </div>
-                <div className="mt-1 font-label text-[9px] uppercase leading-relaxed text-mist">{s.label}</div>
+                <div className="mt-1 font-label text-[11px] uppercase leading-relaxed text-mist">{s.label}</div>
               </motion.div>
             ))}
           </div>

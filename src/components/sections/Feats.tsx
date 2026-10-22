@@ -17,7 +17,7 @@ export default function Feats() {
                 {a.image ? <img src={asset(a.image)} alt="" className="h-full w-full object-cover" loading="lazy" /> : <Sprite name="star" size={48} />}
               </span>
               <div>
-                <p className="font-label text-[10px] uppercase text-gold">Achievement unlocked{a.year ? ` · ${a.year}` : ''}</p>
+                <p className="font-label text-[12px] uppercase text-gold">Achievement unlocked{a.year ? ` · ${a.year}` : ''}</p>
                 <h3 className="mt-1 text-2xl font-bold text-parchment">{a.name}</h3>
                 <p className="mt-1 text-mist">{a.description}</p>
               </div>

@@ -89,7 +89,7 @@ function SkillNode({ name, level, note, last }: { name: string; level: number; n
             ))}
           </span>
         </div>
-        {note && <p className="max-h-0 overflow-hidden font-label text-[10px] uppercase text-mist transition-all duration-300 group-hover/node:mt-1 group-hover/node:max-h-12">{note}</p>}
+        {note && <p className="max-h-0 overflow-hidden font-label text-[12px] uppercase text-mist transition-all duration-300 group-hover/node:mt-1 group-hover/node:max-h-12">{note}</p>}
       </div>
     </li>
   );
@@ -102,7 +102,7 @@ export default function SkillTree() {
 
       <div className="grid items-start gap-12 lg:grid-cols-[320px_1fr]">
         <div className="px-panel p-4 lg:sticky lg:top-28">
-          <p className="text-center font-label text-[10px] uppercase text-crystal">Skill codex</p>
+          <p className="text-center font-label text-[12px] uppercase text-crystal">Skill codex</p>
           <SkillCube />
           <p className="text-center text-sm text-mist">
             {content.skills.reduce((n, g) => n + g.skills.reduce((a, s) => a + s.level, 0), 0)} skill points allocated
@@ -124,7 +124,7 @@ export default function SkillTree() {
                   <Sprite name={isSprite(group.icon) ? group.icon : 'gem'} size={32} />
                 </span>
                 <div>
-                  <p className="font-label text-[10px] uppercase text-crystal">Branch {group.sigil}</p>
+                  <p className="font-label text-[12px] uppercase text-crystal">Branch {group.sigil}</p>
                   <h3 className="text-2xl font-bold text-parchment">{group.name}</h3>
                 </div>
               </div>

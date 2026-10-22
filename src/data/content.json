@@ -9,7 +9,7 @@
     "phone": "+84 368623903",
     "dob": "23/09/2003",
     "aboutMe": "Passionate Game Developer and Playable Ads Expert with a focus on creating engaging, high-performance interactive experiences. I specialize in HTML5 ad development and unique game mechanics.",
-    "profilePic": "",
+    "profilePic": "images/profile.jpg",
     "available": true
   },
   "story": [
@@ -165,164 +165,194 @@
   ],
   "projects": [
     {
-      "id": "pa-gun",
-      "slug": "gun",
-      "title": "Gun",
-      "category": "playable",
-      "summary": "Gun — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
-      "tags": [
-        "HTML5",
-        "Playable Ad"
-      ],
-      "playableUrl": "playables/Gun.html",
-      "orientation": "portrait",
-      "featured": true,
-      "order": 0,
-      "sizeKB": 2059
-    },
-    {
       "id": "pa-busaway",
       "slug": "bus-away",
       "title": "Bus Away",
       "category": "playable",
-      "summary": "Bus Away — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "summary": "Tap the cars in the right order to fill each bus before the queue piles up. A clean traffic-jam puzzle that teaches itself in the first tap.",
       "tags": [
         "HTML5",
-        "Playable Ad"
+        "Playable Ad",
+        "Puzzle",
+        "Parking"
       ],
+      "thumbnail": "images/playables/BusAway_Ikame.jpg",
       "playableUrl": "playables/BusAway_Ikame.html",
       "orientation": "portrait",
       "featured": true,
-      "order": 1,
+      "order": 0,
       "sizeKB": 2903
     },
     {
-      "id": "pa-jigsaw",
-      "slug": "jigsaw",
-      "title": "Jigsaw",
+      "id": "pa-hungrygecko",
+      "slug": "hungry-gecko",
+      "title": "Hungry Gecko",
       "category": "playable",
-      "summary": "Jigsaw — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "summary": "Feed numbered color blocks to the gecko and watch a pixel-art picture come alive. Satisfying stacking with a reveal at every step.",
       "tags": [
         "HTML5",
-        "Playable Ad"
+        "Playable Ad",
+        "Puzzle",
+        "Sorting"
       ],
-      "playableUrl": "playables/Jigsaw.html",
+      "thumbnail": "images/playables/HungryGecko.jpg",
+      "playableUrl": "playables/HungryGecko.html",
+      "orientation": "portrait",
+      "featured": true,
+      "order": 1,
+      "sizeKB": 4777
+    },
+    {
+      "id": "pa-watersort-ice",
+      "slug": "water-sort-ice",
+      "title": "Water Sort x ICE Element",
+      "category": "playable",
+      "summary": "The classic water-sort loop with a twist: a frozen ice column that cracks as you sort. Two guided tutorial moves, then the player is on their own.",
+      "tags": [
+        "HTML5",
+        "Playable Ad",
+        "Puzzle",
+        "Sorting"
+      ],
+      "thumbnail": "images/playables/WaterSortIce.jpg",
+      "playableUrl": "playables/WaterSortIce.html",
       "orientation": "portrait",
       "featured": false,
       "order": 2,
-      "sizeKB": 3038
+      "sizeKB": 3918
     },
     {
-      "id": "pa-merge",
-      "slug": "merge",
-      "title": "Merge",
+      "id": "pa-beadfill",
+      "slug": "bead-fill",
+      "title": "Bead Fill Color Block",
       "category": "playable",
-      "summary": "Merge — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "summary": "Slide colored blocks into place to fill a bead picture before the timer runs out. A sliding-block puzzle with a 2-minute countdown hook.",
       "tags": [
         "HTML5",
-        "Playable Ad"
+        "Playable Ad",
+        "Puzzle",
+        "Sliding Block"
       ],
-      "playableUrl": "playables/Merge.html",
+      "thumbnail": "images/playables/BeadFill.jpg",
+      "playableUrl": "playables/BeadFill.html",
       "orientation": "portrait",
       "featured": false,
       "order": 3,
-      "sizeKB": 2722
+      "sizeKB": 3929
     },
     {
-      "id": "pa-musicbox",
-      "slug": "music-box",
-      "title": "Music Box",
+      "id": "pa-woolblockjam",
+      "slug": "wool-block-jam",
+      "title": "Wool Block Jam",
       "category": "playable",
-      "summary": "Music Box — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "summary": "Swipe knitted wool blocks out through the matching colored gates. Cozy, tactile textures on a quick-to-read jam puzzle.",
       "tags": [
         "HTML5",
-        "Playable Ad"
+        "Playable Ad",
+        "Puzzle",
+        "Sliding Block"
       ],
-      "playableUrl": "playables/MusicBox.html",
+      "thumbnail": "images/playables/WoolBlockJam.jpg",
+      "playableUrl": "playables/WoolBlockJam.html",
       "orientation": "portrait",
       "featured": false,
       "order": 4,
-      "sizeKB": 4548
-    },
-    {
-      "id": "pa-tricky",
-      "slug": "tricky",
-      "title": "Tricky",
-      "category": "playable",
-      "summary": "Tricky — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
-      "tags": [
-        "HTML5",
-        "Playable Ad"
-      ],
-      "playableUrl": "playables/Tricky.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 5,
-      "sizeKB": 4037
-    },
-    {
-      "id": "pa-watersort",
-      "slug": "water-sort",
-      "title": "Water Sort",
-      "category": "playable",
-      "summary": "Water Sort — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
-      "tags": [
-        "HTML5",
-        "Playable Ad"
-      ],
-      "playableUrl": "playables/WaterSort.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 6,
-      "sizeKB": 4326
-    },
-    {
-      "id": "pa-wood",
-      "slug": "wood",
-      "title": "Wood",
-      "category": "playable",
-      "summary": "Wood — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
-      "tags": [
-        "HTML5",
-        "Playable Ad"
-      ],
-      "playableUrl": "playables/Wood.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 7,
-      "sizeKB": 3728
-    },
-    {
-      "id": "pa-wool",
-      "slug": "wool",
-      "title": "Wool",
-      "category": "playable",
-      "summary": "Wool — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
-      "tags": [
-        "HTML5",
-        "Playable Ad"
-      ],
-      "playableUrl": "playables/Wool.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 8,
       "sizeKB": 4028
     },
     {
-      "id": "pa-worm",
-      "slug": "worm",
-      "title": "Worm",
+      "id": "pa-wormcolorblast",
+      "slug": "worm-color-blast",
+      "title": "Worm Color Blast",
       "category": "playable",
-      "summary": "Worm — interactive playable ad, shipped as a single self-contained HTML5 file. Tap to play it right here.",
+      "summary": "Guide cute color worms to their holes and blast away the chocolate wall above. Bright, chunky and readable even at thumbnail size.",
       "tags": [
         "HTML5",
-        "Playable Ad"
+        "Playable Ad",
+        "Puzzle",
+        "Color Match"
       ],
-      "playableUrl": "playables/Worm.html",
+      "thumbnail": "images/playables/WormColorBlast.jpg",
+      "playableUrl": "playables/WormColorBlast.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 5,
+      "sizeKB": 2808
+    },
+    {
+      "id": "pa-trickyprank",
+      "slug": "tricky-prank",
+      "title": "Tricky Prank",
+      "category": "playable",
+      "summary": "Help the poor lady out of a messy situation by picking the right item. A short story-driven brain teaser with a funny payoff.",
+      "tags": [
+        "HTML5",
+        "Playable Ad",
+        "Brain Puzzle",
+        "Story"
+      ],
+      "thumbnail": "images/playables/TrickyPrank.jpg",
+      "playableUrl": "playables/TrickyPrank.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 6,
+      "sizeKB": 4331
+    },
+    {
+      "id": "pa-brainrotmerge",
+      "slug": "brainrot-merge",
+      "title": "Brainrot Merge",
+      "category": "playable",
+      "summary": "Drop and merge meme characters inside a jar until they evolve into bigger ones. Physics-based merge with trending Brainrot faces.",
+      "tags": [
+        "HTML5",
+        "Playable Ad",
+        "Merge",
+        "Physics"
+      ],
+      "thumbnail": "images/playables/BrainrotMerge.jpg",
+      "playableUrl": "playables/BrainrotMerge.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 7,
+      "sizeKB": 2722
+    },
+    {
+      "id": "pa-sprunkiemusicbox",
+      "slug": "sprunkie-music-box",
+      "title": "Sprunkie Music Box",
+      "category": "playable",
+      "summary": "Drag outfits onto Sprunkie characters to build a beat, one layer at a time. A creative music-mixing playable with a horror twist.",
+      "tags": [
+        "HTML5",
+        "Playable Ad",
+        "Music",
+        "Creative"
+      ],
+      "thumbnail": "images/playables/SprunkieMusicBox.jpg",
+      "playableUrl": "playables/SprunkieMusicBox.html",
+      "orientation": "portrait",
+      "featured": false,
+      "order": 8,
+      "sizeKB": 4548
+    },
+    {
+      "id": "pa-jigsawsolitaire",
+      "slug": "jigsaw-solitaire",
+      "title": "Jigsaw Solitaire",
+      "category": "playable",
+      "summary": "Swap scrambled cards to rebuild a famous painting. A calm jigsaw-meets-solitaire puzzle with art-gallery visuals.",
+      "tags": [
+        "HTML5",
+        "Playable Ad",
+        "Puzzle",
+        "Jigsaw"
+      ],
+      "thumbnail": "images/playables/JigsawSolitaire.jpg",
+      "playableUrl": "playables/JigsawSolitaire.html",
       "orientation": "portrait",
       "featured": false,
       "order": 9,
-      "sizeKB": 2694
+      "sizeKB": 3083
     }
   ],
   "awards": [],

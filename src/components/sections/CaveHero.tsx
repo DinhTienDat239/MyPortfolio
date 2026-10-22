@@ -26,21 +26,21 @@ function EventCard({ event, onClose }: { event: Event; onClose: () => void }) {
             <Sprite name="chestOpen" size={32} />
           </span>
           <div className="min-w-0">
-            <p className="font-label text-[9px] uppercase text-mist">You found</p>
+            <p className="font-label text-[11px] uppercase text-mist">You found</p>
             <p className="truncate font-display text-3xl leading-none" style={{ color: RARITY_COLOR[rarity] }}>
               {p.title}
             </p>
-            <p className="font-label text-[9px] uppercase text-mist">
+            <p className="font-label text-[11px] uppercase text-mist">
               {RARITY_LABEL[rarity]} · {CATEGORY_LABEL[p.category]}
             </p>
           </div>
         </div>
         <p className="mt-3 line-clamp-2 text-sm text-mist">{p.summary}</p>
         <div className="mt-3 flex items-center justify-between">
-          <a href={`#/work/${p.slug}`} onClick={rememberHomeScroll} className="px-btn !px-3 !py-2 !text-[10px]">
+          <a href={`#/work/${p.slug}`} onClick={rememberHomeScroll} className="px-btn !px-3 !py-2 !text-[12px]">
             Inspect item ▶
           </a>
-          <button onClick={onClose} className="font-label text-[10px] uppercase text-mist hover:text-parchment">
+          <button onClick={onClose} className="font-label text-[12px] uppercase text-mist hover:text-parchment">
             Close
           </button>
         </div>
@@ -56,7 +56,7 @@ function EventCard({ event, onClose }: { event: Event; onClose: () => void }) {
           ? 'Click the floor to walk, click a wall to dig. Three chests are hidden in this cave — each holds one of my projects. Desktop: WASD works too.'
           : 'A wave of old light rolls through the cave. Somewhere, a slime is impressed.'}
       </p>
-      <button onClick={onClose} className="mt-3 font-label text-[10px] uppercase text-[#6e4a2a] hover:text-ink">
+      <button onClick={onClose} className="mt-3 font-label text-[12px] uppercase text-[#6e4a2a] hover:text-ink">
         Got it
       </button>
     </div>
@@ -178,7 +178,7 @@ export default function CaveHero() {
 
       {/* tooltip theo con trỏ */}
       {hover && (
-        <div className="pointer-events-none fixed z-[60] rounded-md border border-edge bg-night/90 px-2 py-1 font-label text-[10px] uppercase text-parchment shadow-lg" style={{ left: hover.x + 16, top: hover.y + 18 }}>
+        <div className="pointer-events-none fixed z-[60] rounded-md border border-edge bg-night/90 px-2 py-1 font-label text-[12px] uppercase text-parchment shadow-lg" style={{ left: hover.x + 16, top: hover.y + 18 }}>
           {hover.label}
         </div>
       )}
@@ -195,7 +195,7 @@ export default function CaveHero() {
       </div>
 
       {/* nhiệm vụ nhỏ góc phải trên */}
-      <div data-ui className="pointer-events-none absolute right-4 top-24 z-10 hidden items-center gap-2 rounded-md border border-edge/70 bg-night/70 px-3 py-1.5 font-label text-[10px] uppercase text-mist backdrop-blur-sm sm:flex md:right-8">
+      <div data-ui className="pointer-events-none absolute right-4 top-24 z-10 hidden items-center gap-2 rounded-md border border-edge/70 bg-night/70 px-3 py-1.5 font-label text-[12px] uppercase text-mist backdrop-blur-sm sm:flex md:right-8">
         <Sprite name="ore" size={14} /> {Math.min(total, QUEST_GOAL)}/{QUEST_GOAL} blocks mined · 3 chests hidden
       </div>
 
@@ -229,7 +229,7 @@ export default function CaveHero() {
               <Sprite name="scroll" size={18} /> Send a message
             </button>
           </motion.div>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="mt-8 flex items-center gap-2 font-label text-[10px] uppercase text-mist/80">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="mt-8 flex items-center gap-2 font-label text-[12px] uppercase text-mist/80">
             <Sprite name="hand" size={14} className="animate-bob" /> This cave is playable — tap around
           </motion.p>
         </div>

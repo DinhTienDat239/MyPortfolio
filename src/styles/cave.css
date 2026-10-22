@@ -2,14 +2,14 @@
    LANTERNLIGHT — design system (Tailwind v4, CSS-first)
    Hướng thiết kế: hang động 2D nhìn 3/4, ánh đuốc là nhân vật chính,
    UI panel xanh đêm bán trong suốt, góc bo nhẹ, viền mảnh, chữ màu giấy da.
-   Fonts (index.html): Jersey 10 (tiêu đề) · Pixelify Sans (nội dung) · Silkscreen (nhãn HUD)
+   Fonts (index.html): Jersey 10 (tiêu đề) · Pixelify Sans (nội dung + nhãn HUD — dễ đọc hơn Silkscreen ở cỡ nhỏ)
    ============================================================ */
 @import "tailwindcss";
 
 @theme {
   --font-display: "Jersey 10", "Pixelify Sans", ui-monospace, monospace;
   --font-pixel: "Pixelify Sans", ui-monospace, monospace;
-  --font-label: "Silkscreen", ui-monospace, monospace;
+  --font-label: "Pixelify Sans", ui-monospace, monospace;
   --font-sans: "Pixelify Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Nền & panel ---- */
@@ -125,7 +125,9 @@
   gap: 0.6rem;
   padding: 0.8rem 1.35rem;
   font-family: var(--font-label);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #2a1606;
   background: linear-gradient(180deg, #ffd77a 0%, #f2b84b 55%, #e09a33 100%);
@@ -147,7 +149,9 @@
   gap: 0.6rem;
   padding: 0.8rem 1.35rem;
   font-family: var(--font-label);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-parchment);
   background: linear-gradient(180deg, #27305a, #1b2142);
@@ -232,3 +236,6 @@
 .wall-ruins { background-image: var(--wall-ruins); }
 .wall-crystal { background-image: var(--wall-crystal); }
 .wall-garden { background-image: var(--wall-garden); }
+
+/* Nhãn HUD: Pixelify đậm hơn chút + giãn chữ để đọc rõ ở cỡ nhỏ */
+.font-label { font-weight: 500; letter-spacing: 0.04em; }

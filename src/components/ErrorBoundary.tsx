@@ -31,7 +31,7 @@ export default class ErrorBoundary extends Component<Props, State> {
         >
           Dig again
         </button>
-        <pre className="mt-8 max-h-40 max-w-lg overflow-auto text-left font-label text-[10px] text-mist">{this.state.error.message}</pre>
+        <pre className="mt-8 max-h-40 max-w-lg overflow-auto text-left font-label text-[12px] text-mist">{this.state.error.message}</pre>
       </div>
     );
   }
