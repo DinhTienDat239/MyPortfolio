@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { asset, content } from '../../data';
 import { cn } from '../../lib/utils';
@@ -21,36 +21,14 @@ function levelFromDob(dob?: string) {
   return { level, xp: (now.getTime() - last.getTime()) / (next.getTime() - last.getTime()) };
 }
 
-/** Ảnh đại diện được "pixel hoá" thật: vẽ xuống canvas 96px rồi phóng to. */
-function PixelPortrait({ src, alt }: { src?: string; alt: string }) {
-  const ref = useRef<HTMLCanvasElement>(null);
-  const [ok, setOk] = useState(false);
-  useEffect(() => {
-    if (!src) return;
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      const c = ref.current;
-      const ctx = c?.getContext('2d');
-      if (!c || !ctx) return;
-      const s = Math.min(img.width, img.height);
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, c.width, c.height);
-      // giảm bảng màu cho ra chất pixel-art
-      const data = ctx.getImageData(0, 0, c.width, c.height);
-      for (let i = 0; i < data.data.length; i += 4) {
-        for (let k = 0; k < 3; k++) data.data[i + k] = Math.round(data.data[i + k] / 32) * 32;
-      }
-      ctx.putImageData(data, 0, 0);
-      setOk(true);
-    };
-    img.src = src;
-  }, [src]);
-
+/** Ảnh đại diện hiện nguyên bản (không pixel hoá) để nhận ra mặt; khung vẫn theo style pixel. */
+function Portrait({ src, alt }: { src?: string; alt: string }) {
+  const [ok, setOk] = useState(true);
   return (
     <div className="px-slot relative aspect-square w-full overflow-hidden">
-      {src && <canvas ref={ref} width={96} height={96} role="img" aria-label={alt} className={cn('pixelated h-full w-full', !ok && 'hidden')} />}
-      {(!src || !ok) && (
+      {src && ok ? (
+        <img src={src} alt={alt} onError={() => setOk(false)} className="h-full w-full object-cover" />
+      ) : (
         <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle,rgb(255_179_71/0.18),transparent_70%)]">
           <Sprite name="explorer" size={160} className="animate-bob" title={alt} />
         </div>
@@ -81,7 +59,7 @@ function CharacterCard() {
       transition={{ duration: 0.5 }}
       className="px-panel p-5"
     >
-      <PixelPortrait src={asset(profile.profilePic)} alt={profile.fullName} />
+      <Portrait src={asset(profile.profilePic)} alt={profile.fullName} />
 
       <div className="mt-5 flex items-baseline justify-between gap-3">
         <h3 className="pixel-shadow text-2xl font-bold text-parchment">{profile.fullName}</h3>
