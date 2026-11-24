@@ -16,7 +16,7 @@
   "stats": [
     {
       "label": "Ad impressions",
-      "value": "100M+"
+      "value": "200M+"
     },
     {
       "label": "HTML playables built & converted",
@@ -249,7 +249,7 @@
         "label": "Own ventures",
         "title": "Startup, community & indie games",
         "meta": "Products I own end to end",
-        "body": "Creative Dash Lab, my startup for UA teams. Tatadex, a game community site with over a million page views a month. And Metal Sail, my indie studio: award-winning jam games, and now web games live on CrazyGames and Playgama.",
+        "body": "Creative Dash Lab, my startup for UA teams. Tatadex, a game community site with over five million page views a month. And Metal Sail, my indie studio: award-winning jam games, and now web games live on CrazyGames and Playgama.",
         "leaves": [
           "Creative Dash Lab",
           "Tatadex",
@@ -354,8 +354,8 @@
       "title": "Tatadex",
       "body": "The go-to guide for the mobile game Clash of Critters: campaign line-ups, tier lists, boss guides and a card-trading board, in three languages.",
       "facts": [
-        "1M+ page views / month",
-        "Monetised with MGID",
+        "5M+ page views / month",
+        "Monetised with Google AdSense & MGID",
         "VI · EN · RU"
       ],
       "stack": [

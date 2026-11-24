@@ -75,9 +75,9 @@ export default function Hero({ onPlay }: { onPlay: (slug: string) => void }) {
 
         <motion.dl {...fade(0.7)} className="mt-20 grid grid-cols-2 gap-y-8 border-t border-line pt-8 md:mt-24 md:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse pr-4">
-              <dt className="mt-1 text-sm text-muted">{s.label}</dt>
-              <dd className="text-4xl font-medium tracking-[-0.03em] md:text-5xl">{s.value}</dd>
+            <div key={s.label} className="flex flex-col pr-4">
+              <dd className="order-first text-4xl font-medium leading-none tracking-[-0.03em] md:text-5xl">{s.value}</dd>
+              <dt className="mt-2 text-sm leading-snug text-muted">{s.label}</dt>
             </div>
           ))}
         </motion.dl>
@@ -87,14 +87,25 @@ export default function Hero({ onPlay }: { onPlay: (slug: string) => void }) {
 }
 
 /**
- * Ba điện thoại xếp lớp: máy giữa chạy vòng các playable, hai máy sau nghiêng ra hai bên.
+ * Ba điện thoại xếp lớp: máy giữa là playable đang chọn, hai máy sau là bản trước/sau.
+ * Vuốt ngang (hoặc bấm máy bên, chấm, phím ←/→ khi focus) để đổi; tự chạy vòng khi để yên.
  * Mỗi lớp lệch theo chuột với độ sâu khác nhau (parallax) và tách ra khi cuộn xuống.
  */
+const START = Math.max(0, reel.findIndex((p) => p.slug === 'bead-fill'));
+const SWIPE = 45;
+
 function PhoneStage({ onPlay, progress }: { onPlay: (slug: string) => void; progress: MotionValue<number> }) {
-  const [i, setI] = useState(0);
+  const [i, setI] = useState(START);
+  const n = reel.length;
+  const go = (d: number) => {
+    first.current = false;
+    setI((k) => (k + d + n) % n);
+  };
   const cur = reel[i];
-  const left = reel[(i + reel.length - 1) % reel.length];
-  const right = reel[(i + 1) % reel.length];
+  const left = reel[(i + n - 1) % n];
+  const right = reel[(i + 1) % n];
+  const panned = useRef(false);
+  const first = useRef(true);
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -107,12 +118,22 @@ function PhoneStage({ onPlay, progress }: { onPlay: (slug: string) => void; prog
   const spread = useTransform(progress, [0, 0.6], [0, 40]);
   const leftX = useTransform(() => farX.get() - spread.get());
   const rightX = useTransform(() => farX.get() + spread.get());
+  // máy chính đi theo ngón tay khi vuốt, nhả ra thì bật về
+  const dragX = useMotionValue(0);
+  const dragXs = useSpring(dragX, { stiffness: 400, damping: 32 });
+  const dragRot = useTransform(dragXs, [-200, 200], [-6, 6]);
 
+  // Tự chuyển sau mỗi 3.6s; mọi lần đổi (kể cả do người dùng) đều đặt lại đồng hồ.
+  // Lần đầu giữ Bead Fill lâu hơn (cộng cả thời gian intro) vì đó là bản mở màn.
   useEffect(() => {
-    if (reel.length < 2) return;
-    const id = setInterval(() => setI((n) => (n + 1) % reel.length), 3200);
-    return () => clearInterval(id);
-  }, []);
+    if (n < 2) return;
+    const wait = first.current ? D * 1000 + 6500 : 3600;
+    const id = setTimeout(() => {
+      first.current = false;
+      setI((k) => (k + 1) % n);
+    }, wait);
+    return () => clearTimeout(id);
+  }, [i, n]);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -126,58 +147,103 @@ function PhoneStage({ onPlay, progress }: { onPlay: (slug: string) => void; prog
 
   if (!cur) return null;
   return (
-    <div className="relative mx-auto aspect-[1/1.05] w-full max-w-[520px] [perspective:1400px]">
-      {/* hai máy phía sau */}
+    <div className="mx-auto w-full max-w-[340px] sm:max-w-[460px] lg:max-w-[520px]">
       <motion.div
-        initial={{ opacity: 0, rotate: 0, x: 0 }}
-        animate={{ opacity: 1, rotate: -9 }}
-        transition={{ duration: 1.4, ease: EASE, delay: D + 0.45 }}
-        style={{ x: leftX, y: farY }}
-        className="absolute left-[2%] top-[12%] w-[40%]"
+        className="relative aspect-[1/1.08] cursor-grab touch-pan-y select-none [perspective:1400px] active:cursor-grabbing"
+        onPanStart={() => {
+          panned.current = true;
+        }}
+        onPan={(_, info) => dragX.set(info.offset.x)}
+        onPanEnd={(_, info) => {
+          dragX.set(0);
+          if (info.offset.x < -SWIPE || info.velocity.x < -400) go(1);
+          else if (info.offset.x > SWIPE || info.velocity.x > 400) go(-1);
+          // click phát sinh ngay sau pan không được tính là "Tap to play"
+          setTimeout(() => (panned.current = false), 0);
+        }}
       >
-        <PhoneFrame className="opacity-90 shadow-[0_40px_60px_-30px_rgb(0_0_0/0.35)]">
-          <Screen src={asset(left.thumbnail)!} k={left.id} dim />
-        </PhoneFrame>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, rotate: 0, x: 0 }}
-        animate={{ opacity: 1, rotate: 9 }}
-        transition={{ duration: 1.4, ease: EASE, delay: D + 0.5 }}
-        style={{ x: rightX, y: farY }}
-        className="absolute right-[2%] top-[12%] w-[40%]"
-      >
-        <PhoneFrame className="opacity-90 shadow-[0_40px_60px_-30px_rgb(0_0_0/0.35)]">
-          <Screen src={asset(right.thumbnail)!} k={right.id} dim />
-        </PhoneFrame>
-      </motion.div>
+        {/* hai máy phía sau */}
+        <motion.div
+          initial={{ opacity: 0, rotate: 0, x: 0 }}
+          animate={{ opacity: 1, rotate: -9 }}
+          transition={{ duration: 1.4, ease: EASE, delay: D + 0.45 }}
+          style={{ x: leftX, y: farY }}
+          className="absolute left-[3%] top-[13%] w-[39%]"
+        >
+          <button tabIndex={-1} aria-hidden onClick={() => !panned.current && go(-1)} className="block w-full">
+            <PhoneFrame className="opacity-90 shadow-[0_40px_60px_-30px_rgb(0_0_0/0.35)]">
+              <Screen src={asset(left.thumbnail)!} k={left.id} dim />
+            </PhoneFrame>
+          </button>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, rotate: 0, x: 0 }}
+          animate={{ opacity: 1, rotate: 9 }}
+          transition={{ duration: 1.4, ease: EASE, delay: D + 0.5 }}
+          style={{ x: rightX, y: farY }}
+          className="absolute right-[3%] top-[13%] w-[39%]"
+        >
+          <button tabIndex={-1} aria-hidden onClick={() => !panned.current && go(1)} className="block w-full">
+            <PhoneFrame className="opacity-90 shadow-[0_40px_60px_-30px_rgb(0_0_0/0.35)]">
+              <Screen src={asset(right.thumbnail)!} k={right.id} dim />
+            </PhoneFrame>
+          </button>
+        </motion.div>
 
-      {/* máy chính */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.3, ease: EASE, delay: D + 0.25 }}
-        className="absolute left-1/2 top-0 w-[50%] -translate-x-1/2"
-      >
-        <motion.div style={{ rotateX: rotX, rotateY: rotY }}>
-          <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
-            <button onClick={() => onPlay(cur.slug)} data-cursor="Play" aria-label={`Play ${cur.title}`} className="block w-full rounded-[13%/6%]">
-              <PhoneFrame className="shadow-[0_50px_70px_-35px_rgb(0_0_0/0.55)]">
-                <Screen src={asset(cur.thumbnail)!} k={cur.id} />
-              </PhoneFrame>
-            </button>
+        {/* bóng đổ trên "sàn" */}
+        <div aria-hidden className="absolute bottom-0 left-1/2 h-4 w-[38%] -translate-x-1/2 rounded-[50%] bg-black/15 blur-md" />
+
+        {/* máy chính */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.3, ease: EASE, delay: D + 0.25 }}
+          className="absolute left-1/2 top-0 w-[50%] -translate-x-1/2"
+        >
+          <motion.div style={{ rotateX: rotX, rotateY: rotY, x: dragXs, rotate: dragRot }}>
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+              <button
+                onClick={() => !panned.current && onPlay(cur.slug)}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowRight') go(1);
+                  if (e.key === 'ArrowLeft') go(-1);
+                }}
+                data-cursor="Play"
+                aria-label={`Play ${cur.title}`}
+                className="block w-full rounded-[13%/6%]"
+              >
+                <PhoneFrame className="shadow-[0_50px_70px_-35px_rgb(0_0_0/0.55)]">
+                  <Screen src={asset(cur.thumbnail)!} k={cur.id} />
+                </PhoneFrame>
+              </button>
+            </motion.div>
           </motion.div>
         </motion.div>
-        {/* bóng đổ trên "sàn" */}
-        <div aria-hidden className="mx-auto mt-6 h-4 w-[70%] rounded-[50%] bg-black/15 blur-md" />
-        <div className="mt-4 text-center text-sm">
-          <AnimatePresence mode="wait">
-            <motion.p key={cur.id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.3 }}>
-              {cur.title}
-            </motion.p>
-          </AnimatePresence>
-          <p className="text-muted">Tap to play</p>
-        </div>
       </motion.div>
+
+      {/* chú thích + chấm chọn */}
+      <div className="mt-5 text-center text-sm">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.p
+            key={cur.id}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25 }}
+            className="font-medium"
+          >
+            {cur.title}
+          </motion.p>
+        </AnimatePresence>
+        <p className="text-muted">Tap to play · swipe to browse</p>
+        <div className="mt-3 flex justify-center" role="tablist" aria-label="Playables">
+          {reel.map((p, k) => (
+            <button key={p.id} role="tab" aria-selected={k === i} aria-label={p.title} onClick={() => setI(k)} className="grid h-6 w-5 place-items-center">
+              <span className={`block h-1.5 rounded-full bg-fg transition-all duration-300 ${k === i ? 'w-4' : 'w-1.5 opacity-25'}`} />
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
