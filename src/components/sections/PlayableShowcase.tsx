@@ -110,7 +110,9 @@ function HorizontalTrack({ list, onPlay }: { list: Project[]; onPlay: (slug: str
 
 function SwipeTrack({ list, onPlay }: { list: Project[]; onPlay: (slug: string) => void }) {
   return (
-    <div className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-24 sm:px-8" data-lenis-prevent>
+    // Không dùng data-lenis-prevent: CSS của Lenis gán overscroll-behavior: contain cho CẢ HAI trục,
+    // khiến vuốt dọc trên dải này không cuộn được trang trên điện thoại. Chỉ chặn tràn theo trục ngang.
+    <div className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain px-5 pb-24 [touch-action:pan-x_pan-y] sm:px-8">
       {list.map((p, i) => (
         <div key={p.id} className="snap-start">
           <Card project={p} index={i + 1} onPlay={onPlay} width="min(60vw, 240px)" />
