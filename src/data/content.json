@@ -2,360 +2,520 @@
   "profile": {
     "fullName": "Dinh Tien Dat",
     "alias": "Tibber",
-    "roles": "Playable Ads · Game Developer · Idea Creator",
-    "tagline": "Digging up fun, one tiny game at a time.",
+    "title": "Playable Ads Developer & Creative Director",
     "location": "Hanoi, Vietnam",
     "email": "scd239@gmail.com",
     "phone": "+84 368623903",
-    "dob": "23/09/2003",
-    "aboutMe": "Passionate Game Developer and Playable Ads Expert with a focus on creating engaging, high-performance interactive experiences. I specialize in HTML5 ad development and unique game mechanics.",
     "profilePic": "images/profile.jpg",
     "available": true
   },
-  "story": [
-    {
-      "kicker": "I",
-      "title": "The Spawn",
-      "body": "I spawned into game development — systems, mechanics, and the feel of a single jump. Games taught me that every millisecond of feedback matters."
-    },
-    {
-      "kicker": "II",
-      "title": "The Craft",
-      "body": "Then I learned to compress a whole game into thirty seconds and a few megabytes: playable ads that must hook a stranger before they scroll away."
-    },
-    {
-      "kicker": "III",
-      "title": "The Expedition",
-      "body": "Now I dig for ideas — mechanics that read instantly, convert hard, and still feel like real games. Small builds, deep fun."
-    }
-  ],
+  "hero": {
+    "headlineAccent": "Playable Ads Developer & Creative Director.",
+    "subheadline": "I turn game mechanics into 30-second experiences that move IPM and ROAS — then build the AI workflows and web systems that let a team ship them at scale."
+  },
   "stats": [
     {
-      "label": "HTML Playables Built",
+      "label": "Ad impressions",
+      "value": "100M+"
+    },
+    {
+      "label": "HTML playables built & converted",
       "value": "1000+"
     },
     {
-      "label": "Ads Impressions",
-      "value": "10M+"
-    },
-    {
-      "label": "Happy Clients",
+      "label": "Campaigns launched",
       "value": "50+"
     },
     {
-      "label": "Years Experience",
+      "label": "Years in playable ads",
       "value": "3+"
     }
   ],
-  "networks": [
-    {
-      "name": "AppLovin",
-      "logo": "https://www.vectorlogo.zone/logos/applovin/applovin-icon.svg"
-    },
-    {
-      "name": "Meta",
-      "logo": "https://www.vectorlogo.zone/logos/facebook/facebook-icon.svg"
-    },
-    {
-      "name": "Google Ads",
-      "logo": "https://www.vectorlogo.zone/logos/google_adwords/google_adwords-icon.svg"
-    },
-    {
-      "name": "Unity Ads",
-      "logo": "https://www.vectorlogo.zone/logos/unity3d/unity3d-icon.svg"
-    },
-    {
-      "name": "IronSource",
-      "logo": "https://www.vectorlogo.zone/logos/ironsource/ironsource-icon.svg"
-    },
-    {
-      "name": "Mintegral",
-      "logo": "https://www.vectorlogo.zone/logos/mintegral/mintegral-icon.svg"
-    }
-  ],
-  "skills": [
-    {
-      "name": "Engines & Games",
-      "sigil": "I",
-      "skills": [
-        {
-          "name": "Unity",
-          "level": 5
-        },
-        {
-          "name": "C#",
-          "level": 5
-        },
-        {
-          "name": "Game Mechanics",
-          "level": 4,
-          "note": "Game feel, juice, core loops"
-        }
-      ],
-      "icon": "sword"
-    },
-    {
-      "name": "Playable Ads",
-      "sigil": "II",
-      "skills": [
-        {
-          "name": "HTML5 / Canvas",
-          "level": 5
-        },
-        {
-          "name": "JavaScript",
-          "level": 5
-        },
-        {
-          "name": "TypeScript",
-          "level": 4
-        },
-        {
-          "name": "Ad Network SDKs",
-          "level": 5,
-          "note": "MRAID & network-specific builds"
-        },
-        {
-          "name": "Size Optimization",
-          "level": 4,
-          "note": "Single-file builds under network limits"
-        }
-      ],
-      "icon": "gem"
-    },
-    {
-      "name": "Web",
-      "sigil": "III",
-      "skills": [
-        {
-          "name": "React",
-          "level": 4
-        },
-        {
-          "name": "Vite",
-          "level": 4
-        },
-        {
-          "name": "Tailwind CSS",
-          "level": 4
-        },
-        {
-          "name": "Three.js / R3F",
-          "level": 3
-        }
-      ],
-      "icon": "book"
-    },
-    {
-      "name": "Craft",
-      "sigil": "IV",
-      "skills": [
-        {
-          "name": "Idea Creation",
-          "level": 5,
-          "note": "Hooks & concepts for ad creatives"
-        },
-        {
-          "name": "Git",
-          "level": 4
-        }
-      ],
-      "icon": "pickaxe"
-    }
-  ],
+  "about": {
+    "statement": "I came to ads from making real games — so I know what makes a mechanic sticky. Today I build playables, lead the creative behind them, and design the AI workflows that let one person do the work of a team.",
+    "facts": [
+      {
+        "k": "Specialty",
+        "v": "Mobile puzzle playables"
+      },
+      {
+        "k": "Engines",
+        "v": "Unity, Cocos"
+      },
+      {
+        "k": "Based in",
+        "v": "Hanoi, Vietnam"
+      }
+    ]
+  },
   "projects": [
     {
       "id": "pa-busaway",
       "slug": "bus-away",
       "title": "Bus Away",
-      "category": "playable",
+      "genre": "puzzle",
       "summary": "Tap the cars in the right order to fill each bus before the queue piles up. A clean traffic-jam puzzle that teaches itself in the first tap.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Puzzle",
         "Parking"
       ],
       "thumbnail": "images/playables/BusAway_Ikame.jpg",
       "playableUrl": "playables/BusAway_Ikame.html",
-      "orientation": "portrait",
       "featured": true,
       "order": 0,
       "sizeKB": 2903
     },
     {
-      "id": "pa-hungrygecko",
-      "slug": "hungry-gecko",
-      "title": "Hungry Gecko",
-      "category": "playable",
-      "summary": "Feed numbered color blocks to the gecko and watch a pixel-art picture come alive. Satisfying stacking with a reveal at every step.",
+      "id": "pa-watersort",
+      "slug": "water-sort",
+      "title": "Water Sort",
+      "genre": "puzzle",
+      "summary": "The classic water-sort loop with a twist: a frozen column that cracks as you sort. Two guided moves, then the player is on their own.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
-        "Puzzle",
-        "Sorting"
-      ],
-      "thumbnail": "images/playables/HungryGecko.jpg",
-      "playableUrl": "playables/HungryGecko.html",
-      "orientation": "portrait",
-      "featured": true,
-      "order": 1,
-      "sizeKB": 4777
-    },
-    {
-      "id": "pa-watersort-ice",
-      "slug": "water-sort-ice",
-      "title": "Water Sort x ICE Element",
-      "category": "playable",
-      "summary": "The classic water-sort loop with a twist: a frozen ice column that cracks as you sort. Two guided tutorial moves, then the player is on their own.",
-      "tags": [
-        "HTML5",
-        "Playable Ad",
         "Puzzle",
         "Sorting"
       ],
       "thumbnail": "images/playables/WaterSortIce.jpg",
       "playableUrl": "playables/WaterSortIce.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 2,
+      "order": 1,
       "sizeKB": 3918
     },
     {
-      "id": "pa-beadfill",
-      "slug": "bead-fill",
-      "title": "Bead Fill Color Block",
-      "category": "playable",
-      "summary": "Slide colored blocks into place to fill a bead picture before the timer runs out. A sliding-block puzzle with a 2-minute countdown hook.",
+      "id": "pa-hungrygecko",
+      "slug": "hungry-gecko",
+      "title": "Hungry Gecko",
+      "genre": "puzzle",
+      "summary": "Feed numbered color blocks to the gecko and watch a pixel-art picture come alive. Satisfying stacking with a reveal at every step.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Puzzle",
-        "Sliding Block"
+        "Sorting"
       ],
-      "thumbnail": "images/playables/BeadFill.jpg",
-      "playableUrl": "playables/BeadFill.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 3,
-      "sizeKB": 3929
+      "thumbnail": "images/playables/HungryGecko.jpg",
+      "playableUrl": "playables/HungryGecko.html",
+      "featured": true,
+      "order": 2,
+      "sizeKB": 4777
     },
     {
       "id": "pa-woolblockjam",
       "slug": "wool-block-jam",
       "title": "Wool Block Jam",
-      "category": "playable",
+      "genre": "puzzle",
       "summary": "Swipe knitted wool blocks out through the matching colored gates. Cozy, tactile textures on a quick-to-read jam puzzle.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Puzzle",
-        "Sliding Block"
+        "Block jam"
       ],
       "thumbnail": "images/playables/WoolBlockJam.jpg",
       "playableUrl": "playables/WoolBlockJam.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 4,
+      "order": 3,
       "sizeKB": 4028
+    },
+    {
+      "id": "pa-beadfill",
+      "slug": "bead-fill",
+      "title": "Bead Fill Color Block",
+      "genre": "puzzle",
+      "summary": "Slide coloured blocks into the board and fill a pixel-bead Pharaoh before you run out of moves. A sliding-block puzzle with a tight 15-move hook.",
+      "tags": [
+        "Puzzle",
+        "Sliding block",
+        "Move limit"
+      ],
+      "thumbnail": "images/playables/BeadFill.jpg",
+      "playableUrl": "playables/BeadFill.html",
+      "order": 4,
+      "sizeKB": 3260
+    },
+    {
+      "id": "pa-jigsawsolitaire",
+      "slug": "jigsaw-solitaire",
+      "title": "Jigsaw Solitaire",
+      "genre": "puzzle",
+      "summary": "Swap scrambled cards to rebuild a famous painting. A calm jigsaw-meets-solitaire puzzle with art-gallery visuals.",
+      "tags": [
+        "Puzzle",
+        "Jigsaw"
+      ],
+      "thumbnail": "images/playables/JigsawSolitaire.jpg",
+      "playableUrl": "playables/JigsawSolitaire.html",
+      "order": 5,
+      "sizeKB": 3083
     },
     {
       "id": "pa-wormcolorblast",
       "slug": "worm-color-blast",
       "title": "Worm Color Blast",
-      "category": "playable",
-      "summary": "Guide cute color worms to their holes and blast away the chocolate wall above. Bright, chunky and readable even at thumbnail size.",
+      "genre": "puzzle",
+      "summary": "Guide cute color worms to their holes and blast away the chocolate wall above. Path-finding puzzle that reads even at thumbnail size.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Puzzle",
-        "Color Match"
+        "Path-finding"
       ],
       "thumbnail": "images/playables/WormColorBlast.jpg",
       "playableUrl": "playables/WormColorBlast.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 5,
+      "order": 6,
       "sizeKB": 2808
     },
     {
       "id": "pa-trickyprank",
       "slug": "tricky-prank",
       "title": "Tricky Prank",
-      "category": "playable",
+      "genre": "hypercasual",
       "summary": "Help the poor lady out of a messy situation by picking the right item. A short story-driven brain teaser with a funny payoff.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
-        "Brain Puzzle",
+        "Brain teaser",
         "Story"
       ],
       "thumbnail": "images/playables/TrickyPrank.jpg",
       "playableUrl": "playables/TrickyPrank.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 6,
+      "order": 7,
       "sizeKB": 4331
     },
     {
       "id": "pa-brainrotmerge",
       "slug": "brainrot-merge",
       "title": "Brainrot Merge",
-      "category": "playable",
+      "genre": "casual",
       "summary": "Drop and merge meme characters inside a jar until they evolve into bigger ones. Physics-based merge with trending Brainrot faces.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Merge",
         "Physics"
       ],
       "thumbnail": "images/playables/BrainrotMerge.jpg",
       "playableUrl": "playables/BrainrotMerge.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 7,
+      "order": 8,
       "sizeKB": 2722
     },
     {
       "id": "pa-sprunkiemusicbox",
       "slug": "sprunkie-music-box",
       "title": "Sprunkie Music Box",
-      "category": "playable",
+      "genre": "casual",
       "summary": "Drag outfits onto Sprunkie characters to build a beat, one layer at a time. A creative music-mixing playable with a horror twist.",
       "tags": [
-        "HTML5",
-        "Playable Ad",
         "Music",
         "Creative"
       ],
       "thumbnail": "images/playables/SprunkieMusicBox.jpg",
       "playableUrl": "playables/SprunkieMusicBox.html",
-      "orientation": "portrait",
-      "featured": false,
-      "order": 8,
-      "sizeKB": 4548
-    },
-    {
-      "id": "pa-jigsawsolitaire",
-      "slug": "jigsaw-solitaire",
-      "title": "Jigsaw Solitaire",
-      "category": "playable",
-      "summary": "Swap scrambled cards to rebuild a famous painting. A calm jigsaw-meets-solitaire puzzle with art-gallery visuals.",
-      "tags": [
-        "HTML5",
-        "Playable Ad",
-        "Puzzle",
-        "Jigsaw"
-      ],
-      "thumbnail": "images/playables/JigsawSolitaire.jpg",
-      "playableUrl": "playables/JigsawSolitaire.html",
-      "orientation": "portrait",
-      "featured": false,
       "order": 9,
-      "sizeKB": 3083
+      "sizeKB": 4548
     }
   ],
-  "awards": [],
+  "experience": {
+    "center": "Dat",
+    "intro": "Two years deep in-house, years of freelance across very different products, and my own ventures on the side. I like learning by shipping — so the map keeps growing.",
+    "branches": [
+      {
+        "id": "inhouse",
+        "label": "In-house",
+        "title": "JOYBIT · Brave Holdings",
+        "meta": "Founding Playable Ads Developer · 2 years",
+        "body": "I was JOYBIT's first playable ads developer — part of Brave Holdings, one of Vietnam's largest mobile game groups. I set up playable production from zero: the workflow, the network-ready build process and the quality bar every playable after was held to. Starting from scratch never meant starting small. Those playables stood next to the big studios' work and outperformed it — and they gave JOYBIT the confidence to step into mobile puzzle, one of the toughest genres on the store.",
+        "leaves": [
+          "Built the pipeline from zero",
+          "Puzzle playables",
+          "Network-ready builds"
+        ],
+        "highlight": "First playable hire. I built the pipeline the studio still ships on."
+      },
+      {
+        "id": "freelance",
+        "label": "Freelance",
+        "title": "Outsource for studios & businesses",
+        "meta": "Ongoing · still taking projects",
+        "body": "Playables for studios and agencies — and beyond ads: a B2B enterprise platform covering CRM, operations and HR for a manufacturing company. I still take outside projects today.",
+        "leaves": [
+          "Playable ads",
+          "B2B platform",
+          "Web systems"
+        ]
+      },
+      {
+        "id": "ai",
+        "label": "AI workflows",
+        "title": "AI-native production",
+        "meta": "Framework · skills · agents",
+        "body": "I build the AI framework my team works in: reusable skills, automated creative workflows and a manager–worker setup across models — so I can run several projects at once and customise assets and mechanics fast.",
+        "leaves": [
+          "Team framework",
+          "Agent workers",
+          "Vibe-coded products"
+        ]
+      },
+      {
+        "id": "ventures",
+        "label": "Own ventures",
+        "title": "Startup, community & indie games",
+        "meta": "Products I own end to end",
+        "body": "Creative Dash Lab, my startup for UA teams. Tatadex, a game community site with over a million page views a month. And Metal Sail, my indie studio: award-winning jam games, and now web games live on CrazyGames and Playgama.",
+        "leaves": [
+          "Creative Dash Lab",
+          "Tatadex",
+          "Metal Sail Studio"
+        ]
+      }
+    ]
+  },
+  "ai": {
+    "intro": "I don't just use AI — I build the system my team works in. One brief goes in; an orchestrator splits it into tasks, hands them to specialised workers, and checks the results before anything ships.",
+    "steps": [
+      {
+        "name": "Brief",
+        "detail": "Idea, mechanic, target networks"
+      },
+      {
+        "name": "Orchestrator",
+        "detail": "Plans, splits and reviews the work",
+        "tools": [
+          "Claude",
+          "Codex"
+        ]
+      },
+      {
+        "name": "Workers",
+        "detail": "Parallel tasks through a custom CLI over model APIs",
+        "tools": [
+          "DeepSeek",
+          "GPT-6 Astra",
+          "GPT-6 Luna"
+        ]
+      },
+      {
+        "name": "Skills & workflows",
+        "detail": "Reusable recipes for assets, mechanics, localisation, export"
+      },
+      {
+        "name": "Ship",
+        "detail": "Playable variants ready for every network"
+      }
+    ],
+    "points": [
+      "A working framework for the team: shared skills, rules and automated workflows for creative playables",
+      "Vibe-coding in production — real projects that make money, not demos",
+      "Manager–worker setup across Claude, Codex and a custom CLI over many model APIs",
+      "Lets me multitask and stay flexible with custom assets and mechanics"
+    ]
+  },
+  "ventures": [
+    {
+      "id": "cdl",
+      "kind": "My startup",
+      "title": "Creative Dash Lab",
+      "body": "A platform for UA teams to produce playable ads and video faster: a drag-and-drop Playable Canvas with bulk variants, one-click conversion between ad networks, asset extract-and-replace, and video resizing — all in the browser.",
+      "facts": [
+        "Live in production",
+        "Exports to 9 ad networks",
+        "Files processed in the browser"
+      ],
+      "stack": [
+        "Cloudflare Workers",
+        "D1",
+        "React",
+        "TypeScript"
+      ],
+      "image": "images/ventures/creativedashlab.png",
+      "link": "https://app.creativedashlab.workers.dev/"
+    },
+    {
+      "id": "b2b",
+      "kind": "Freelance · B2B · under NDA",
+      "title": "Enterprise operations platform",
+      "body": "An all-in-one system for a manufacturing company: CRM with a stage-based pipeline, partners, products with versioned pricing, contracts and orders, purchasing, finance, tasks by department, an internal wiki and role-based access. Client identity is removed here.",
+      "facts": [
+        "Role-based access & audit log",
+        "Theme studio, no-code branding",
+        "Mobile-ready"
+      ],
+      "stack": [
+        "Next.js",
+        "PostgreSQL",
+        "Prisma",
+        "Tailwind"
+      ],
+      "nda": true,
+      "modules": [
+        "Dashboard",
+        "Customers",
+        "Pipeline",
+        "Contracts",
+        "Orders",
+        "Purchasing",
+        "Finance",
+        "Tasks",
+        "Wiki",
+        "Organization"
+      ]
+    },
+    {
+      "id": "tatadex",
+      "kind": "Community site",
+      "title": "Tatadex",
+      "body": "The go-to guide for the mobile game Clash of Critters: campaign line-ups, tier lists, boss guides and a card-trading board, in three languages.",
+      "facts": [
+        "1M+ page views / month",
+        "Monetised with MGID",
+        "VI · EN · RU"
+      ],
+      "stack": [
+        "Web",
+        "SEO",
+        "Ads"
+      ],
+      "image": "images/ventures/tatadex.png",
+      "link": "https://tatadex.site/vi"
+    }
+  ],
+  "studio": {
+    "name": "Metal Sail Studio",
+    "link": "https://metalsailstudio.itch.io/"
+  },
+  "awards": [
+    {
+      "title": "Viction Game Award",
+      "result": "Nominee · Hall of Fame",
+      "year": "2025",
+      "project": "tales-from-the-shadows",
+      "link": "https://gameawards.viction.xyz/all-submission",
+      "image": "images/awards/viction-2025.webp",
+      "fit": "cover",
+      "caption": "The Metal Sail team at the Viction Game Awards"
+    },
+    {
+      "title": "SEEE JAM",
+      "result": "1st Prize",
+      "year": "2025",
+      "project": "astrolotl",
+      "link": "https://www.facebook.com/egdc.seee",
+      "image": "images/awards/seee-jam-2025.webp",
+      "fit": "contain",
+      "caption": "Game design & programming contest"
+    },
+    {
+      "title": "Avalanche Game Jam Vietnam",
+      "result": "Finalist · Bootcamp",
+      "year": "2025",
+      "link": "https://www.facebook.com/profile.php?id=61579127210795",
+      "project": "bubble-up",
+      "image": "images/awards/avalanche-2025.webp",
+      "fit": "contain",
+      "caption": "Bubble Up made the finalist line-up"
+    },
+    {
+      "title": "Global Game Jam Vietnam",
+      "result": "Great Art-work Award",
+      "year": "2024",
+      "link": "https://www.facebook.com/events/296810809554222",
+      "entry": "Pretty Handsome Boy",
+      "image": "images/awards/ggj-2024.webp",
+      "fit": "contain",
+      "caption": "Pretty Handsome Boy — our jam entry"
+    }
+  ],
+  "games": [
+    {
+      "slug": "tales-from-the-shadows",
+      "title": "Tales from the Shadows",
+      "year": "2024",
+      "genre": "Story-driven horror",
+      "cover": "images/games/tales-from-the-shadows.jpg",
+      "link": "https://metalsailstudio.itch.io/tales-from-the-shadows"
+    },
+    {
+      "slug": "astrolotl",
+      "title": "Astrolotl",
+      "year": "2025",
+      "genre": "Sokoban puzzle",
+      "cover": "images/games/astrolotl.jpg",
+      "link": "https://metalsailstudio.itch.io/astrolotl"
+    },
+    {
+      "slug": "bubble-up",
+      "title": "Bubble Up",
+      "year": "2025",
+      "genre": "Pacing click puzzle",
+      "cover": "images/games/bubble-up.jpg",
+      "link": "https://metalsailstudio.itch.io/bubble-up"
+    },
+    {
+      "slug": "banhmichines",
+      "title": "Banhmichines",
+      "year": "2026",
+      "status": "In development",
+      "genre": "3D puzzle",
+      "cover": "images/games/banhmichines.jpg",
+      "link": "https://metalsailstudio.itch.io/banhmichines"
+    }
+  ],
+  "stack": [
+    {
+      "name": "Hands-on",
+      "note": "What I build with every day",
+      "items": [
+        {
+          "name": "Unity",
+          "detail": "Main engine for playables"
+        },
+        {
+          "name": "Cocos Creator",
+          "detail": "Plus my own Unity → Cocos conversion research repo"
+        },
+        {
+          "name": "HTML5 / JavaScript",
+          "detail": "Single-file builds, MRAID & network SDKs"
+        },
+        {
+          "name": "C#",
+          "detail": "Gameplay & tooling"
+        }
+      ]
+    },
+    {
+      "name": "Shipped with AI pairing",
+      "note": "Built with AI in the loop, running in production",
+      "items": [
+        {
+          "name": "React, Next.js, Tailwind",
+          "detail": "Web apps & dashboards"
+        },
+        {
+          "name": "PostgreSQL",
+          "detail": "B2B enterprise platform"
+        },
+        {
+          "name": "Cloudflare Workers",
+          "detail": "Creative Dash Lab"
+        },
+        {
+          "name": "Python",
+          "detail": "Automation tools"
+        }
+      ]
+    },
+    {
+      "name": "AI tooling",
+      "note": "How the work gets multiplied",
+      "items": [
+        {
+          "name": "Claude & Codex",
+          "detail": "Orchestration & coding agents"
+        },
+        {
+          "name": "Custom CLI",
+          "detail": "One interface over many model APIs"
+        },
+        {
+          "name": "DeepSeek, GPT-6 Astra / Luna",
+          "detail": "Worker models"
+        },
+        {
+          "name": "Skills & workflows",
+          "detail": "Reusable team playbooks"
+        }
+      ]
+    }
+  ],
   "socials": [
     {
       "label": "GitHub",
@@ -363,19 +523,60 @@
       "handle": "@DinhTienDat239"
     },
     {
+      "label": "itch.io",
+      "url": "https://metalsailstudio.itch.io/",
+      "handle": "Metal Sail Studio"
+    },
+    {
       "label": "Email",
       "url": "mailto:scd239@gmail.com",
       "handle": "scd239@gmail.com"
     },
     {
-      "label": "itch.io",
-      "url": "",
-      "handle": ""
-    },
-    {
       "label": "LinkedIn",
       "url": "",
       "handle": ""
+    }
+  ],
+  "webGames": [
+    {
+      "slug": "gangster-life",
+      "title": "Gangster Life: Neon Shores",
+      "year": "2026",
+      "genre": "3D open-world crime action",
+      "blurb": "Steal cars, outrun five-star police chases and take back the family diner on a neon beach coast — a full open city running in the browser.",
+      "cover": "images/games/gangster-life.jpg",
+      "engine": "Unity WebGL",
+      "link": "https://playgama.com/game/gangster-life--neon-shores",
+      "portals": [
+        {
+          "name": "Playgama",
+          "status": "Live"
+        },
+        {
+          "name": "CrazyGames",
+          "status": "Basic launch"
+        }
+      ]
+    },
+    {
+      "slug": "cosmic-world",
+      "title": "Cosmic World: Pack & Binder",
+      "year": "2026",
+      "genre": "Card collecting · idle",
+      "blurb": "Rip cosmic card packs, collect 100 original space creatures and fill your binder — then grade guests’ cards at your own Star Desk.",
+      "cover": "images/games/cosmic-world.jpg",
+      "engine": "Unity WebGL",
+      "portals": [
+        {
+          "name": "CrazyGames",
+          "status": "In testing"
+        },
+        {
+          "name": "Playgama",
+          "status": "Sandbox"
+        }
+      ]
     }
   ]
 }

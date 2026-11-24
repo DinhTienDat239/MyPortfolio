@@ -2,10 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
-import './styles/cave.css';
-import { installTextures } from './engine/textures';
-
-installTextures();
+import './styles/index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

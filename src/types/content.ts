@@ -1,108 +1,143 @@
 /**
- * Toàn bộ nội dung site nằm trong src/data/content.json (không còn database).
+ * Toàn bộ nội dung site nằm trong src/data/content.json (không database, không backend).
  * Sửa JSON → commit → GitHub Actions tự build & deploy.
- *
- * Đường dẫn ảnh/playable: viết tương đối với thư mục public/
- *   "images/profile.webp", "playables/Merge.html"
- * hoặc URL tuyệt đối "https://…". Không cần dấu "/" ở đầu.
+ * Đường dẫn ảnh/playable: tương đối với public/ ("images/a.jpg") hoặc URL "https://…".
  */
-export type ProjectCategory = 'game' | 'playable' | 'webapp';
 
-export const CATEGORY_LABEL: Record<ProjectCategory, string> = {
-  game: 'Game Dev',
-  playable: 'Playable Ad',
-  webapp: 'Web App',
+export type Genre = 'puzzle' | 'casual' | 'hypercasual' | 'midcore';
+
+export const GENRE_LABEL: Record<Genre, string> = {
+  puzzle: 'Puzzle',
+  casual: 'Casual',
+  hypercasual: 'Hyper-casual',
+  midcore: 'Midcore',
 };
 
 export interface Profile {
   fullName: string;
-  alias: string;          // "Tibber" — tên lớn ở Hero
-  roles: string;
-  tagline: string;
+  alias: string;
+  title: string;
   location: string;
   email: string;
   phone?: string;
-  dob?: string;           // giữ lại dữ liệu cũ, không hiển thị công khai
-  aboutMe: string;
   profilePic?: string;
-  available?: boolean;    // hiện badge "Open for work"
-}
-
-export interface StoryChapter {
-  kicker: string;         // "I." / "Who"
-  title: string;
-  body: string;
+  available?: boolean;
 }
 
 export interface Stat {
   label: string;
-  value: string;          // "1000+", "10M+" — số được đếm lên, hậu tố giữ nguyên
-}
-
-export interface Network {
-  name: string;
-  logo?: string;
-}
-
-export interface SkillGroup {
-  name: string;           // "Engines", "Web", …
-  sigil: string;          // ký hiệu trang trí: "I", "II", …
-  icon?: string;          // tên sprite: pickaxe | sword | gem | book | potion | …
-  skills: { name: string; level: number; note?: string }[]; // level 1–5
-}
-
-export interface Social {
-  label: string;
-  url: string;            // để trống "" → tự ẩn
-  handle?: string;
-}
-
-export interface Award {
-  id: string;
-  name: string;
-  description: string;
-  image?: string;
-  link?: string;
-  year?: string;
+  value: string;
 }
 
 export interface Project {
   id: string;
-  slug: string;           // URL: #/work/<slug>
+  slug: string;
   title: string;
-  category: ProjectCategory;
+  genre: Genre;
   summary: string;
-  tagline?: string;
-  thumbnail?: string;     // ảnh card 16:10. Bỏ trống → card tự vẽ artwork đỏ-đen
-  cover?: string;         // ảnh nền lớn ở trang case study
-  previewVideo?: string;  // clip 3–6s webm/mp4 muted, play khi hover card
   tags: string[];
-  year?: string;
-  role?: string;
-  playableUrl?: string;   // "playables/Merge.html" — chơi trực tiếp trong khung điện thoại
-  sizeKB?: number;        // dung lượng build (tự điền bằng script, hiện ở bảng inventory)
-  orientation?: 'portrait' | 'landscape';
-  externalLink?: string;  // store / itch.io / web demo
-  caseStudy?: CaseStudyBlock[];
+  thumbnail?: string;
+  previewVideo?: string;
+  playableUrl?: string;
+  sizeKB?: number;
+  engine?: string;
+  platform?: string;
+  installs?: string;
+  networks?: string[];
   featured?: boolean;
-  /** Ghi đè độ hiếm tự động (mặc định: featured → legendary, game → epic, playable → rare, webapp → uncommon) */
-  rarity?: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
   order: number;
 }
 
-export type CaseStudyBlock =
-  | { type: 'text'; heading?: string; body: string }
-  | { type: 'image'; src: string; caption?: string }
-  | { type: 'stats'; items: Stat[] }
-  | { type: 'quote'; text: string };
+/** Một nhánh trong sơ đồ kinh nghiệm */
+export interface Branch {
+  id: string;
+  label: string;      // tên ngắn trên sơ đồ
+  title: string;      // tiêu đề chi tiết
+  meta: string;       // "2 years · in-house"
+  body: string;
+  highlight?: string; // câu nhấn mạnh, in lớn
+  leaves: string[];   // các nút con
+}
+
+export interface AiFlow {
+  intro: string;
+  steps: { name: string; detail: string; tools?: string[] }[];
+  points: string[];
+}
+
+export interface Venture {
+  id: string;
+  kind: string;
+  title: string;
+  body: string;
+  facts: string[];
+  stack: string[];
+  image?: string;
+  link?: string;
+  nda?: boolean;      // true → vẽ UI trừu tượng, ẩn danh tính đối tác
+  modules?: string[];
+}
+
+export interface Award {
+  title: string;
+  result: string;
+  year: string;
+  project?: string;   // slug game liên quan
+  entry?: string;     // tên bài dự thi khi không có trong games
+  link?: string;
+  image?: string;
+  /** cover: ảnh chụp, cắt vừa khung · contain: banner có chữ, giữ nguyên + nền mờ */
+  fit?: 'cover' | 'contain';
+  caption?: string;
+}
+
+export interface WebGame {
+  slug: string;
+  title: string;
+  year: string;
+  genre: string;
+  blurb: string;
+  cover: string;
+  engine?: string;
+  link?: string;
+  portals: { name: string; status: string }[];
+}
+
+export interface Game {
+  slug: string;
+  title: string;
+  year: string;
+  status?: string;
+  genre: string;
+  cover: string;
+  link: string;
+}
+
+export interface StackGroup {
+  name: string;
+  note: string;
+  items: { name: string; detail?: string }[];
+}
+
+export interface Social {
+  label: string;
+  url: string;
+  handle?: string;
+}
 
 export interface Content {
   profile: Profile;
-  story: StoryChapter[];
+  hero: { headlineAccent: string; subheadline: string };
   stats: Stat[];
-  networks: Network[];
-  skills: SkillGroup[];
+  about: { statement: string; facts: { k: string; v: string }[] };
   projects: Project[];
+  experience: { center: string; intro: string; branches: Branch[] };
+  ai: AiFlow;
+  ventures: Venture[];
+  studio: { name: string; link: string };
   awards: Award[];
+  games: Game[];
+  webGames: WebGame[];
+  stack: StackGroup[];
   socials: Social[];
 }

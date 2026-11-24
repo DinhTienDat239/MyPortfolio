@@ -1,51 +1,38 @@
-import { useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useState } from 'react';
 import { content } from '../../data';
-import { goToSection } from '../../lib/router';
-import { startTreasureRain } from '../../lib/game';
-import { Sprite, Torch } from '../pixel/Sprite';
-import { WallBand } from '../fx/Layer';
+import { scrollTo } from '../../lib/scroll';
+import MiniGame from './MiniGame';
 
 export default function Footer() {
-  const clicks = useRef<number[]>([]);
-
-  // Bí mật: click 3 lần liên tiếp vào viên ngọc ở đáy
-  const onGem = () => {
-    const now = Date.now();
-    clicks.current = [...clicks.current.filter((t) => now - t < 1200), now];
-    if (clicks.current.length >= 3) {
-      clicks.current = [];
-      startTreasureRain('secret');
-    }
-  };
+  const { profile } = content;
+  const [game, setGame] = useState(false);
 
   return (
-    <footer className="relative z-20 overflow-hidden bg-void pb-28">
-      {/* Bức tường cuối cùng của hang */}
-      <WallBand biome="garden" />
-      <div className="bg-void px-5 pt-16 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex items-end justify-center gap-6">
-            <Torch size={48} className="hidden sm:inline-block" />
-            <p aria-hidden className="title-glow select-none text-center font-display text-[24vw] leading-none md:text-[14rem]">
-              {content.profile.alias.toUpperCase()}
-            </p>
-            <Torch size={48} className="hidden sm:inline-block" />
-          </div>
-
-          <div className="mt-16 flex flex-col items-center justify-between gap-6 font-label text-[13px] uppercase text-mist md:flex-row">
-            <p className="flex items-center gap-2">
-              © {new Date().getFullYear()} {content.profile.fullName}
-              <button onClick={onGem} aria-label="A glinting gem" className="opacity-40 transition-opacity hover:opacity-100">
-                <Sprite name="gem" size={16} />
-              </button>
-            </p>
-            <p className="text-mist/60">Hand-placed pixels · React · Three.js</p>
-            <button onClick={() => goToSection('top')} className="flex items-center gap-2 hover:text-torch">
-              <Sprite name="lantern" size={20} /> Back to surface
-            </button>
-          </div>
-          <p aria-hidden className="mt-8 text-center font-label text-[12px] tracking-[0.4em] text-edge">↑ ↑ ↓ ↓ ← → ← → B A</p>
+    <footer className="bg-fg text-bg">
+      <div className="mx-auto max-w-[1400px] px-5 pb-10 sm:px-8">
+      <AnimatePresence>
+        {game && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
+            <div className="pb-10">
+              <MiniGame />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="flex flex-col gap-3 border-t border-bg/15 pt-6 text-sm text-bg/50 sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          © {new Date().getFullYear()} {profile.fullName}
+        </p>
+        <div className="flex gap-6">
+          <button onClick={() => setGame((g) => !g)} className="link hover:text-bg">
+            {game ? 'Close game' : 'Got 5 seconds?'}
+          </button>
+          <button onClick={() => scrollTo(0)} className="link hover:text-bg">
+            Back to top ↑
+          </button>
         </div>
+      </div>
       </div>
     </footer>
   );

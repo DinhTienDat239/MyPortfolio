@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/*
+ * Tối giản đơn sắc: trắng · đen · xám. Một font. Không màu nhấn, không bóng, không gradient.
+ * Tailwind v4: theme khai báo ngay tại đây (thay cho tailwind.config.js).
+ */
+@theme {
+  --color-bg: #ffffff;
+  --color-fg: #111111;
+  --color-muted: #888888;
+  --color-line: #e6e6e6;
+  --color-soft: #f4f4f4;
+
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-rev: marquee 44s linear infinite reverse;
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'ss01', 'tnum';
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  :focus-visible {
+    outline: 1.5px solid var(--color-fg);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Link chữ: gạch chân mảnh chạy ra khi hover */
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s var(--ease-out-quart);
+  }
+  .link:hover,
+  .link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.7rem 0;
+    color: var(--color-fg);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field::placeholder {
+    color: #b5b5b5;
+  }
+  .field:focus {
+    border-color: var(--color-fg);
+  }
+}
+
+/* Ẩn thanh cuộn ngang của dải playable trên mobile */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Chữ nhấn serif nghiêng trong tiêu đề */
+.em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Con trỏ tuỳ biến: ẩn con trỏ hệ thống trên desktop */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor, html.has-cursor * { cursor: none !important; }
+  html.has-cursor iframe { cursor: auto !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

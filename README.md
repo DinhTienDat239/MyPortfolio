@@ -1,9 +1,10 @@
-# Tibber · Dinh Tien Dat — Portfolio
+# Dinh Tien Dat — Playable Ads Developer & Creative Director
 
-Portfolio tĩnh phong cách **pixel-art khám phá hang động**: cuộn trang = đào sâu xuống lòng đất. React 19 + Vite + Tailwind v4 + Motion + engine canvas 2D tự viết (hang nhìn 3/4, ánh sáng động).
+Portfolio tĩnh phong cách **đơn sắc kiểu editorial**: trắng / đen / xám, chữ Instrument Sans + Instrument Serif nghiêng cho chữ nhấn. Điểm nhấn bằng chuyển động: preloader đếm số, điện thoại 3D nghiêng theo chuột ở hero, dải playable cuộn ngang, câu giới thiệu sáng dần theo cuộn, dòng danh sách đổ đen khi hover, con trỏ "Play".
+Playable ads thật chạy trực tiếp trong **Phone Simulator** trên web.
 
-Toàn bộ pixel art (sprite, tile, con trỏ, hang động có ánh sáng) là **nguyên bản**, vẽ bằng code — không dùng asset của game nào.
-Không database, không backend: toàn bộ nội dung nằm trong `src/data/content.json`, **push lên `main` là GitHub Actions tự build và deploy lên GitHub Pages**.
+**Stack:** Vite 6 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion (`motion/react`) · Lenis smooth scroll.
+Không database, không backend — nội dung nằm trong `src/data/content.json`, push lên `main` là GitHub Actions tự build & deploy lên GitHub Pages.
 
 ## Chạy local
 
@@ -11,100 +12,85 @@ Không database, không backend: toàn bộ nội dung nằm trong `src/data/con
 npm install
 npm run dev        # http://localhost:3000
 npm run build      # xuất ra dist/
-npm run preview    # xem bản build
+npm run lint       # type-check
 ```
-
-## Deploy (GitHub Pages)
-
-1. Lần đầu: repo trên GitHub → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. `git push` lên `main` → workflow `.github/workflows/deploy.yml` build & deploy (≈1–2 phút, xem tab **Actions**).
-3. Site: `https://dinhtiendat239.github.io/MyPortfolio/`
-
-Site dùng hash routing (`#/work/<slug>`) và `base: './'` nên chạy được ở mọi đường dẫn / domain riêng mà không cần cấu hình thêm.
-
-## Cập nhật nội dung
-
-Mọi thứ ở **`src/data/content.json`** (kiểu dữ liệu: `src/types/content.ts`):
-
-| Muốn… | Sửa |
-|---|---|
-| Đổi tên, tagline, about, ảnh đại diện | `profile` |
-| 3 thẻ câu chuyện ở phần Origin | `story` |
-| Số liệu đếm (1000+, 10M+…) | `stats` |
-| Thêm dự án | thêm 1 object vào `projects` |
-| Kỹ năng (level 1–5) | `skills` |
-| GitHub / itch.io / LinkedIn | `socials` (để `url` rỗng → tự ẩn) |
-| Giải thưởng | `awards` (mảng rỗng → section tự ẩn) |
-
-### Thêm 1 project
-
-```jsonc
-{
-  "id": "my-game",
-  "slug": "my-game",                 // URL: #/work/my-game
-  "title": "My Game",
-  "category": "game",                // "game" | "playable" | "webapp"
-  "summary": "One or two sentences.",
-  "thumbnail": "images/my-game.webp", // file đặt trong public/images/ — bỏ trống → artwork tự sinh
-  "previewVideo": "videos/my-game.webm", // tuỳ chọn: clip 3–6s, play khi hover card
-  "playableUrl": "playables/MyGame.html", // tuỳ chọn: chơi trực tiếp trong khung điện thoại
-  "externalLink": "https://…",       // tuỳ chọn: store / itch.io
-  "tags": ["Unity", "C#"],
-  "year": "2026",
-  "role": "Solo developer",
-  "featured": true,
-  "order": 0,
-  "caseStudy": [                     // tuỳ chọn: nội dung trang case study
-    { "type": "text", "heading": "The hook", "body": "…" },
-    { "type": "image", "src": "images/my-game-2.webp", "caption": "…" },
-    { "type": "stats", "items": [{ "label": "CTR", "value": "12%" }] },
-    { "type": "quote", "text": "…" }
-  ]
-}
-```
-
-Tab **Web Apps** tự xuất hiện khi có project `"category": "webapp"`.
-
-## Lấy dữ liệu cũ từ Firestore (chạy 1 lần)
-
-```bash
-npm run export:firestore
-```
-
-Script đọc dữ liệu công khai của site cũ, tách ảnh base64 thành file trong `public/images/` và **merge** vào `content.json` (giữ nguyên những gì bạn tự viết thêm). Xong thì commit, có thể xoá `scripts/export-firestore.mjs`.
-
-## Easter eggs
-
-- **Đào quặng**: click vào tường hang ở Hero 3 lần để đào vỡ khối — đủ 10 khối hoàn thành quest → Treasure Rain
-- Gõ **↑ ↑ ↓ ↓ ← → ← → B A** → Treasure Rain
-- Click 3 lần vào viên ngọc ở footer → Treasure Rain
-- Phím số **1–5** (thêm awards thì thành 1–6): nhảy giữa các tầng (hotbar)
-- Nút loa trên HUD → âm thanh chiptune (Web Audio, không có file âm thanh)
-- Mở DevTools console ⛏
-
-## Thêm sprite pixel
-
-Sprite nằm ở `src/components/pixel/sprites.ts`: mỗi sprite là lưới 16×16 ký tự, màu tra theo `PALETTE`.
-Dùng: `<Sprite name="gem" size={32} />`. Có thể đổi màu: `recolor={{ c: '#b77cff' }}`.
 
 ## Cấu trúc
 
 ```
 src/
-├─ data/content.json        ← toàn bộ nội dung
-├─ types/content.ts
-├─ styles/cave.css          ← theme Tailwind v4: màu hang/quặng/độ hiếm, panel pixel, tile nền, con trỏ cuốc
-├─ pages/                   HomePage · CaseStudyPage (Item Codex)
-├─ components/
-│  ├─ sections/             CaveHero · Character · Vault · SkillTree · Feats · Craft
-│  ├─ projects/             ItemCard (độ hiếm + 3D tilt + video hover) · PlayableFrame (máy cầm tay)
-│  ├─ pixel/                sprites.ts · Sprite · PixelScene (cảnh hang tự sinh)
-│  ├─ fx/                   Preloader · Curtain · Layer · Ambience · SmoothScroll · Counter
-│  └─ layout/               Header (HUD độ sâu) · Hotbar · Footer (địa tầng)
-├─ engine/                  CaveWorld (render + ánh sáng + đào) · paint (cọ vẽ tile) · biomes (bảng màu) · textures
-├─ lib/                     router (hash) · game (tầng, quặng, kho báu) · sound · store · utils
-└─ hooks/useKonami.ts
-public/
-├─ playables/               build HTML của từng playable
-└─ images/                  ảnh (do export script tạo / bạn tự thêm)
+├─ App.tsx                      # ghép các section + simulator
+├─ styles/index.css             # Tailwind v4 @theme (màu, font) + .link / .field
+├─ data/content.json            # TOÀN BỘ nội dung
+├─ types/content.ts             # kiểu dữ liệu + danh sách tab GENRES
+├─ hooks/useHashRoute.ts        # deep-link #/play/<slug>
+├─ lib/    particles (hiệu ứng hạt nhỏ khi gửi form) · scroll (Lenis)
+└─ components/
+   ├─ fx/        SmoothScroll · Preloader · Cursor
+   ├─ ui/        Reveal (Reveal · MaskLine · ScrollText · Section) · HoverRow · PhoneFrame
+   ├─ layout/    Header · Footer · MiniGame (ẩn sau link "Got 5 seconds?")
+   └─ sections/  Hero · PlayableShowcase · ProjectModal · About · Experience · AiWorkflow · Ventures · Awards · TechStack · Contact
 ```
+
+> Tailwind v4 không dùng `tailwind.config.js`: theme khai báo bằng `@theme { … }` trong `src/styles/index.css`
+> (ví dụ `--color-muted: #888888` → `text-muted`, `border-muted/40`).
+
+## Cập nhật nội dung (`src/data/content.json`)
+
+| Muốn… | Sửa |
+|---|---|
+| Chức danh, mô tả hero, 4 con số | `hero`, `stats` |
+| Câu giới thiệu + 3 dòng thông tin | `about` |
+| Playable | `projects` (`genre`: `puzzle` · `casual` · `hypercasual` · `midcore`) |
+| Sơ đồ kinh nghiệm (4 nhánh) | `experience.branches` |
+| Quy trình AI | `ai` |
+| Startup / B2B (NDA) / community | `ventures` (`nda: true` → vẽ UI trừu tượng, ẩn đối tác) |
+| Giải thưởng & game indie | `awards`, `games`, `studio` |
+| Toolbox | `stack` |
+| Mạng xã hội | `socials` (`url` rỗng → ẩn) |
+
+### Thêm 1 playable
+
+```jsonc
+{
+  "id": "pa-my-game",
+  "slug": "my-game",                     // deep-link: #/play/my-game
+  "title": "My Game",
+  "genre": "puzzle",                     // puzzle | casual | hypercasual | midcore
+  "summary": "One or two sentences.",
+  "tags": ["Match-3"],
+  "thumbnail": "images/playables/MyGame.jpg",   // ảnh dọc 9:16
+  "previewVideo": "videos/MyGame.webm",         // tuỳ chọn — chạy khi hover; bỏ trống → ảnh tự pan
+  "playableUrl": "playables/MyGame.html",       // build single-file
+  "sizeKB": 3200,
+  "engine": "Luna Playworks",            // mặc định "HTML5"
+  "platform": "iOS · Android",
+  "installs": "1.2M",                    // chỉ hiện khi có số thật
+  "networks": ["AppLovin", "Unity Ads"],
+  "featured": false,
+  "order": 10
+}
+```
+
+## Form liên hệ
+
+Site tĩnh nên mặc định form mở ứng dụng email với nội dung soạn sẵn (`mailto:`).
+Muốn nhận thẳng vào hộp thư: tạo endpoint Formspree/Getform rồi đặt biến môi trường lúc build:
+
+```bash
+VITE_FORM_ENDPOINT=https://formspree.io/f/xxxxxx
+```
+
+(Trên GitHub Actions: thêm vào `env:` của bước build trong `.github/workflows/deploy.yml`.)
+
+## Deploy (GitHub Pages)
+
+1. Lần đầu: **Settings → Pages → Source: GitHub Actions**.
+2. `git push` lên `main` → workflow build & deploy.
+3. Site: `https://dinhtiendat239.github.io/MyPortfolio/`
+
+`base: './'` + hash routing nên chạy được ở mọi đường dẫn/domain riêng.
+
+## Easter egg
+
+- Footer: link **Got 5 seconds?** mở mini-game 5 giây (lưu best score).

@@ -1,67 +1,48 @@
 import { useEffect } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import SmoothScroll, { jumpTo } from './components/fx/SmoothScroll';
+import SmoothScroll from './components/fx/SmoothScroll';
 import Preloader from './components/fx/Preloader';
-import Curtain from './components/fx/Curtain';
-import { ClickDebris, LanternLight, TreasureRain } from './components/fx/Ambience';
+import Cursor from './components/fx/Cursor';
 import Header from './components/layout/Header';
-import Hotbar from './components/layout/Hotbar';
 import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePage';
-import CaseStudyPage from './pages/CaseStudyPage';
-import { matchWork, useRoute } from './lib/router';
-import { useKonami } from './hooks/useKonami';
-import { startTreasureRain } from './lib/game';
-import { play } from './lib/sound';
+import Hero from './components/sections/Hero';
+import PlayableShowcase from './components/sections/PlayableShowcase';
+import ProjectModal from './components/sections/ProjectModal';
+import About from './components/sections/About';
+import Experience from './components/sections/Experience';
+import AiWorkflow from './components/sections/AiWorkflow';
+import Ventures from './components/sections/Ventures';
+import Awards from './components/sections/Awards';
+import TechStack from './components/sections/TechStack';
+import Contact from './components/sections/Contact';
+import { usePlayRoute } from './hooks/useHashRoute';
 import { content, findProject } from './data';
 
-const konami = () => startTreasureRain('konami');
-
 export default function App() {
-  const route = useRoute();
-  const slug = matchWork(route);
-
-  useKonami(konami);
-
-  // Tiếng "tách" khi click link/nút (chỉ khi đã bật âm)
-  useEffect(() => {
-    const onDown = (e: PointerEvent) => {
-      if ((e.target as HTMLElement).closest('a, button')) play('tick');
-    };
-    window.addEventListener('pointerdown', onDown);
-    return () => window.removeEventListener('pointerdown', onDown);
-  }, []);
+  const play = usePlayRoute();
 
   useEffect(() => {
-    const p = slug ? findProject(slug) : undefined;
-    document.title = p ? `${p.title} — ${content.profile.alias}` : `${content.profile.alias} · ${content.profile.fullName} — Game & Playable Ads Developer`;
-  }, [slug]);
-
-  useEffect(() => {
-    console.log(
-      `%c⛏ ${content.profile.alias.toUpperCase()} %c\nYou dug into the console. Nice. → ${content.profile.email}\nPsst: ↑↑↓↓←→←→BA`,
-      'font: 700 26px monospace; color: #ffb347; text-shadow: 3px 3px 0 #14121f;',
-      'color: #9a98b8;',
-    );
-  }, []);
+    const p = play.slug ? findProject(play.slug) : undefined;
+    document.title = p ? `${p.title} — ${content.profile.fullName}` : `${content.profile.fullName} — Playable Ads Developer & Creative Director`;
+  }, [play.slug]);
 
   return (
     <SmoothScroll>
       <Preloader />
-      <LanternLight />
-      <ClickDebris />
-      <TreasureRain />
+      <Cursor />
       <Header />
-      <Hotbar />
-
-      <AnimatePresence mode="wait" onExitComplete={() => jumpTo(0)}>
-        <motion.main key={slug ?? 'home'} initial="initial" animate="enter" exit="exit">
-          <Curtain />
-          {slug ? <CaseStudyPage slug={slug} /> : <HomePage />}
-        </motion.main>
-      </AnimatePresence>
-
+      <main>
+        <Hero onPlay={play.open} />
+        <PlayableShowcase onPlay={play.open} />
+        <About />
+        <Experience />
+        <AiWorkflow />
+        <Ventures />
+        <Awards />
+        <TechStack />
+        <Contact />
+      </main>
       <Footer />
+      <ProjectModal slug={play.slug} onClose={play.close} onNavigate={play.open} />
     </SmoothScroll>
   );
 }
