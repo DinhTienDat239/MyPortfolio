@@ -6,7 +6,7 @@ export default function TechStack() {
   return (
     <Section
       id="stack"
-      index="07"
+      index="08"
       label="Toolbox"
       note="Honest version"
       title={
@@ -18,7 +18,7 @@ export default function TechStack() {
         </>
       }
     >
-      <div className="grid gap-12 md:grid-cols-3 md:gap-8">
+      <div className="grid gap-12 md:grid-cols-2 md:gap-8">
         {content.stack.map((g, i) => (
           <Reveal key={g.name} delay={i * 0.06}>
             <h3 className="text-lg font-medium tracking-tight">{g.name}</h3>

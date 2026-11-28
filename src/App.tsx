@@ -6,6 +6,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
 import PlayableShowcase from './components/sections/PlayableShowcase';
+import Services from './components/sections/Services';
 import ProjectModal from './components/sections/ProjectModal';
 import About from './components/sections/About';
 import Experience from './components/sections/Experience';
@@ -33,6 +34,7 @@ export default function App() {
       <main>
         <Hero onPlay={play.open} />
         <PlayableShowcase onPlay={play.open} />
+        <Services />
         <About />
         <Experience />
         <AiWorkflow />

@@ -125,8 +125,28 @@ export interface Social {
   handle?: string;
 }
 
+/** Gói dịch vụ — khớp với Project Catalog trên Upwork */
+export interface Service {
+  id: string;
+  name: string;
+  price: string;      // "From $149"
+  delivery: string;   // "Under 48 hours"
+  body: string;
+  includes: string[];
+  featured?: boolean;
+}
+
+export interface Services {
+  intro: string;
+  items: Service[];
+  terms: { k: string; v: string }[];
+  ctaUrl?: string;
+  ctaLabel?: string;
+}
+
 export interface Content {
   profile: Profile;
+  services: Services;
   hero: { headlineAccent: string; subheadline: string };
   stats: Stat[];
   about: { statement: string; facts: { k: string; v: string }[] };

@@ -15,7 +15,7 @@ export default function Awards() {
   return (
     <Section
       id="awards"
-      index="06"
+      index="07"
       label="Games & recognition"
       note={studio.name}
       title={
@@ -76,12 +76,14 @@ export default function Awards() {
           return (
             <Reveal key={g.slug} delay={i * 0.06}>
               <a href={g.link} target="_blank" rel="noopener noreferrer" className="group block" data-cursor="Play">
-                <div className="relative aspect-[4/5] overflow-hidden bg-soft">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#0d0d0d]">
+                  {/* Ảnh bìa đủ mọi tỉ lệ: nền mờ từ chính ảnh + ảnh gốc contain, không cắt mất nhân vật/tên game */}
+                  <img src={asset(g.cover)} alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-60 blur-2xl" />
                   <img
                     src={asset(g.cover)}
                     alt={g.title}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover grayscale transition-[filter,transform] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04] group-hover:grayscale-0"
+                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.04]"
                   />
                   {award && (
                     <span className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] bg-bg px-2 py-1 text-xs font-medium">

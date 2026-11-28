@@ -12,14 +12,14 @@ export default function AiWorkflow() {
   return (
     <Section
       id="ai"
-      index="04"
-      label="AI workflow"
-      note="Claude · Codex · custom CLI"
+      index="05"
+      label="How I work"
+      note="Brief → storyboard → build → test → ship"
       title={
         <>
-          <MaskLine inView>One brief.</MaskLine>
+          <MaskLine inView>Fast,</MaskLine>
           <MaskLine inView delay={0.08}>
-            A team of <span className="em">agents.</span>
+            without <span className="em">cutting corners.</span>
           </MaskLine>
         </>
       }
@@ -51,7 +51,7 @@ export default function AiWorkflow() {
               <span
                 className={cn(
                   'relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full border text-sm tabular-nums lg:mx-auto',
-                  i === 1 ? 'border-fg bg-fg text-bg' : 'border-line bg-bg',
+                  i === 4 ? 'border-fg bg-fg text-bg' : 'border-line bg-bg',
                 )}
               >
                 {String(i + 1).padStart(2, '0')}

@@ -9,9 +9,75 @@
     "profilePic": "images/profile.jpg",
     "available": true
   },
+  "services": {
+    "intro": "Fixed prices, clear delivery dates. Send your assets and a reference or idea; you get a storyboard first, then a demo link to test on your own phone, then final files for every network. Missing playable UI like an end card, buttons or win/lose banners? I can make those to match your game.",
+    "items": [
+      {
+        "id": "new",
+        "name": "New playable ad",
+        "price": "From $149",
+        "delivery": "Under 48 hours",
+        "featured": true,
+        "body": "Built from your gameplay video, assets or Unity project, so it looks and feels like your real game.",
+        "includes": [
+          "Core mechanic + end card",
+          "No playable UI? I supply end card, buttons, win/lose banners",
+          "Portrait, landscape on request",
+          "Exported for 9 ad networks",
+          "Up to 3 revision rounds"
+        ]
+      },
+      {
+        "id": "convert",
+        "name": "Network conversion",
+        "price": "From $49",
+        "delivery": "24 hours",
+        "body": "Already have a playable? I package it for each network with the right MRAID, CTA and size limit, and fix what gets rejected.",
+        "includes": [
+          "AppLovin, Unity Ads, ironSource, Mintegral",
+          "Meta, Google, TikTok/Pangle, Liftoff, Moloco",
+          "Checked in network preview tools",
+          "Size cuts & rejection fixes"
+        ]
+      },
+      {
+        "id": "variations",
+        "name": "Variations for A/B tests",
+        "price": "$39 each",
+        "delivery": "Same day",
+        "body": "New levels, skins, texts, end cards or languages on top of a playable you already run.",
+        "includes": [
+          "Levels, skins, end cards",
+          "Localisation from $15 / language",
+          "Portrait & landscape",
+          "Delivered as a batch"
+        ]
+      }
+    ],
+    "terms": [
+      {
+        "k": "Express",
+        "v": "A simple one-mechanic playable in as little as 4 hours, when assets and reference are ready."
+      },
+      {
+        "k": "Revisions",
+        "v": "Changes inside the agreed scope are free."
+      },
+      {
+        "k": "Confidentiality",
+        "v": "Your unreleased game and assets stay private. Happy to sign your NDA."
+      },
+      {
+        "k": "Updates",
+        "v": "Progress every day and a demo link you can test on your phone."
+      }
+    ],
+    "ctaUrl": "https://www.upwork.com/freelancers/~0168c8a87b901ca2ca",
+    "ctaLabel": "Hire me on Upwork"
+  },
   "hero": {
     "headlineAccent": "Playable Ads Developer & Creative Director.",
-    "subheadline": "I turn game mechanics into 30-second experiences that move IPM and ROAS — then build the AI workflows and web systems that let a team ship them at scale."
+    "subheadline": "I turn your game's core mechanic into a 30-second playable ad, ready for every major ad network — usually in under 48 hours from the moment your assets land."
   },
   "stats": [
     {
@@ -36,15 +102,15 @@
     "facts": [
       {
         "k": "Specialty",
-        "v": "Mobile puzzle playables"
+        "v": "Mobile puzzle & casual playables"
       },
       {
         "k": "Engines",
-        "v": "Unity, Cocos"
+        "v": "Unity + Luna, Cocos Creator, HTML5"
       },
       {
-        "k": "Based in",
-        "v": "Hanoi, Vietnam"
+        "k": "Turnaround",
+        "v": "Under 48 h · express from 4 h"
       }
     ]
   },
@@ -205,7 +271,7 @@
   ],
   "experience": {
     "center": "Dat",
-    "intro": "Two years deep in-house, years of freelance across very different products, and my own ventures on the side. I like learning by shipping — so the map keeps growing.",
+    "intro": "Two years in-house building a studio's playable pipeline from zero, freelance playables for studios and agencies, and my own tools and games on the side.",
     "branches": [
       {
         "id": "inhouse",
@@ -223,87 +289,78 @@
       {
         "id": "freelance",
         "label": "Freelance",
-        "title": "Outsource for studios & businesses",
+        "title": "Playables for studios & agencies",
         "meta": "Ongoing · still taking projects",
-        "body": "Playables for studios and agencies — and beyond ads: a B2B enterprise platform covering CRM, operations and HR for a manufacturing company. I still take outside projects today.",
+        "body": "Playable ads for mobile game studios and UA agencies: new builds from video or assets, Unity projects cut down into light playables, conversions and A/B variations. Still taking projects today.",
         "leaves": [
-          "Playable ads",
-          "B2B platform",
-          "Web systems"
+          "New playables",
+          "Conversions",
+          "A/B variations"
         ]
       },
       {
         "id": "ai",
-        "label": "AI workflows",
-        "title": "AI-native production",
-        "meta": "Framework · skills · agents",
-        "body": "I build the AI framework my team works in: reusable skills, automated creative workflows and a manager–worker setup across models — so I can run several projects at once and customise assets and mechanics fast.",
+        "label": "Fast production",
+        "title": "Built for speed",
+        "meta": "Templates · tooling · automation",
+        "body": "Years of reusable mechanics, my own conversion tool and an automated export and QA routine. That is why a full playable usually ships in under 48 hours, and a simple one can be ready the same day.",
         "leaves": [
-          "Team framework",
-          "Agent workers",
-          "Vibe-coded products"
+          "Mechanic templates",
+          "One-click export",
+          "Automated checks"
         ]
       },
       {
         "id": "ventures",
         "label": "Own ventures",
-        "title": "Startup, community & indie games",
+        "title": "My own tools & games",
         "meta": "Products I own end to end",
-        "body": "Creative Dash Lab, my startup for UA teams. Tatadex, a game community site with over five million page views a month. And Metal Sail, my indie studio: award-winning jam games, and now web games live on CrazyGames and Playgama.",
+        "body": "Creative Dash Lab, the playable and video tool for UA teams that I use on client work. And Metal Sail, my indie studio: award-winning jam games and Unity WebGL games live on Playgama and CrazyGames.",
         "leaves": [
           "Creative Dash Lab",
-          "Tatadex",
-          "Metal Sail Studio"
+          "Metal Sail Studio",
+          "Web games"
         ]
       }
     ]
   },
   "ai": {
-    "intro": "I don't just use AI — I build the system my team works in. One brief goes in; an orchestrator splits it into tasks, hands them to specialised workers, and checks the results before anything ships.",
+    "intro": "Speed comes from preparation, not shortcuts. A clear brief, reusable mechanic templates and my own export tool mean your time goes into the idea and the feel, not into packaging.",
     "steps": [
       {
         "name": "Brief",
-        "detail": "Idea, mechanic, target networks"
+        "detail": "Your assets, idea or reference, target networks"
       },
       {
-        "name": "Orchestrator",
-        "detail": "Plans, splits and reviews the work",
-        "tools": [
-          "Claude",
-          "Codex"
-        ]
+        "name": "Storyboard",
+        "detail": "The 30-second flow, agreed before I build"
       },
       {
-        "name": "Workers",
-        "detail": "Parallel tasks through a custom CLI over model APIs",
-        "tools": [
-          "DeepSeek",
-          "GPT-6 Astra",
-          "GPT-6 Luna"
-        ]
+        "name": "Build",
+        "detail": "Your art and mechanic on my tested templates; missing UI made to match"
       },
       {
-        "name": "Skills & workflows",
-        "detail": "Reusable recipes for assets, mechanics, localisation, export"
+        "name": "Test",
+        "detail": "Demo link on your phone, checked in network preview tools"
       },
       {
         "name": "Ship",
-        "detail": "Playable variants ready for every network"
+        "detail": "Final files for every network, plus variations"
       }
     ],
     "points": [
-      "A working framework for the team: shared skills, rules and automated workflows for creative playables",
-      "Vibe-coding in production — real projects that make money, not demos",
-      "Manager–worker setup across Claude, Codex and a custom CLI over many model APIs",
-      "Lets me multitask and stay flexible with custom assets and mechanics"
+      "Under 48 hours for a full playable once assets are in; as little as 4 hours for a simple one",
+      "Many variations fast: levels, skins, end cards and languages for A/B tests",
+      "Your unreleased game and assets stay private and are only used for your project. NDA welcome",
+      "AI speeds up my code and tooling: a set of custom skills and an in-house system built only for playables. Creative calls and final QA are done by me"
     ]
   },
   "ventures": [
     {
       "id": "cdl",
-      "kind": "My startup",
+      "kind": "My own tool",
       "title": "Creative Dash Lab",
-      "body": "A platform for UA teams to produce playable ads and video faster: a drag-and-drop Playable Canvas with bulk variants, one-click conversion between ad networks, asset extract-and-replace, and video resizing — all in the browser.",
+      "body": "A platform for UA teams to produce playable ads and video faster: a drag-and-drop Playable Canvas with bulk variants, one-click conversion between ad networks, asset extract-and-replace, and video resizing — all in the browser. It is the same tool I use on client projects, which is why every build ships network-ready.",
       "facts": [
         "Live in production",
         "Exports to 9 ad networks",
@@ -317,54 +374,6 @@
       ],
       "image": "images/ventures/creativedashlab.png",
       "link": "https://app.creativedashlab.workers.dev/"
-    },
-    {
-      "id": "b2b",
-      "kind": "Freelance · B2B · under NDA",
-      "title": "Enterprise operations platform",
-      "body": "An all-in-one system for a manufacturing company: CRM with a stage-based pipeline, partners, products with versioned pricing, contracts and orders, purchasing, finance, tasks by department, an internal wiki and role-based access. Client identity is removed here.",
-      "facts": [
-        "Role-based access & audit log",
-        "Theme studio, no-code branding",
-        "Mobile-ready"
-      ],
-      "stack": [
-        "Next.js",
-        "PostgreSQL",
-        "Prisma",
-        "Tailwind"
-      ],
-      "nda": true,
-      "modules": [
-        "Dashboard",
-        "Customers",
-        "Pipeline",
-        "Contracts",
-        "Orders",
-        "Purchasing",
-        "Finance",
-        "Tasks",
-        "Wiki",
-        "Organization"
-      ]
-    },
-    {
-      "id": "tatadex",
-      "kind": "Community site",
-      "title": "Tatadex",
-      "body": "The go-to guide for the mobile game Clash of Critters: campaign line-ups, tier lists, boss guides and a card-trading board, in three languages.",
-      "facts": [
-        "5M+ page views / month",
-        "Monetised with Google AdSense & MGID",
-        "VI · EN · RU"
-      ],
-      "stack": [
-        "Web",
-        "SEO",
-        "Ads"
-      ],
-      "image": "images/ventures/tatadex.png",
-      "link": "https://tatadex.site/vi"
     }
   ],
   "studio": {
@@ -472,46 +481,24 @@
       ]
     },
     {
-      "name": "Shipped with AI pairing",
-      "note": "Built with AI in the loop, running in production",
+      "name": "Playable toolchain",
+      "note": "What gets your build onto every network",
       "items": [
         {
-          "name": "React, Next.js, Tailwind",
-          "detail": "Web apps & dashboards"
+          "name": "Luna Playworks",
+          "detail": "Unity projects to light HTML5 playables"
         },
         {
-          "name": "PostgreSQL",
-          "detail": "B2B enterprise platform"
+          "name": "Creative Dash Lab",
+          "detail": "My tool: one playable, 9 network exports"
         },
         {
-          "name": "Cloudflare Workers",
-          "detail": "Creative Dash Lab"
+          "name": "MRAID & network SDKs",
+          "detail": "CTA, store redirect, lifecycle events"
         },
         {
           "name": "Python",
-          "detail": "Automation tools"
-        }
-      ]
-    },
-    {
-      "name": "AI tooling",
-      "note": "How the work gets multiplied",
-      "items": [
-        {
-          "name": "Claude & Codex",
-          "detail": "Orchestration & coding agents"
-        },
-        {
-          "name": "Custom CLI",
-          "detail": "One interface over many model APIs"
-        },
-        {
-          "name": "DeepSeek, GPT-6 Astra / Luna",
-          "detail": "Worker models"
-        },
-        {
-          "name": "Skills & workflows",
-          "detail": "Reusable team playbooks"
+          "detail": "Automation for export & size checks"
         }
       ]
     }

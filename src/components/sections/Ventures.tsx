@@ -9,14 +9,14 @@ export default function Ventures() {
   return (
     <Section
       id="ventures"
-      index="05"
-      label="Beyond ads"
-      note="Startup · B2B · community"
+      index="06"
+      label="My tools"
+      note="Used on every client project"
       title={
         <>
-          <MaskLine inView>Products I built</MaskLine>
+          <MaskLine inView>The tool behind</MaskLine>
           <MaskLine inView delay={0.08}>
-            <span className="em">beyond</span> the ads.
+            the <span className="em">speed.</span>
           </MaskLine>
         </>
       }
@@ -31,7 +31,7 @@ export default function Ventures() {
 }
 
 function VentureRow({ v, flip }: { v: Venture; flip: boolean }) {
-  const visual = v.nda ? <NdaMock modules={v.modules ?? []} /> : v.image && <img src={asset(v.image)} alt={v.title} loading="lazy" className="h-full w-full object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0" />;
+  const visual = v.nda ? <NdaMock modules={v.modules ?? []} /> : v.image && <img src={asset(v.image)} alt={v.title} loading="lazy" className="h-full w-full object-cover" />;
 
   return (
     <article className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">

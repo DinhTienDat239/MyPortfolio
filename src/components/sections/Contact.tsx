@@ -48,7 +48,7 @@ export default function Contact() {
         <Reveal>
           <div className="flex items-baseline justify-between gap-6 border-t border-bg/15 pt-4 text-sm text-bg/50">
             <span>
-              <span className="tabular-nums">(08)</span>
+              <span className="tabular-nums">(09)</span>
               <span className="ml-4">Contact</span>
             </span>
             <span className="hidden sm:block">Usually replies within a day</span>

@@ -25,7 +25,7 @@ export default function Experience() {
   return (
     <Section
       id="experience"
-      index="03"
+      index="04"
       label="Experience"
       note="In-house · freelance · AI · ventures"
       title={

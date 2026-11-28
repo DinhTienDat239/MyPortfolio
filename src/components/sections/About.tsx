@@ -4,7 +4,7 @@ import { Reveal, ScrollText, Section } from '../ui/Reveal';
 export default function About() {
   const { about, profile } = content;
   return (
-    <Section id="about" index="02" label="About" note={profile.location}>
+    <Section id="about" index="03" label="About" note={profile.location}>
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-8">
           <ScrollText className="text-[clamp(1.75rem,3.2vw,3rem)] font-medium leading-[1.14] tracking-[-0.025em]" text={about.statement} />
